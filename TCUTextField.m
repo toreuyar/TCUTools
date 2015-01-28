@@ -44,7 +44,6 @@
 @interface TCUTextField()
 
 @property (strong, nonatomic) _TCUTextFieldDelegate *ownDelegate;
-@property (strong, nonatomic, readwrite) NSDate *selectedDate;
 
 - (void)pickerDismissButtonAction;
 - (void)dateChanged:(id)sender;
@@ -268,6 +267,15 @@
 
 @implementation TCUTextField
 
+- (void)setSelectedDate:(NSDate *)selectedDate {
+    _selectedDate = selectedDate;
+    if (selectedDate) {
+        self.text = [self.dateFormatter stringFromDate:selectedDate];
+    } else {
+        self.text = nil;
+    }
+}
+
 - (_TCUTextFieldDelegate *)ownDelegate {
     if (!_ownDelegate) {
         [self willChangeValueForKey:@"ownDelegate"];
@@ -352,7 +360,6 @@
 
 - (void)dateChanged:(id)sender {
     self.selectedDate = self.datePicker.date;
-    self.text = [self.dateFormatter stringFromDate:self.datePicker.date];
 }
 
 - (void)setDatePicker:(UIDatePicker *)datePicker {

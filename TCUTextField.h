@@ -68,7 +68,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet TCUTextField *nextTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *inputDoneBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolBarTitleButton;
-@property (strong, nonatomic, readonly) NSDate *selectedDate;
+@property (strong, nonatomic) NSDate *selectedDate;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) id selectedData;
 @property (nonatomic) BOOL requiredNotEmpty;
