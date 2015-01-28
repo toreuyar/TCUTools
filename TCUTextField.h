@@ -74,6 +74,9 @@ typedef enum : NSUInteger {
 @property (nonatomic) BOOL requiredNotEmpty;
 @property (nonatomic) BOOL hiddenCursor;
 @property (nonatomic) DatePickerTimeFrame datePickerTimeFrame;
+@property (nonatomic) CGPoint textRectInset;
+@property (nonatomic) CGPoint editingRectInset;
+@property (nonatomic) CGPoint placeholderRectInset;
 
 - (IBAction)inputDone:(id)sender;
 

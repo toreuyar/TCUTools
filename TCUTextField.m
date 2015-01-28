@@ -385,15 +385,15 @@
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 10 , 10 );
+    return CGRectInset(bounds, self.textRectInset.x, self.textRectInset.y);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 10 , 10 );
+    return CGRectInset(bounds, self.editingRectInset.x, self.editingRectInset.y);
 }
 
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 10 , 10 );
+    return CGRectInset(bounds, self.placeholderRectInset.x, self.placeholderRectInset.y);
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
