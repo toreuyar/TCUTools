@@ -419,18 +419,19 @@
             [self.dataPicker.delegate pickerView:self.dataPicker didSelectRow:[self.dataPicker selectedRowInComponent:i] inComponent:i];
         }
     }
-    [self resignFirstResponder];
-    [[super allTargets] enumerateObjectsUsingBlock:^(id target, BOOL *stop) {
-        [[super actionsForTarget:target forControlEvent:UIControlEventEditingDidEndOnExit] enumerateObjectsUsingBlock:^(NSString *action, NSUInteger idx, BOOL *stop) {
-            SEL actionSelector = NSSelectorFromString(action);
-            if ([target respondsToSelector:actionSelector]) {
+    if ([self.delegate textFieldShouldReturn:self]) {
+        [[super allTargets] enumerateObjectsUsingBlock:^(id target, BOOL *stop) {
+            [[super actionsForTarget:target forControlEvent:UIControlEventEditingDidEndOnExit] enumerateObjectsUsingBlock:^(NSString *action, NSUInteger idx, BOOL *stop) {
+                SEL actionSelector = NSSelectorFromString(action);
+                if ([target respondsToSelector:actionSelector]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                [target performSelector:actionSelector withObject:self];
+                    [target performSelector:actionSelector withObject:self];
 #pragma clang diagnostic pop
-            }
+                }
+            }];
         }];
-    }];
+    }
 }
 
 - (void)setText:(NSString *)text {
