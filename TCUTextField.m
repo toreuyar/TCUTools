@@ -55,47 +55,41 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(TCUTextField *)textField {
-    BOOL shouldBeginEditing = YES;
-    if ([self.textField.tcuTextFieldDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
-        shouldBeginEditing = [self.textField.tcuTextFieldDelegate textFieldShouldBeginEditing:self.textField];
-    }
-    if (shouldBeginEditing) {
-        if (self.textField.datePicker) {
-            switch (self.textField.datePickerTimeFrame) {
-                case DatePickerTimeFrameFuture: {
-                    self.textField.datePicker.minimumDate = [NSDate date];
-                    self.textField.datePicker.maximumDate = nil;
-                    break;
-                }
-                case DatePickerTimeFramePast: {
-                    self.textField.datePicker.minimumDate = nil;
-                    self.textField.datePicker.maximumDate = [NSDate date];
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-        } else if (self.textField.dataPicker) {
-            self.textField.dataPicker.associatedObject = self.textField;
-            [self.textField.dataPicker reloadAllComponents];
-        }
-        if (self.textField.toolBarTitleButton) {
-            self.textField.toolBarTitleButton.title = self.textField.placeholder;
-        }
-        if (self.textField.inputDoneBarButton) {
-            self.textField.inputDoneBarButton.target = self.textField;
-            self.textField.inputDoneBarButton.action = @selector(inputDone:);
-        }
-        if (self.textField.pickerDismissButton) {
-            [self.textField.pickerDismissButton addTarget:self.textField action:@selector(pickerDismissButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            self.textField.pickerDismissButton.hidden = NO;
-        }
-    }
-    return shouldBeginEditing;
+    return [self.textField.tcuTextFieldDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)] ? [self.textField.tcuTextFieldDelegate textFieldShouldBeginEditing:self.textField] : YES;
 }
 
 - (void)textFieldDidBeginEditing:(TCUTextField *)textField {
+    if (self.textField.datePicker) {
+        switch (self.textField.datePickerTimeFrame) {
+            case DatePickerTimeFrameFuture: {
+                self.textField.datePicker.minimumDate = [NSDate date];
+                self.textField.datePicker.maximumDate = nil;
+                break;
+            }
+            case DatePickerTimeFramePast: {
+                self.textField.datePicker.minimumDate = nil;
+                self.textField.datePicker.maximumDate = [NSDate date];
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    } else if (self.textField.dataPicker) {
+        self.textField.dataPicker.associatedObject = self.textField;
+        [self.textField.dataPicker reloadAllComponents];
+    }
+    if (self.textField.toolBarTitleButton) {
+        self.textField.toolBarTitleButton.title = self.textField.placeholder;
+    }
+    if (self.textField.inputDoneBarButton) {
+        self.textField.inputDoneBarButton.target = self.textField;
+        self.textField.inputDoneBarButton.action = @selector(inputDone:);
+    }
+    if (self.textField.pickerDismissButton) {
+        [self.textField.pickerDismissButton addTarget:self.textField action:@selector(pickerDismissButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        self.textField.pickerDismissButton.hidden = NO;
+    }
     if ([self.textField.tcuTextFieldDelegate respondsToSelector:@selector(textFieldDefaultTextColor)]) {
         self.textField.textColor = self.textField.tcuTextFieldDelegate.textFieldDefaultTextColor;
     }
@@ -105,30 +99,24 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(TCUTextField *)textField {
-    BOOL shouldEndEditing = YES;
-    if ([self.textField.tcuTextFieldDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
-        shouldEndEditing = [self.textField.tcuTextFieldDelegate textFieldShouldEndEditing:self.textField];
-    }
-    if (shouldEndEditing) {
-        if (self.textField.dataPicker) {
-            self.textField.dataPicker.associatedObject = nil;
-        }
-        if (self.textField.inputDoneBarButton) {
-            self.textField.inputDoneBarButton.target = nil;
-            self.textField.inputDoneBarButton.action = nil;
-        }
-        if (self.textField.toolBarTitleButton) {
-            self.textField.toolBarTitleButton.title = nil;
-        }
-        if (self.textField.pickerDismissButton) {
-            [self.textField.pickerDismissButton removeTarget:self action:@selector(pickerDismissButtonAction) forControlEvents:UIControlEventTouchUpInside];
-            self.textField.pickerDismissButton.hidden = YES;
-        }
-    }
-    return shouldEndEditing;
+    return [self.textField.tcuTextFieldDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)] ? [self.textField.tcuTextFieldDelegate textFieldShouldEndEditing:self.textField] : YES;
 }
 
 - (void)textFieldDidEndEditing:(TCUTextField *)textField {
+    if (self.textField.dataPicker) {
+        self.textField.dataPicker.associatedObject = nil;
+    }
+    if (self.textField.inputDoneBarButton) {
+        self.textField.inputDoneBarButton.target = nil;
+        self.textField.inputDoneBarButton.action = nil;
+    }
+    if (self.textField.toolBarTitleButton) {
+        self.textField.toolBarTitleButton.title = nil;
+    }
+    if (self.textField.pickerDismissButton) {
+        [self.textField.pickerDismissButton removeTarget:self action:@selector(pickerDismissButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        self.textField.pickerDismissButton.hidden = YES;
+    }
     if (textField == self.textField.equalityCheckedTextField) {
         if ([textField.text isEqualToString:self.textField.text]) {
             if ([self.textField.tcuTextFieldDelegate respondsToSelector:@selector(textFieldDefaultTextColor)]) {
