@@ -1,16 +1,18 @@
 {
   "name": "TCUTools",
-  "version": "0.1.0",
-  "summary": "A short description of TCUTools.",
-  "description": "                       An optional longer description of TCUTools\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/TCUTools",
-  "license": "MIT",
+  "version": "1.0.6",
+  "summary": "Helper classes for various needs coded on Objective-C, iOS.",
+  "homepage": "https://github.com/toreuyar/TCUTools",
+  "license": {
+    "type": "MIT"
+  },
   "authors": {
     "Töre Çağrı Uyar": "mail@toreuyar.net"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/TCUTools.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/toreuyar/TCUTools.git",
+    "tag": "1.0.6",
+    "submodules": true
   },
   "platforms": {
     "ios": "7.0"
@@ -21,5 +23,12 @@
     "TCUTools": [
       "Pod/Assets/*.png"
     ]
+  },
+  "frameworks": [
+    "UIKit",
+    "Foundation"
+  ],
+  "xcconfig": {
+    "OTHER_LDFLAGS": "-lObjC"
   }
 }

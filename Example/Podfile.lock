@@ -1,17 +1,7 @@
 PODS:
-  - Expecta (0.3.2)
-  - Expecta+Snapshots (1.3.1):
-    - Expecta
-    - FBSnapshotTestCase
-  - FBSnapshotTestCase (1.5)
-  - Specta (0.4.0)
-  - TCUTools (0.1.0)
+  - TCUTools (1.0.6)
 
 DEPENDENCIES:
-  - Expecta
-  - Expecta+Snapshots
-  - FBSnapshotTestCase
-  - Specta
   - TCUTools (from `../`)
 
 EXTERNAL SOURCES:
@@ -19,10 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
-  Expecta+Snapshots: 4a56b9411c6ed156987072e52c39de67d864015a
-  FBSnapshotTestCase: e2914fbaabccea1dcc773d6a16b1c24540642488
-  Specta: 1df326d6ec48603c77f507a0ab1f89ad2df1c582
-  TCUTools: 175e9813af5d99e536de18102aaf3ba8260b7750
+  TCUTools: 91bfe0d143b96babe452683664078d90962a914c
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.36.3
