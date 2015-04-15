@@ -255,6 +255,8 @@
 
 @implementation TCUTextField
 
+@dynamic inputAccessoryView;
+
 - (void)setSelectedDate:(NSDate *)selectedDate {
     _selectedDate = selectedDate;
     if (selectedDate) {
