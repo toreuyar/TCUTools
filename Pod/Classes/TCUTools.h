@@ -47,6 +47,7 @@
 #import "TCUVariableType.h"
 #import "TCUPropertyAttributes.h"
 #import "TCUImageView.h"
+#import "TCUTypeSafeCollection.h"
 
 #ifdef DEBUG
     #define NSLogDebug(format, ...) NSLog(@"<%s:%d> %s: " format, strrchr("/" __FILE__, '/') + 1, __LINE__, __PRETTY_FUNCTION__, ## __VA_ARGS__)
