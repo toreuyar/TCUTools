@@ -54,6 +54,7 @@ typedef NS_OPTIONS(NSUInteger, TCUPropertyAttribute) {
 @property (strong, nonatomic) NSString *setter;
 @property (strong, nonatomic) NSString *getter;
 @property (strong, nonatomic) NSString *instanceVariableName;
+@property (strong, nonatomic) NSString *propertyName;
 
 + (NSDictionary *)propertyDictionaryOfClassHierarchy:(Class)subjectClass onDictionary:(NSMutableDictionary *)propertyMap;
 

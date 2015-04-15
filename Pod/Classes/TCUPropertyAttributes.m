@@ -75,6 +75,7 @@
             if (attributes && propertyName) {
                 TCUPropertyAttributes *propertyAttributes = [[TCUPropertyAttributes alloc] init];
                 if ([propertyAttributes parseFromAttributesString:attributes]) {
+                    propertyAttributes.propertyName = propertyName;
                     [propertyMap setObject:propertyAttributes forKey:propertyName];
                 }
             }
