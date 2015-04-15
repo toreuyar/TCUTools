@@ -52,12 +52,12 @@
     if (subjectClass == NULL) {
         return nil;
     }
+    if (![propertyMap isKindOfClass:[NSMutableDictionary class]]) {
+        propertyMap = [NSMutableDictionary dictionary];
+    }
     if (subjectClass == [NSObject class]) {
         return [NSDictionary dictionaryWithDictionary:propertyMap];
     } else {
-        if (![propertyMap isKindOfClass:[NSMutableDictionary class]]) {
-            propertyMap = [NSMutableDictionary dictionary];
-        }
         unsigned int outCount, i;
         objc_property_t *properties = class_copyPropertyList(subjectClass, &outCount);
         for (i = 0; i < outCount; i++) {
