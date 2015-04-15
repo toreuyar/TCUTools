@@ -23,6 +23,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		94B380861ADEA34500133260 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380851ADEA34500133260 /* User.m */; };
+		94B380891ADEA35200133260 /* Requests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380881ADEA35200133260 /* Requests.m */; };
 		BCF869BF038CCB49A59E45DD /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 487019242FF8D360A932C7B0 /* libPods-Tests.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,10 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6A97662BA9FD6B201CBA5D2C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		94B380841ADEA34500133260 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		94B380851ADEA34500133260 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		94B380871ADEA35200133260 /* Requests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Requests.h; sourceTree = "<group>"; };
+		94B380881ADEA35200133260 /* Requests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Requests.m; sourceTree = "<group>"; };
 		C9752A4E54F93EC74E23C4ED /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F5E19043D02B622B4E418DD3 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +157,10 @@
 				6003F5A6195388D20070C39A /* TCUViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				94B380841ADEA34500133260 /* User.h */,
+				94B380851ADEA34500133260 /* User.m */,
+				94B380871ADEA35200133260 /* Requests.h */,
+				94B380881ADEA35200133260 /* Requests.m */,
 			);
 			path = TCUTools;
 			sourceTree = "<group>";
@@ -361,9 +371,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B380861ADEA34500133260 /* User.m in Sources */,
 				6003F59E195388D20070C39A /* TCUAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* TCUViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				94B380891ADEA35200133260 /* Requests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
