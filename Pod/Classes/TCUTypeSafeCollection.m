@@ -26,6 +26,8 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 }
 
 - (NSString *)keyForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (id)getter:(TCUPropertyAttributes *)propertyAttributes;
+- (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)castObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast;
 - (id)castAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast;
@@ -34,6 +36,54 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 @end
 
 @implementation TCUTypeSafeCollection
+
+#pragma mark - NSKeyValueCoding
+
+- (id)valueForKey:(NSString *)key {
+    TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionGetters objectForKey:key];
+    if (propertyAttributes) {
+        return [self getter:propertyAttributes];
+    } else {
+        return [super valueForKey:key];
+    }
+}
+
+- (void)setValue:(id)value forKey:(NSString *)key {
+    TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionSetters objectForKey:key];
+    if (propertyAttributes) {
+        return [self setter:value propertyAttributes:propertyAttributes];
+    } else {
+        return [super setValue:value forKey:key];
+    }
+}
+
+- (void)setNilValueForKey:(NSString *)key {
+    TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionSetters objectForKey:key];
+    if (propertyAttributes) {
+        return [self setter:nil propertyAttributes:propertyAttributes];
+    } else {
+        return [super setNilValueForKey:key];
+    }
+}
+
+- (BOOL)validateValue:(inout id *)ioValue forKey:(NSString *)key error:(out NSError **)outError {
+    TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionGetters objectForKey:key];
+    if (propertyAttributes) {
+        if ([(*ioValue) isKindOfClass:NSClassFromString(propertyAttributes.name)]) {
+            return YES;
+        } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
+                   [(*ioValue) isKindOfClass:[NSDictionary class]]) {
+            (*ioValue) = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:(*ioValue)];
+            return NO;
+        } else {
+            return NO;
+        }
+    } else {
+        return [super validateValue:ioValue forKey:key error:outError];
+    }
+}
+
+#pragma mark - Class
 
 + (void)initialize {
     [super initialize];
