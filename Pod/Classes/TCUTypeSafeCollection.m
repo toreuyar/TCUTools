@@ -26,6 +26,10 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 }
 
 - (NSString *)keyForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (id)castObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast;
+- (id)castAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast;
+- (id)castObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeCasted propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 
 @end
 
@@ -98,35 +102,23 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
     }
 }
 
+- (void)setDataWith:(NSDictionary *)dict __attribute__((deprecated)) { // TODO: Should be removed at next major version.
+    [self setDataWithDictionary:dict];
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     self = [self init];
     if (self) {
-        [self setDataWith:dict];
+        [self setDataWithDictionary:dict];
     }
     return self;
 }
 
-- (void)setDataWith:(NSDictionary *)dict {
+- (void)setDataWithDictionary:(NSDictionary *)dict {
     [tcuTypeSafeCollectionData removeAllObjects];
     [tcuTypeSafeCollectionData setValuesForKeysWithDictionary:dict];
-    if (tcuTypeSafeCollectionArrayToClassMappingTable.count > 0) {
-        [tcuTypeSafeCollectionArrayToClassMappingTable.dictionaryRepresentation enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, Class classType, BOOL *stop) {
-            TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionProperties objectForKey:propertyName];
-            if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[NSArray class]]) {
-                NSString *key = [self keyForPropertyAttributes:propertyAttributes];
-                NSArray *array = tcuTypeSafeCollectionData[key];
-                if ([array isKindOfClass:[NSArray class]]) {
-                    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:array.count];
-                    [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-                        if ([obj isKindOfClass:[NSDictionary class]]) {
-                            id concreteObject = [[classType alloc] initWithDictionary:obj];
-                            [tempArray addObject:concreteObject];
-                        }
-                    }];
-                    tcuTypeSafeCollectionData[key] = [NSArray arrayWithArray:tempArray];
-                }
-            }
-        }];
+    for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
+        [self setter:dict[[self keyForPropertyAttributes:propertyAttributes]] propertyAttributes:propertyAttributes];
     }
 }
 
@@ -250,8 +242,14 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
         return returnObject;
     } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
                [returnObject isKindOfClass:[NSDictionary class]]) {
-        returnObject = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:returnObject];
-        tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = returnObject;
+        returnObject = nil;
+        if ([self respondsToSelector:@selector(shouldAutoCastObject:forProperty:)]) {
+            if ([self shouldAutoCastObject:returnObject forProperty:propertyAttributes.propertyName]) {
+                returnObject = [self castAndSetObject:returnObject propertyAttributes:propertyAttributes autoCast:[self shouldAutoCastObject:returnObject forProperty:propertyAttributes.propertyName]];
+            }
+        } else {
+            returnObject = [self castAndSetObject:returnObject propertyAttributes:propertyAttributes autoCast:YES];
+        }
         return returnObject;
     } else {
         return nil;
@@ -259,15 +257,103 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 }
 
 - (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
-    if ([objectToBeSet isKindOfClass:NSClassFromString(propertyAttributes.name)]) {
-        tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = objectToBeSet;
-    } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
-               [objectToBeSet isKindOfClass:[NSDictionary class]]) {
-        objectToBeSet = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:objectToBeSet];
-        tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = objectToBeSet;
+    if ([self respondsToSelector:@selector(shouldSetObject:forProperty:)]) {
+        if ([self shouldSetObject:objectToBeSet forProperty:propertyAttributes.propertyName]) {
+            [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+        }
+    } else {
+        Class expectedClass = NSClassFromString(propertyAttributes.name);
+        if ([objectToBeSet isKindOfClass:expectedClass]) {
+            if ([expectedClass isSubclassOfClass:[NSArray class]]) {
+                Class classToBeCasted = [tcuTypeSafeCollectionArrayToClassMappingTable objectForKey:propertyAttributes.propertyName];
+                if (classToBeCasted) {
+                    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:((NSArray *)objectToBeSet).count];
+                    [((NSArray *)objectToBeSet) enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+                        id castedObject = [self castObject:obj atIndex:idx toClass:classToBeCasted propertyAttributes:propertyAttributes];
+                        if (castedObject) {
+                            [tempArray addObject:castedObject];
+                        }
+                    }];
+                    NSArray *castedObject = nil;
+                    if ([expectedClass isSubclassOfClass:[NSMutableArray class]]) {
+                        castedObject = tempArray;
+                    } else {
+                        castedObject = [NSArray arrayWithArray:tempArray];
+                    }
+                    [self setObject:castedObject onPropertyAttributes:propertyAttributes];
+                } else {
+                    [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+                }
+            } else {
+                [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+            }
+        } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
+                   [objectToBeSet isKindOfClass:[NSDictionary class]]) {
+            if ([self respondsToSelector:@selector(shouldAutoCastObject:forProperty:)]) {
+                [self castAndSetObject:objectToBeSet propertyAttributes:propertyAttributes autoCast:[self shouldAutoCastObject:objectToBeSet forProperty:propertyAttributes.propertyName]];
+            } else {
+                [self castAndSetObject:objectToBeSet propertyAttributes:propertyAttributes autoCast:YES];
+            }
+        } else {
+            [self setObject:nil onPropertyAttributes:propertyAttributes];
+        }
+    }
+}
+
+- (id)castObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeCasted propertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+    id castedObject = nil;
+    if ([self respondsToSelector:@selector(shouldCastObject:atIndex:forProperty:)] ? [self shouldCastObject:object atIndex:index forProperty:propertyAttributes.propertyName] : YES) {
+        if ([self respondsToSelector:@selector(willCastObject:atIndex:forProperty:)]) {
+            [self willCastObject:object atIndex:index forProperty:propertyAttributes.propertyName];
+        }
+        castedObject = ([object isKindOfClass:[NSDictionary class]] ? [[classToBeCasted alloc] initWithDictionary:object] : [[classToBeCasted alloc] init]);
+        if ([self respondsToSelector:@selector(didCastObject:atIndex:forProperty:toObject:)]) {
+            [self didCastObject:object atIndex:index forProperty:propertyAttributes.propertyName toObject:castedObject];
+        }
+    }
+    return castedObject;
+}
+
+- (id)castObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast {
+    if ([self respondsToSelector:@selector(willAutoCastObject:forProperty:)]) {
+        [self willAutoCastObject:object forProperty:propertyAttributes.propertyName];
+    }
+    id castedObject = nil;
+    if (autoCast) {
+        castedObject = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:object];
+    } else if ([self respondsToSelector:@selector(castObject:toClass:forProperty:)]) {
+        Class expectedClass = NSClassFromString(propertyAttributes.name);
+        castedObject = [self castObject:object toClass:expectedClass forProperty:propertyAttributes.propertyName];
+        if (![castedObject isKindOfClass:expectedClass]) {
+            castedObject = nil;
+        }
+    }
+    if ([self respondsToSelector:@selector(didAutoCastObject:forProperty:toObject:)]) {
+        [self didAutoCastObject:object forProperty:propertyAttributes.propertyName toObject:castedObject];
+    }
+    return castedObject;
+}
+
+- (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+    if ([self respondsToSelector:@selector(willSetObject:forProperty:)]) {
+        [self willSetObject:object forProperty:propertyAttributes.propertyName];
+    }
+    [self willChangeValueForKey:propertyAttributes.propertyName];
+    if (object) {
+        tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = object;
     } else {
         [tcuTypeSafeCollectionData removeObjectForKey:[self keyForPropertyAttributes:propertyAttributes]];
     }
+    if ([self respondsToSelector:@selector(didSetObject:forProperty:)]) {
+        [self didSetObject:object forProperty:propertyAttributes.propertyName];
+    }
+    [self didChangeValueForKey:propertyAttributes.propertyName];
+}
+
+- (id)castAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast {
+    id castedObject = [self castObject:objectToBeSet onPropertyAttributes:propertyAttributes autoCast:autoCast];
+    [self setObject:castedObject onPropertyAttributes:propertyAttributes];
+    return castedObject;
 }
 
 @end
