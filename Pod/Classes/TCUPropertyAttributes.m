@@ -35,7 +35,15 @@
 @implementation NSObject (PropertyDictionary)
 
 + (NSDictionary *)propertyDictionary {
-    return [TCUPropertyAttributes propertyDictionaryOfClassHierarchy:[self class] onDictionary:nil];
+    return [self propertyDictionaryOfClassHierarchy];
+}
+
++ (NSDictionary *)propertyDictionaryOfClass {
+    return [TCUPropertyAttributes propertyDictionaryOfClass:[self class] includeSuperClasses:NO onDictionary:nil];
+}
+
++ (NSDictionary *)propertyDictionaryOfClassHierarchy {
+    return [TCUPropertyAttributes propertyDictionaryOfClass:[self class] includeSuperClasses:YES onDictionary:nil];
 }
 
 @end
@@ -49,6 +57,12 @@
 @implementation TCUPropertyAttributes
 
 + (NSDictionary *)propertyDictionaryOfClassHierarchy:(Class)subjectClass onDictionary:(NSMutableDictionary *)propertyMap {
+    return [self propertyDictionaryOfClass:subjectClass includeSuperClasses:YES onDictionary:propertyMap];
+}
+
++ (NSDictionary *)propertyDictionaryOfClass:(Class)subjectClass
+                        includeSuperClasses:(BOOL)allHierarchy
+                               onDictionary:(NSMutableDictionary *)propertyMap  {
     if (subjectClass == NULL) {
         return nil;
     }
@@ -81,7 +95,11 @@
             }
         }
         free(properties);
-        return [self propertyDictionaryOfClassHierarchy:[subjectClass superclass] onDictionary:propertyMap];
+        if (allHierarchy) {
+            return [self propertyDictionaryOfClass:[subjectClass superclass] includeSuperClasses:YES onDictionary:propertyMap];
+        } else {
+            return [NSDictionary dictionaryWithDictionary:propertyMap];
+        }
     }
 }
 

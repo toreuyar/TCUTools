@@ -34,6 +34,8 @@
 @interface NSObject (PropertyDictionary)
 
 + (NSDictionary *)propertyDictionary;
++ (NSDictionary *)propertyDictionaryOfClass;
++ (NSDictionary *)propertyDictionaryOfClassHierarchy;
 
 @end
 
@@ -57,6 +59,6 @@ typedef NS_OPTIONS(NSUInteger, TCUPropertyAttribute) {
 @property (strong, nonatomic) NSString *propertyName;
 
 + (NSDictionary *)propertyDictionaryOfClassHierarchy:(Class)subjectClass onDictionary:(NSMutableDictionary *)propertyMap;
++ (NSDictionary *)propertyDictionaryOfClass:(Class)subjectClass includeSuperClasses:(BOOL)allHierarchy onDictionary:(NSMutableDictionary *)propertyMap;
 
 @end
-
