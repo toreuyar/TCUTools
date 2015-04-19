@@ -33,7 +33,7 @@
 
 @interface NSObject (PropertyDictionary)
 
-+ (NSDictionary *)propertyDictionary;
++ (NSDictionary *)propertyDictionary __attribute__((deprecated)); // TODO: Should be removed at next major version.
 + (NSDictionary *)propertyDictionaryOfClass;
 + (NSDictionary *)propertyDictionaryOfClassHierarchy;
 
