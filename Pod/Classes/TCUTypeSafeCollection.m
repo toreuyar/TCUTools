@@ -34,11 +34,11 @@
 #import "TCUPropertyAttributes.h"
 @import ObjectiveC;
 
-static char kTCUTypeSafeCollectionPropertiesKey;
-static char kTCUTypeSafeCollectionGettersKey;
-static char kTCUTypeSafeCollectionSettersKey;
-static char kTCUTypeSafeCollectionPropertyToKeyMappingTableKey;
-static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
+static const void *kTCUTypeSafeCollectionPropertiesKey = (void *)&kTCUTypeSafeCollectionPropertiesKey;
+static const void *kTCUTypeSafeCollectionGettersKey = (void *)&kTCUTypeSafeCollectionGettersKey;
+static const void *kTCUTypeSafeCollectionSettersKey = (void *)&kTCUTypeSafeCollectionSettersKey;
+static const void *kTCUTypeSafeCollectionPropertyToKeyMappingTableKey = (void *)&kTCUTypeSafeCollectionPropertyToKeyMappingTableKey;
+static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 
 @interface TCUTypeSafeCollection () {
     __weak NSDictionary *tcuTypeSafeCollectionProperties;
@@ -112,7 +112,7 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 + (void)initialize {
     [super initialize];
     if ([self class] != [TCUTypeSafeCollection class]) {
-        NSDictionary *tcuTypeSafeCollectionProperties = [[self class] propertyDictionary];
+        NSDictionary *tcuTypeSafeCollectionProperties = [[self class] propertyDictionaryOfClassHierarchy];
         NSMutableDictionary *propertyDictionary = [NSMutableDictionary dictionaryWithCapacity:tcuTypeSafeCollectionProperties.count];
         [tcuTypeSafeCollectionProperties enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, TCUPropertyAttributes *propertyAttributes, BOOL *stop) {
             if ((propertyAttributes.typeAttribute & TCUTypeAttributeObject) &&
@@ -142,34 +142,42 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
                 [tcuTypeSafeCollectionSetters setObject:propertyAttributes forKey:setter];
             }
         }];
-        objc_setAssociatedObject(self, &kTCUTypeSafeCollectionPropertiesKey, tcuTypeSafeCollectionProperties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, &kTCUTypeSafeCollectionGettersKey, tcuTypeSafeCollectionGetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, &kTCUTypeSafeCollectionSettersKey, tcuTypeSafeCollectionSetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, &kTCUTypeSafeCollectionPropertyToKeyMappingTableKey, tcuTypeSafeCollectionPropertyToKeyMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, &kTCUTypeSafeCollectionArrayToClassMappingTableKey, tcuTypeSafeCollectionArrayToClassMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionPropertiesKey, tcuTypeSafeCollectionProperties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionGettersKey, tcuTypeSafeCollectionGetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionSettersKey, tcuTypeSafeCollectionSetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionPropertyToKeyMappingTableKey, tcuTypeSafeCollectionPropertyToKeyMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionArrayToClassMappingTableKey, tcuTypeSafeCollectionArrayToClassMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
 
 + (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable {
-    NSMapTable *tcuTypeSafeCollectionPropertyToObjectMappingTable = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
-    [tcuTypeSafeCollectionPropertyToObjectMappingTable removeAllObjects];
+    NSMapTable *selfMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
+    [selfMappingTable removeAllObjects];
+    NSMapTable *superMappingTable = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
+    for (NSString *propertyName in superMappingTable.keyEnumerator) {
+        [selfMappingTable setObject:[superMappingTable objectForKey:propertyName] forKey:propertyName];
+    };
     if ([mappingTable isKindOfClass:[NSDictionary class]]) {
         [mappingTable enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSString *fieldName, BOOL *stop) {
             if ([propertyName isKindOfClass:[NSString class]] && [fieldName isKindOfClass:[NSString class]]) {
-                [tcuTypeSafeCollectionPropertyToObjectMappingTable setObject:fieldName forKey:propertyName];
+                [selfMappingTable setObject:fieldName forKey:propertyName];
             }
         }];
     }
 }
 
 + (void)setArrayToClassMappingTable:(NSDictionary *)mappingTable {
-    NSMapTable *tcuTypeSafeCollectionArrayToClassMappingTable = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionArrayToClassMappingTableKey);
-    [tcuTypeSafeCollectionArrayToClassMappingTable removeAllObjects];
+    NSMapTable *selfMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionArrayToClassMappingTableKey);
+    [selfMappingTable removeAllObjects];
+    NSMapTable *superMappingTable = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionArrayToClassMappingTableKey);
+    for (NSString *propertyName in superMappingTable.keyEnumerator) {
+        [selfMappingTable setObject:[superMappingTable objectForKey:propertyName] forKey:propertyName];
+    };
     if ([mappingTable isKindOfClass:[NSDictionary class]]) {
         [mappingTable enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, Class classType, BOOL *stop) {
             if ([propertyName isKindOfClass:[NSString class]] && class_isMetaClass(object_getClass(classType))) {
                 if ([classType isSubclassOfClass:[TCUTypeSafeCollection class]]) {
-                    [tcuTypeSafeCollectionArrayToClassMappingTable setObject:classType forKey:propertyName];
+                    [selfMappingTable setObject:classType forKey:propertyName];
                 }
             }
         }];
@@ -199,11 +207,15 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 - (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable preserveClassLevelMappings:(BOOL)preserve {
     tcuTypeSafeCollectionPropertyToKeyMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
     if (preserve) {
-        NSMapTable *classLevelMappingTable = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
-        [classLevelMappingTable.dictionaryRepresentation enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSString *fieldName, BOOL *stop) {
-            [tcuTypeSafeCollectionPropertyToKeyMappingTable setObject:fieldName forKey:propertyName];
-        }];
+        NSMapTable *classLevelMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
+        for (NSString *propertyName in classLevelMappingTable.keyEnumerator) {
+            [tcuTypeSafeCollectionPropertyToKeyMappingTable setObject:[classLevelMappingTable objectForKey:propertyName] forKey:propertyName];
+        }
     }
+    NSMapTable *superMappingTable = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
+    for (NSString *propertyName in superMappingTable.keyEnumerator) {
+        [tcuTypeSafeCollectionPropertyToKeyMappingTable setObject:[superMappingTable objectForKey:propertyName] forKey:propertyName];
+    };
     if ([mappingTable isKindOfClass:[NSDictionary class]]) {
         [mappingTable enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSString *fieldName, BOOL *stop) {
             if ([propertyName isKindOfClass:[NSString class]] && [fieldName isKindOfClass:[NSString class]]) {
@@ -216,11 +228,15 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 - (void)setArrayToClassMappingTable:(NSDictionary *)mappingTable preserveClassLevelMappings:(BOOL)preserve {
     tcuTypeSafeCollectionArrayToClassMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
     if (preserve) {
-        NSMapTable *classLevelMappingTable = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionArrayToClassMappingTableKey);
-        [classLevelMappingTable.dictionaryRepresentation enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, Class classType, BOOL *stop) {
-            [tcuTypeSafeCollectionArrayToClassMappingTable setObject:classType forKey:propertyName];
-        }];
+        NSMapTable *classLevelMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionArrayToClassMappingTableKey);
+        for (NSString *propertyName in classLevelMappingTable.keyEnumerator) {
+            [tcuTypeSafeCollectionArrayToClassMappingTable setObject:[classLevelMappingTable objectForKey:propertyName] forKey:propertyName];
+        }
     }
+    NSMapTable *superMappingTable = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionArrayToClassMappingTableKey);
+    for (NSString *propertyName in superMappingTable.keyEnumerator) {
+        [tcuTypeSafeCollectionArrayToClassMappingTable setObject:[superMappingTable objectForKey:propertyName] forKey:propertyName];
+    };
     if ([mappingTable isKindOfClass:[NSDictionary class]]) {
         [mappingTable enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, Class classType, BOOL *stop) {
             if ([propertyName isKindOfClass:[NSString class]] && class_isMetaClass(object_getClass(classType))) {
@@ -239,11 +255,11 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
             self = nil;
         } else {
             tcuTypeSafeCollectionData = [NSMutableDictionary dictionary];
-            tcuTypeSafeCollectionProperties = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionPropertiesKey);
-            tcuTypeSafeCollectionGetters = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionGettersKey);
-            tcuTypeSafeCollectionSetters = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionSettersKey);
-            tcuTypeSafeCollectionPropertyToKeyMappingTable = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
-            tcuTypeSafeCollectionArrayToClassMappingTable = objc_getAssociatedObject([self class], &kTCUTypeSafeCollectionArrayToClassMappingTableKey);
+            tcuTypeSafeCollectionProperties = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionPropertiesKey);
+            tcuTypeSafeCollectionGetters = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionGettersKey);
+            tcuTypeSafeCollectionSetters = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionSettersKey);
+            tcuTypeSafeCollectionPropertyToKeyMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
+            tcuTypeSafeCollectionArrayToClassMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionArrayToClassMappingTableKey);
         }
     }
     return self;
@@ -270,12 +286,7 @@ static char kTCUTypeSafeCollectionArrayToClassMappingTableKey;
     if (getter) {
         return self;
     } else {
-        TCUPropertyAttributes *setter = [tcuTypeSafeCollectionSetters objectForKey:selectorName];
-        if (setter) {
-            return self;
-        } else {
-            return nil;
-        }
+        return [super forwardingTargetForSelector:aSelector];
     }
 }
 
