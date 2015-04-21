@@ -22,9 +22,10 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		790A7CF6873C49B5B5E7F81C /* libPods-TCUToolsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 056294D0B7B2CBBE3BE82752 /* libPods-TCUToolsTests.a */; };
 		94B380861ADEA34500133260 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380851ADEA34500133260 /* User.m */; };
 		94B380891ADEA35200133260 /* Requests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380881ADEA35200133260 /* Requests.m */; };
+		94EE60181AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60171AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m */; };
 		BCF869BF038CCB49A59E45DD /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 487019242FF8D360A932C7B0 /* libPods-Tests.a */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		056294D0B7B2CBBE3BE82752 /* libPods-TCUToolsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TCUToolsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E059D2A860B5DAF4CCABD93 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		16EE668588494090839550E1 /* Pods-TCUToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUToolsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCUToolsTests/Pods-TCUToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		24538AD0409CD362E433CBEA /* libPods-TCUTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TCUTools.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		264BF264F1F4EEBDD3B2F084 /* Pods-TCUTools.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUTools.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCUTools/Pods-TCUTools.release.xcconfig"; sourceTree = "<group>"; };
 		267F08BB58DD4B8D8BC1528A /* TCUTools.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TCUTools.podspec; path = ../TCUTools.podspec; sourceTree = "<group>"; };
@@ -60,17 +63,18 @@
 		6003F5A5195388D20070C39A /* TCUViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCUViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* TCUViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCUViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* TCUToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCUToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6A97662BA9FD6B201CBA5D2C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		94B380841ADEA34500133260 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		94B380851ADEA34500133260 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		94B380871ADEA35200133260 /* Requests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Requests.h; sourceTree = "<group>"; };
 		94B380881ADEA35200133260 /* Requests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Requests.m; sourceTree = "<group>"; };
+		94EE60171AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCUTypeSafeCollectionTests.m; sourceTree = "<group>"; };
+		9DC17DE0F330F11538F787BF /* Pods-TCUToolsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUToolsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCUToolsTests/Pods-TCUToolsTests.release.xcconfig"; sourceTree = "<group>"; };
 		C9752A4E54F93EC74E23C4ED /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F5E19043D02B622B4E418DD3 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +99,7 @@
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
 				BCF869BF038CCB49A59E45DD /* libPods-Tests.a in Frameworks */,
+				790A7CF6873C49B5B5E7F81C /* libPods-TCUToolsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +113,8 @@
 				264BF264F1F4EEBDD3B2F084 /* Pods-TCUTools.release.xcconfig */,
 				F5E19043D02B622B4E418DD3 /* Pods-Tests.debug.xcconfig */,
 				0E059D2A860B5DAF4CCABD93 /* Pods-Tests.release.xcconfig */,
+				16EE668588494090839550E1 /* Pods-TCUToolsTests.debug.xcconfig */,
+				9DC17DE0F330F11538F787BF /* Pods-TCUToolsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -117,7 +124,7 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* TCUTools */,
-				6003F5B5195388D20070C39A /* Tests */,
+				6003F5B5195388D20070C39A /* TCUToolsTests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				248748B70167977D46B447B1 /* Pods */,
@@ -128,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				6003F58A195388D20070C39A /* TCUTools.app */,
-				6003F5AE195388D20070C39A /* Tests.xctest */,
+				6003F5AE195388D20070C39A /* TCUToolsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,6 +149,7 @@
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				24538AD0409CD362E433CBEA /* libPods-TCUTools.a */,
 				487019242FF8D360A932C7B0 /* libPods-Tests.a */,
+				056294D0B7B2CBBE3BE82752 /* libPods-TCUToolsTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -176,12 +184,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6003F5B5195388D20070C39A /* Tests */ = {
+		6003F5B5195388D20070C39A /* TCUToolsTests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				94EE60171AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
+			name = TCUToolsTests;
 			path = Tests;
 			sourceTree = "<group>";
 		};
@@ -244,7 +253,7 @@
 			);
 			name = TCUToolsTests;
 			productName = TCUToolsTests;
-			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* TCUToolsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -331,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TCUToolsTests/Pods-TCUToolsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3ECB81AEFA384A0793D0C245 /* Check Pods Manifest.lock */ = {
@@ -383,7 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				94EE60181AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +544,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5E19043D02B622B4E418DD3 /* Pods-Tests.debug.xcconfig */;
+			baseConfigurationReference = 16EE668588494090839550E1 /* Pods-TCUToolsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TCUTools.app/TCUTools";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -558,7 +567,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E059D2A860B5DAF4CCABD93 /* Pods-Tests.release.xcconfig */;
+			baseConfigurationReference = 9DC17DE0F330F11538F787BF /* Pods-TCUToolsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TCUTools.app/TCUTools";
 				FRAMEWORK_SEARCH_PATHS = (
