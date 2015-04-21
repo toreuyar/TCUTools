@@ -1,1 +1,0 @@
-PODS_TCUTOOLS_TCUTOOLS_OTHER_LDFLAGS = -l"ObjC" -framework "Foundation" -framework "UIKit"
