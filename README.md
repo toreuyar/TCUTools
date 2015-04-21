@@ -1,6 +1,6 @@
 # TCUTools
 
-[![CI Status](http://img.shields.io/travis/Töre Çağrı Uyar/TCUTools.svg?style=flat)](https://travis-ci.org/Töre Çağrı Uyar/TCUTools)
+[![CI Status](http://img.shields.io/travis/toreuyar/TCUTools.svg?style=flat)](https://travis-ci.org/toreuyar/TCUTools)
 [![Version](https://img.shields.io/cocoapods/v/TCUTools.svg?style=flat)](http://cocoadocs.org/docsets/TCUTools)
 [![License](https://img.shields.io/cocoapods/l/TCUTools.svg?style=flat)](http://cocoadocs.org/docsets/TCUTools)
 [![Platform](https://img.shields.io/cocoapods/p/TCUTools.svg?style=flat)](http://cocoadocs.org/docsets/TCUTools)
@@ -22,7 +22,7 @@ it, simply add the following line to your Podfile:
 
 ## Author
 
-Töre Çağrı Uyar, mail@toreuyar.net
+Töre Çağrı Uyar, mail@toreuyar.net
 
 ## License
 
