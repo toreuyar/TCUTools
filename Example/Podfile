@@ -1,9 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'Application', :exclusive => true do
+target 'TCUTools', :exclusive => true do
   pod "TCUTools", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'TCUToolsTests', :exclusive => true do
   pod "TCUTools", :path => "../"
 end

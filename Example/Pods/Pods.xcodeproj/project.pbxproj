@@ -7,553 +7,553 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03F5E7C1A5413AD4518BD9C1 /* TCUVariableType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3029238D067739963F73F96B /* TCUVariableType.m */; };
-		170D875A1A5ED8B5015DAF82 /* UILabel+FrameCalculation.h in Headers */ = {isa = PBXBuildFile; fileRef = F3D3BFE09519D1AE26E4D097 /* UILabel+FrameCalculation.h */; };
-		1F86BA79104923383FC3380E /* TCUTypeSafeCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3806CBBCD36D1BA3621B8F8C /* TCUTypeSafeCollection.h */; };
-		1FA6EA988014CFAEE13AE086 /* TCUVariableType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9558E917BAC5A9A3A858E9F8 /* TCUVariableType.h */; };
-		23FAA0D4CD5B67612C5F4C9C /* TCUPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD581503CD864DF1407F3AE /* TCUPickerView.m */; };
-		299084FC2241E4D296DC3891 /* TCUTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D3709F4494ABB04B460F16 /* TCUTools.h */; };
-		34D4BFB8FA812E0516414073 /* TCUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F797A8A4F4AB4186A194A3C /* TCUTextField.m */; };
-		3EE3B5A582D106082E4038E3 /* UIImage+MaskImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A721FC72C3D7F83076C9B5EB /* UIImage+MaskImage.m */; };
-		40B14A4ED1211E89BF26F298 /* TCUTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = DE4954A24AAB63AF378D6FEE /* TCUTextField.h */; };
-		412BB60969463AE429672B1B /* NSString+Email.h in Headers */ = {isa = PBXBuildFile; fileRef = F816F1B6D5A8C03D6EEC0FB3 /* NSString+Email.h */; };
-		46A9BAC6ADB887A730232905 /* Pods-Application-TCUTools-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96586A8DF8BD4E655D5149AE /* Pods-Application-TCUTools-dummy.m */; };
-		4E8D16BE767E094C10C488A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A322FD9983921EABC24F596E /* UIKit.framework */; };
-		5484C9B077B6B796E56208A3 /* UIImage+ResizeAndCrop.h in Headers */ = {isa = PBXBuildFile; fileRef = 20EB72921D7BFD835499DBD7 /* UIImage+ResizeAndCrop.h */; };
-		548699BFD84A1C2CB5D87945 /* TCUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F797A8A4F4AB4186A194A3C /* TCUTextField.m */; };
-		60F0EAFE96E9498DA05B1B6F /* TCUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB30732D6550E17058E13BA /* TCUImageView.m */; };
-		62553D23E7671C4FF50894CE /* UIImage+MaskImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AD08CC15E873FD09DE27EBF /* UIImage+MaskImage.h */; };
-		6A7E88E871C3F51BB6460162 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8201760566AA8C67D1861B /* Foundation.framework */; };
-		6AFFE128D1E264D28AB27437 /* TCUVariableType.h in Headers */ = {isa = PBXBuildFile; fileRef = 9558E917BAC5A9A3A858E9F8 /* TCUVariableType.h */; };
-		6F0FC376AF16FBCEB8249E5F /* TCUTypeSafeCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3806CBBCD36D1BA3621B8F8C /* TCUTypeSafeCollection.h */; };
-		70DD7A405CA24CC184CFCEE4 /* TCUImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F150D5923B6D53AE59C5E7C1 /* TCUImageView.h */; };
-		7FC9AD61FECDD12AA91AD2DE /* UILabel+FrameCalculation.h in Headers */ = {isa = PBXBuildFile; fileRef = F3D3BFE09519D1AE26E4D097 /* UILabel+FrameCalculation.h */; };
-		7FE6166E0997962829430CA8 /* TCUPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD581503CD864DF1407F3AE /* TCUPickerView.m */; };
-		80C47E82C5239CBB2EF60ED9 /* TCUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB30732D6550E17058E13BA /* TCUImageView.m */; };
-		86EA7A592CD12E597247A637 /* TCUVariableType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3029238D067739963F73F96B /* TCUVariableType.m */; };
-		8958B7D97D60E65238988437 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A322FD9983921EABC24F596E /* UIKit.framework */; };
-		94F6CE87219423E83A00EE2C /* UIImage+MaskImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AD08CC15E873FD09DE27EBF /* UIImage+MaskImage.h */; };
-		9A4EC17517B81B828A4DF543 /* TCUImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F150D5923B6D53AE59C5E7C1 /* TCUImageView.h */; };
-		9CCCCC88D1B574683DEC6129 /* TCUPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = FF445BD4B70BC7E8C6DEEA2E /* TCUPropertyAttributes.m */; };
-		A373D25EFBAD86EA43540A21 /* NSString+Email.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A700D5DB3D932A295673FB /* NSString+Email.m */; };
-		A4169D95A3B53AF5B3260337 /* TCUDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 35C1B7140CFF12097B2C7142 /* TCUDataManager.h */; };
-		A70F3D1A9FE42E2A47C2E198 /* NSString+Email.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A700D5DB3D932A295673FB /* NSString+Email.m */; };
-		A815C7051D82CB716D4E7C5C /* TCUTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D3709F4494ABB04B460F16 /* TCUTools.h */; };
-		A9B8C82C6867895A7BC2A89F /* Pods-Application-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BB56F3B3209EDED5B9A935C5 /* Pods-Application-dummy.m */; };
-		AA7EDC66D6250AEDBCB12292 /* UIImage+CachedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA189C33E70CC49E36B27127 /* UIImage+CachedImage.m */; };
-		B19B7C7A8B7446AF98BD7B85 /* TCUPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAAB0ABA312118060EE5DAB /* TCUPickerView.h */; };
-		B346BF33B8C13628ED695C7E /* TCUPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAAB0ABA312118060EE5DAB /* TCUPickerView.h */; };
-		B614E287C7C5CB86483C2B3D /* TCUDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD5F598DBD7828D40E6B4B /* TCUDataManager.m */; };
-		B7A53872B09012F70583610D /* UIImage+ResizeAndCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 57DF4822099558E7DE852334 /* UIImage+ResizeAndCrop.m */; };
-		BB1DF50BE4EE8E1474F8E6F6 /* TCUDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 35C1B7140CFF12097B2C7142 /* TCUDataManager.h */; };
-		BDE15776604AEDC17C9A8556 /* NSString+Email.h in Headers */ = {isa = PBXBuildFile; fileRef = F816F1B6D5A8C03D6EEC0FB3 /* NSString+Email.h */; };
-		C1EB40235855EB17B5950BF1 /* TCUTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = DE4954A24AAB63AF378D6FEE /* TCUTextField.h */; };
-		C7B70FF1033B7A72A98C1B7B /* UIImage+CachedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D4EA155E652EF9C8475C1B /* UIImage+CachedImage.h */; };
-		C7CA54E235A82069035482A3 /* TCUPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = FF445BD4B70BC7E8C6DEEA2E /* TCUPropertyAttributes.m */; };
-		C8332F8A645A07553AC13D14 /* UIImage+ResizeAndCrop.h in Headers */ = {isa = PBXBuildFile; fileRef = 20EB72921D7BFD835499DBD7 /* UIImage+ResizeAndCrop.h */; };
-		CB63A495F77D24D9F1E08A78 /* TCUPropertyAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2DBA9104B0C332475EF910 /* TCUPropertyAttributes.h */; };
-		CC83062263F3FF8C7F8FCF83 /* TCUDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFD5F598DBD7828D40E6B4B /* TCUDataManager.m */; };
-		CE0D371C53342D6C31FF919C /* TCUPropertyAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2DBA9104B0C332475EF910 /* TCUPropertyAttributes.h */; };
-		D078F599C473B7EE3032EC5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8201760566AA8C67D1861B /* Foundation.framework */; };
-		D4D7934D4A0BFAE8C842D9C8 /* UIImage+CachedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D4EA155E652EF9C8475C1B /* UIImage+CachedImage.h */; };
-		D89FFAFEE022E53F23732EB0 /* TCUTypeSafeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C093B9A7FEDAB7F294B003DB /* TCUTypeSafeCollection.m */; };
-		DB47410D2DC6EC67DC73D334 /* UIImage+MaskImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A721FC72C3D7F83076C9B5EB /* UIImage+MaskImage.m */; };
-		DD6AF2280D4156DB6ABA0877 /* TCUTypeSafeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = C093B9A7FEDAB7F294B003DB /* TCUTypeSafeCollection.m */; };
-		E2002B15A4A4A4EF2CDB73AF /* UILabel+FrameCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5877180F7AEAA99F096F44 /* UILabel+FrameCalculation.m */; };
-		E3A843DF04ED704A395A975D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8201760566AA8C67D1861B /* Foundation.framework */; };
-		F611744505EA5EF53520B482 /* Pods-Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 572EB9E5DD05DE657601E7F9 /* Pods-Tests-dummy.m */; };
-		F70827D5641ADD91276D7A4D /* Pods-Tests-TCUTools-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC780F57B10354562C9B960 /* Pods-Tests-TCUTools-dummy.m */; };
-		FAEF76087F4B5FCB70E5B940 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C8201760566AA8C67D1861B /* Foundation.framework */; };
-		FBFD50CF5331813D8FE63606 /* UILabel+FrameCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5877180F7AEAA99F096F44 /* UILabel+FrameCalculation.m */; };
-		FE173DB27D97A6624AF0B143 /* UIImage+ResizeAndCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 57DF4822099558E7DE852334 /* UIImage+ResizeAndCrop.m */; };
-		FF106AB4FA3D0840E6BD0619 /* UIImage+CachedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA189C33E70CC49E36B27127 /* UIImage+CachedImage.m */; };
+		0AD5A838475A60F134C6EC05 /* TCUVariableType.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67D8FA56AE2851ADB47571 /* TCUVariableType.m */; };
+		0CC12747CC42C37EE4EEB3EF /* NSString+Email.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E1F4AA68EADBFAA8D6D650 /* NSString+Email.m */; };
+		0FA51C50F46487270B103E76 /* UIImage+MaskImage.h in Headers */ = {isa = PBXBuildFile; fileRef = B971813C13F24DD4A17E0F89 /* UIImage+MaskImage.h */; };
+		1323B0B5E6C85D1A30A2668E /* TCUTypeSafeCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB0854F5A3B304FAFB19D70 /* TCUTypeSafeCollection.h */; };
+		2158D56F26E10347596ECF71 /* TCUDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C04E7DAD2FABDC48ECE70762 /* TCUDataManager.m */; };
+		28D9DC0CE0A72391C17C79C2 /* TCUDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C04E7DAD2FABDC48ECE70762 /* TCUDataManager.m */; };
+		29C5380C4F340448BA991551 /* TCUImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F23C9DA26DF1DD60098A1B96 /* TCUImageView.h */; };
+		29DC38BAF9FE72A4C004C6CA /* TCUPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09176E59688B9F9F7991C6DF /* TCUPickerView.m */; };
+		2D642BB26345F5225ECC7390 /* UIImage+MaskImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EDAB12AC43330B06F68E18 /* UIImage+MaskImage.m */; };
+		2E906D0B5B1AA581B9318F32 /* UIImage+MaskImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EDAB12AC43330B06F68E18 /* UIImage+MaskImage.m */; };
+		34D2CB9DB7863EB793889116 /* UIImage+CachedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 606166D71B8937B92A8085E9 /* UIImage+CachedImage.m */; };
+		3748BC3479234DA50949FEB2 /* TCUImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F23C9DA26DF1DD60098A1B96 /* TCUImageView.h */; };
+		3918420F76638AD73CD0471C /* UIImage+MaskImage.h in Headers */ = {isa = PBXBuildFile; fileRef = B971813C13F24DD4A17E0F89 /* UIImage+MaskImage.h */; };
+		39778C66390679E515D0CCF1 /* TCUTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8785E69111AD6C5C8E40CE2C /* TCUTextField.h */; };
+		4EA053A3C4732F72E6BBABE7 /* TCUPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 855E46558EFA035627524A43 /* TCUPropertyAttributes.m */; };
+		5651C8A338EA10468EC20586 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E23F7A2CEF35E99C4175EAB /* UIKit.framework */; };
+		5C6BF541558F23604C73FE34 /* NSString+Email.h in Headers */ = {isa = PBXBuildFile; fileRef = 23BFDB1F348D4FB738002245 /* NSString+Email.h */; };
+		5F2AE561D6C790FD917ED329 /* TCUTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 36414E0F6DAB4FEB1F72149F /* TCUTools.h */; };
+		61559D135A114E86D076BE6A /* UIImage+CachedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 672704AB87110F3A8320B32D /* UIImage+CachedImage.h */; };
+		6848BD671D4D6C112A6A047A /* UIImage+ResizeAndCrop.h in Headers */ = {isa = PBXBuildFile; fileRef = 2ED6B62564EC1D71BE6B7554 /* UIImage+ResizeAndCrop.h */; };
+		6B56E49355627E57C7E49E6D /* UIImage+CachedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 672704AB87110F3A8320B32D /* UIImage+CachedImage.h */; };
+		6CD6E0382C8C736399A48D22 /* UIImage+ResizeAndCrop.h in Headers */ = {isa = PBXBuildFile; fileRef = 2ED6B62564EC1D71BE6B7554 /* UIImage+ResizeAndCrop.h */; };
+		6FEB8794890B07EA662F1E3A /* TCUVariableType.m in Sources */ = {isa = PBXBuildFile; fileRef = AE67D8FA56AE2851ADB47571 /* TCUVariableType.m */; };
+		711092CF3301A64D552DE77A /* Pods-TCUTools-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F15CD2A6D20E4425FCB047 /* Pods-TCUTools-dummy.m */; };
+		73E190B4B7E4FE13D5DF9936 /* TCUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D13AF3DF983F1CD369CF9FE3 /* TCUImageView.m */; };
+		74D6CB1D6247E506F9DB2263 /* UILabel+FrameCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35C8C88640EFA2E019ED71 /* UILabel+FrameCalculation.m */; };
+		7668E3B25EAAAA5FDCDAFF72 /* TCUPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 855E46558EFA035627524A43 /* TCUPropertyAttributes.m */; };
+		7A40706C75FC16B5FFAC7F31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */; };
+		7AD3A4DEB2F4A6A70815EC06 /* TCUVariableType.h in Headers */ = {isa = PBXBuildFile; fileRef = A0960DA3B55F2B8D7995FF3F /* TCUVariableType.h */; };
+		7DB8C430F34F29EA52838D9D /* TCUTypeSafeCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB0854F5A3B304FAFB19D70 /* TCUTypeSafeCollection.h */; };
+		7F91C34E332259EEE4586946 /* TCUTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8785E69111AD6C5C8E40CE2C /* TCUTextField.h */; };
+		819D2D87709285817547880A /* UIImage+ResizeAndCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE6439A3274ECA5944B6EE /* UIImage+ResizeAndCrop.m */; };
+		852356CD73F2581420C0A2B2 /* TCUTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 36414E0F6DAB4FEB1F72149F /* TCUTools.h */; };
+		8B7ADC4445E381B0DDD9F230 /* TCUDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B333FD4168FA7706F908D4EA /* TCUDataManager.h */; };
+		8D43259EBA05BF1F31F3284C /* Pods-TCUToolsTests-TCUTools-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D9AF8BF052C991EAE36D9C /* Pods-TCUToolsTests-TCUTools-dummy.m */; };
+		96DA2C0E3D2944BECF45A0B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */; };
+		98FC908CB1645046C0BEF385 /* UIImage+ResizeAndCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE6439A3274ECA5944B6EE /* UIImage+ResizeAndCrop.m */; };
+		990D43C6FF356DBA608847B7 /* TCUDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B333FD4168FA7706F908D4EA /* TCUDataManager.h */; };
+		9AA9157DCFADED9DC0675F56 /* TCUPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 48450D77432B5518F02A7191 /* TCUPickerView.h */; };
+		9D1FEF9A81E23A0C0464FB9C /* UIImage+CachedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 606166D71B8937B92A8085E9 /* UIImage+CachedImage.m */; };
+		9ED65408BB12BBB126382CA0 /* TCUPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 48450D77432B5518F02A7191 /* TCUPickerView.h */; };
+		A234D7C6C531936D267747F1 /* Pods-TCUTools-TCUTools-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3B1DB98C642E51D98BCDF7 /* Pods-TCUTools-TCUTools-dummy.m */; };
+		A5AFB99FEF2220EC9A8AA67D /* Pods-TCUToolsTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BECFBEC405213970CABCA850 /* Pods-TCUToolsTests-dummy.m */; };
+		A5C5361E66497CFFEECC2FF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */; };
+		A61391E554D3BECBF9969855 /* TCUTypeSafeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EA7B984C8E482385E371C /* TCUTypeSafeCollection.m */; };
+		B028307A21298CFFB509179A /* UILabel+FrameCalculation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAA587B4C998EE15B1A79E0 /* UILabel+FrameCalculation.h */; };
+		B2C3FF8AC68B288065F108B2 /* UILabel+FrameCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35C8C88640EFA2E019ED71 /* UILabel+FrameCalculation.m */; };
+		B35E6691E6AAE1DF44D855D9 /* UILabel+FrameCalculation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAA587B4C998EE15B1A79E0 /* UILabel+FrameCalculation.h */; };
+		C04BBDBBAEC6C69A0EADD37E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */; };
+		C13F342A4B4FD2415359C180 /* TCUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5149E03ACB12E04DBF561 /* TCUTextField.m */; };
+		C3550FD9EE6E57C8280094D1 /* TCUTypeSafeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 047EA7B984C8E482385E371C /* TCUTypeSafeCollection.m */; };
+		C627E6FC5631DABDD5893F28 /* TCUPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09176E59688B9F9F7991C6DF /* TCUPickerView.m */; };
+		D7776BAE555E5A40EB9DB4FB /* NSString+Email.h in Headers */ = {isa = PBXBuildFile; fileRef = 23BFDB1F348D4FB738002245 /* NSString+Email.h */; };
+		DB198EEDFCA30A15267EB02E /* TCUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5149E03ACB12E04DBF561 /* TCUTextField.m */; };
+		DB3F56196FAE07BA64A68D22 /* TCUVariableType.h in Headers */ = {isa = PBXBuildFile; fileRef = A0960DA3B55F2B8D7995FF3F /* TCUVariableType.h */; };
+		DE13C272F83CA3D4F409CCE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E23F7A2CEF35E99C4175EAB /* UIKit.framework */; };
+		E2B8A0DE66AEA728E6FF5475 /* TCUPropertyAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = F3FE021849072F5807E36915 /* TCUPropertyAttributes.h */; };
+		EACFCDCA6A4E624BB35DD50F /* TCUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D13AF3DF983F1CD369CF9FE3 /* TCUImageView.m */; };
+		EEFF6AA6C6D283E7F4C1C849 /* NSString+Email.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E1F4AA68EADBFAA8D6D650 /* NSString+Email.m */; };
+		F18BF823214B5C9A242E7EB2 /* TCUPropertyAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = F3FE021849072F5807E36915 /* TCUPropertyAttributes.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		29F424680B449F5B674D8CAF /* PBXContainerItemProxy */ = {
+		50A9F937EACD34F05350EB84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 51AD4DA3DFBFCE45AC79CC55 /* Project object */;
+			containerPortal = ED03FAED0F8A9C0C5B3CBE7C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4862A064D026040F0859BA63;
-			remoteInfo = "Pods-Tests-TCUTools";
+			remoteGlobalIDString = FB73DB2EF033540920E4642E;
+			remoteInfo = "Pods-TCUToolsTests-TCUTools";
 		};
-		45F0E207DA8479C4B8D6DECC /* PBXContainerItemProxy */ = {
+		760B584C7A121254C4A6D14D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 51AD4DA3DFBFCE45AC79CC55 /* Project object */;
+			containerPortal = ED03FAED0F8A9C0C5B3CBE7C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6E1C54EA851F1692F3FDB643;
-			remoteInfo = "Pods-Tests-TCUTools-TCUTools";
+			remoteGlobalIDString = AAF6C97ECAF52C053BDDBB09;
+			remoteInfo = "Pods-TCUToolsTests-TCUTools-TCUTools";
 		};
-		6C1295172B3A4355FDC63472 /* PBXContainerItemProxy */ = {
+		ADFC16E21C921F8A6A709D1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 51AD4DA3DFBFCE45AC79CC55 /* Project object */;
+			containerPortal = ED03FAED0F8A9C0C5B3CBE7C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 335F3956BCDD01CF445A98A3;
-			remoteInfo = "Pods-Application-TCUTools-TCUTools";
+			remoteGlobalIDString = C275BC03C7E88A5BA18CE370;
+			remoteInfo = "Pods-TCUTools-TCUTools-TCUTools";
 		};
-		7CB179627837839E75F4286A /* PBXContainerItemProxy */ = {
+		DF7A1D21E8B16CA5D06479C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 51AD4DA3DFBFCE45AC79CC55 /* Project object */;
+			containerPortal = ED03FAED0F8A9C0C5B3CBE7C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2D4A367660FEEADB14CC002F;
-			remoteInfo = "Pods-Application-TCUTools";
+			remoteGlobalIDString = 86BE61AF77E89BF9CB7AE8D8;
+			remoteInfo = "Pods-TCUTools-TCUTools";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04D3709F4494ABB04B460F16 /* TCUTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUTools.h; sourceTree = "<group>"; };
-		0CC2A4572D95096CEB8CCC3D /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		0EFD23AB14DF29E604B78F98 /* TCUTools.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCUTools.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FB30732D6550E17058E13BA /* TCUImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUImageView.m; sourceTree = "<group>"; };
-		0FC9E42B537CBE6098E3C8E6 /* Pods-Tests-TCUTools-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-Tests-TCUTools-prefix.pch"; path = "../Pods-Tests-TCUTools/Pods-Tests-TCUTools-prefix.pch"; sourceTree = "<group>"; };
-		17CE7AD8A93D599B70E6D2C1 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		180357EB412272D15B646A60 /* Pods-Application-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Application-resources.sh"; sourceTree = "<group>"; };
-		1F797A8A4F4AB4186A194A3C /* TCUTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUTextField.m; sourceTree = "<group>"; };
-		20EB72921D7BFD835499DBD7 /* UIImage+ResizeAndCrop.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeAndCrop.h"; sourceTree = "<group>"; };
-		2AD08CC15E873FD09DE27EBF /* UIImage+MaskImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+MaskImage.h"; sourceTree = "<group>"; };
-		2E5877180F7AEAA99F096F44 /* UILabel+FrameCalculation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FrameCalculation.m"; sourceTree = "<group>"; };
-		3029238D067739963F73F96B /* TCUVariableType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUVariableType.m; sourceTree = "<group>"; };
-		3467011B9C671A867CD82744 /* libPods-Application.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Application.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		35C1B7140CFF12097B2C7142 /* TCUDataManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUDataManager.h; sourceTree = "<group>"; };
-		3710AC022B1C81113206FF0E /* Pods-Tests-TCUTools-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-TCUTools-Private.xcconfig"; path = "../Pods-Tests-TCUTools/Pods-Tests-TCUTools-Private.xcconfig"; sourceTree = "<group>"; };
-		3806CBBCD36D1BA3621B8F8C /* TCUTypeSafeCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUTypeSafeCollection.h; sourceTree = "<group>"; };
-		38A700D5DB3D932A295673FB /* NSString+Email.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+Email.m"; sourceTree = "<group>"; };
-		3C0056D45318AF336A687DC1 /* libPods-Application-TCUTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Application-TCUTools.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B6BB0EFF03DB9BA71F70F26 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		572EB9E5DD05DE657601E7F9 /* Pods-Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Tests-dummy.m"; sourceTree = "<group>"; };
-		57DF4822099558E7DE852334 /* UIImage+ResizeAndCrop.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeAndCrop.m"; sourceTree = "<group>"; };
-		57E83AF1485495D116760E6D /* Pods-Application-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Application-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5F191DF0FD25F222F4FB6514 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6C8201760566AA8C67D1861B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		755026E5273CBD1B831CEFCF /* Pods-Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		77D21E2CE30C370CA480B504 /* Pods-Application-TCUTools.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Application-TCUTools.xcconfig"; sourceTree = "<group>"; };
-		78D4EA155E652EF9C8475C1B /* UIImage+CachedImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+CachedImage.h"; sourceTree = "<group>"; };
-		80781FB614ED682759A9422B /* Pods-Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tests-resources.sh"; sourceTree = "<group>"; };
-		850DC43D821228A94B72BACE /* Pods-Application.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Application.release.xcconfig"; sourceTree = "<group>"; };
-		94566449102A0B088F8E3ACA /* Pods-Tests-TCUTools.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-TCUTools.xcconfig"; path = "../Pods-Tests-TCUTools/Pods-Tests-TCUTools.xcconfig"; sourceTree = "<group>"; };
-		9558E917BAC5A9A3A858E9F8 /* TCUVariableType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUVariableType.h; sourceTree = "<group>"; };
-		96586A8DF8BD4E655D5149AE /* Pods-Application-TCUTools-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Application-TCUTools-dummy.m"; sourceTree = "<group>"; };
-		990ED3B3811D7681DDF31E7B /* Pods-Application-TCUTools-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Application-TCUTools-prefix.pch"; sourceTree = "<group>"; };
-		9FFD5F598DBD7828D40E6B4B /* TCUDataManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUDataManager.m; sourceTree = "<group>"; };
-		A12C60C1711E605333D79B8F /* Pods-Application-TCUTools-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Application-TCUTools-Private.xcconfig"; sourceTree = "<group>"; };
-		A322FD9983921EABC24F596E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		A721FC72C3D7F83076C9B5EB /* UIImage+MaskImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MaskImage.m"; sourceTree = "<group>"; };
-		AD2DBA9104B0C332475EF910 /* TCUPropertyAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUPropertyAttributes.h; sourceTree = "<group>"; };
-		AF390B74D85849117B9F4A28 /* Pods-Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AFC780F57B10354562C9B960 /* Pods-Tests-TCUTools-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-Tests-TCUTools-dummy.m"; path = "../Pods-Tests-TCUTools/Pods-Tests-TCUTools-dummy.m"; sourceTree = "<group>"; };
-		BB56F3B3209EDED5B9A935C5 /* Pods-Application-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Application-dummy.m"; sourceTree = "<group>"; };
-		BCD581503CD864DF1407F3AE /* TCUPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUPickerView.m; sourceTree = "<group>"; };
-		C093B9A7FEDAB7F294B003DB /* TCUTypeSafeCollection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUTypeSafeCollection.m; sourceTree = "<group>"; };
-		DA189C33E70CC49E36B27127 /* UIImage+CachedImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CachedImage.m"; sourceTree = "<group>"; };
-		DCB729E34637E44882848844 /* Pods-Application.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Application.debug.xcconfig"; sourceTree = "<group>"; };
-		DE4954A24AAB63AF378D6FEE /* TCUTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUTextField.h; sourceTree = "<group>"; };
-		E35EA809315E9CC6D545A706 /* Pods-Application-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Application-acknowledgements.plist"; sourceTree = "<group>"; };
-		EAAAB0ABA312118060EE5DAB /* TCUPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUPickerView.h; sourceTree = "<group>"; };
-		ED56B711FC9B3519CBA18ADF /* libPods-Tests-TCUTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-TCUTools.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F150D5923B6D53AE59C5E7C1 /* TCUImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUImageView.h; sourceTree = "<group>"; };
-		F2D3AED2BE6A5362F87C35F8 /* Pods-Application-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Application-environment.h"; sourceTree = "<group>"; };
-		F35929A1A5E6D00E25D20DC4 /* TCUTools.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCUTools.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3D3BFE09519D1AE26E4D097 /* UILabel+FrameCalculation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UILabel+FrameCalculation.h"; sourceTree = "<group>"; };
-		F5A4C36E054FB58E4418530F /* Pods-Tests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tests-environment.h"; sourceTree = "<group>"; };
-		F816F1B6D5A8C03D6EEC0FB3 /* NSString+Email.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+Email.h"; sourceTree = "<group>"; };
-		FF445BD4B70BC7E8C6DEEA2E /* TCUPropertyAttributes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUPropertyAttributes.m; sourceTree = "<group>"; };
+		0458F3DEBE3788AF3C9AE314 /* Pods-TCUToolsTests-TCUTools-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-TCUToolsTests-TCUTools-prefix.pch"; path = "../Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools-prefix.pch"; sourceTree = "<group>"; };
+		047EA7B984C8E482385E371C /* TCUTypeSafeCollection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUTypeSafeCollection.m; sourceTree = "<group>"; };
+		09176E59688B9F9F7991C6DF /* TCUPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUPickerView.m; sourceTree = "<group>"; };
+		0DD5149E03ACB12E04DBF561 /* TCUTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUTextField.m; sourceTree = "<group>"; };
+		16A39880971C570A48AFD98E /* Pods-TCUToolsTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TCUToolsTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		18B8C4C2E1945D1471AA01FC /* Pods-TCUTools-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TCUTools-acknowledgements.plist"; sourceTree = "<group>"; };
+		19FE6439A3274ECA5944B6EE /* UIImage+ResizeAndCrop.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeAndCrop.m"; sourceTree = "<group>"; };
+		1E23F7A2CEF35E99C4175EAB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		23BFDB1F348D4FB738002245 /* NSString+Email.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+Email.h"; sourceTree = "<group>"; };
+		24CB24DCB9A78664BD87E29A /* Pods-TCUTools-TCUTools-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUTools-TCUTools-Private.xcconfig"; sourceTree = "<group>"; };
+		2706CD331B42F64578BE2D5D /* libPods-TCUTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TCUTools.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED6B62564EC1D71BE6B7554 /* UIImage+ResizeAndCrop.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeAndCrop.h"; sourceTree = "<group>"; };
+		36414E0F6DAB4FEB1F72149F /* TCUTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUTools.h; sourceTree = "<group>"; };
+		38C3435042DBC1B4480D5C0B /* Pods-TCUTools-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TCUTools-acknowledgements.markdown"; sourceTree = "<group>"; };
+		48450D77432B5518F02A7191 /* TCUPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUPickerView.h; sourceTree = "<group>"; };
+		487CBB55C1799F27A5F3F34B /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4FB0854F5A3B304FAFB19D70 /* TCUTypeSafeCollection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUTypeSafeCollection.h; sourceTree = "<group>"; };
+		50220DD4F7AEF2DE79C79F7F /* Pods-TCUToolsTests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TCUToolsTests-environment.h"; sourceTree = "<group>"; };
+		56847C77741FD38E60D5C064 /* Pods-TCUTools.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUTools.debug.xcconfig"; sourceTree = "<group>"; };
+		606166D71B8937B92A8085E9 /* UIImage+CachedImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CachedImage.m"; sourceTree = "<group>"; };
+		672704AB87110F3A8320B32D /* UIImage+CachedImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+CachedImage.h"; sourceTree = "<group>"; };
+		6974A4BBF1E9D8838DAD0074 /* Pods-TCUToolsTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TCUToolsTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		855E46558EFA035627524A43 /* TCUPropertyAttributes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUPropertyAttributes.m; sourceTree = "<group>"; };
+		8785E69111AD6C5C8E40CE2C /* TCUTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUTextField.h; sourceTree = "<group>"; };
+		8B35C8C88640EFA2E019ED71 /* UILabel+FrameCalculation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FrameCalculation.m"; sourceTree = "<group>"; };
+		8BAA587B4C998EE15B1A79E0 /* UILabel+FrameCalculation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UILabel+FrameCalculation.h"; sourceTree = "<group>"; };
+		91951290CF422B634E3DE241 /* Pods-TCUTools-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TCUTools-environment.h"; sourceTree = "<group>"; };
+		9411936A7B0EB6081759DC35 /* Pods-TCUToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A0960DA3B55F2B8D7995FF3F /* TCUVariableType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUVariableType.h; sourceTree = "<group>"; };
+		A6FA4123638E2F89782AFC19 /* Pods-TCUToolsTests-TCUTools-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUToolsTests-TCUTools-Private.xcconfig"; path = "../Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools-Private.xcconfig"; sourceTree = "<group>"; };
+		AD3F6054F9A6CE0F9BBB4B7D /* TCUTools.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCUTools.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE67D8FA56AE2851ADB47571 /* TCUVariableType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUVariableType.m; sourceTree = "<group>"; };
+		AF2810CB4923784E94443CA5 /* libPods-TCUToolsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TCUToolsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF3B1DB98C642E51D98BCDF7 /* Pods-TCUTools-TCUTools-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TCUTools-TCUTools-dummy.m"; sourceTree = "<group>"; };
+		B333FD4168FA7706F908D4EA /* TCUDataManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUDataManager.h; sourceTree = "<group>"; };
+		B34916100198A6297CF379DB /* Pods-TCUTools-TCUTools.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUTools-TCUTools.xcconfig"; sourceTree = "<group>"; };
+		B971813C13F24DD4A17E0F89 /* UIImage+MaskImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+MaskImage.h"; sourceTree = "<group>"; };
+		B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		BCA415B86A83948155F2D560 /* Pods-TCUToolsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUToolsTests.release.xcconfig"; sourceTree = "<group>"; };
+		BECFBEC405213970CABCA850 /* Pods-TCUToolsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TCUToolsTests-dummy.m"; sourceTree = "<group>"; };
+		C04E7DAD2FABDC48ECE70762 /* TCUDataManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUDataManager.m; sourceTree = "<group>"; };
+		C2553D9DD1AF6A2586FE5CE5 /* libPods-TCUTools-TCUTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TCUTools-TCUTools.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D13AF3DF983F1CD369CF9FE3 /* TCUImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TCUImageView.m; sourceTree = "<group>"; };
+		D5BD9FB45C80B17521CED9DF /* TCUTools.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCUTools.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D64384C5F588F9AA87375451 /* Pods-TCUToolsTests-TCUTools.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUToolsTests-TCUTools.xcconfig"; path = "../Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools.xcconfig"; sourceTree = "<group>"; };
+		D8BFBB8F814F10BBED1ECBB9 /* Pods-TCUTools-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TCUTools-resources.sh"; sourceTree = "<group>"; };
+		DBA81699ABF96B2BD9E8F541 /* Pods-TCUTools-TCUTools-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TCUTools-TCUTools-prefix.pch"; sourceTree = "<group>"; };
+		E04B2FA1F0F53242A7792FEE /* Pods-TCUToolsTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TCUToolsTests-resources.sh"; sourceTree = "<group>"; };
+		E3EDAB12AC43330B06F68E18 /* UIImage+MaskImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MaskImage.m"; sourceTree = "<group>"; };
+		EADDC87913C2F743579EF91D /* libPods-TCUToolsTests-TCUTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TCUToolsTests-TCUTools.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE72A025115C56E8B8CCF122 /* Pods-TCUTools.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUTools.release.xcconfig"; sourceTree = "<group>"; };
+		F0F15CD2A6D20E4425FCB047 /* Pods-TCUTools-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TCUTools-dummy.m"; sourceTree = "<group>"; };
+		F23C9DA26DF1DD60098A1B96 /* TCUImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUImageView.h; sourceTree = "<group>"; };
+		F3FE021849072F5807E36915 /* TCUPropertyAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUPropertyAttributes.h; sourceTree = "<group>"; };
+		F4E1F4AA68EADBFAA8D6D650 /* NSString+Email.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+Email.m"; sourceTree = "<group>"; };
+		F8D9AF8BF052C991EAE36D9C /* Pods-TCUToolsTests-TCUTools-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-TCUToolsTests-TCUTools-dummy.m"; path = "../Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		06927AE5B72D7D1FD1252EF1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAEF76087F4B5FCB70E5B940 /* Foundation.framework in Frameworks */,
-				4E8D16BE767E094C10C488A5 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3003D4ACF397A1C10E4D5E57 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3A843DF04ED704A395A975D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6240E0C1F0DDFFE12F2531AF /* Frameworks */ = {
+		057F27D27057CD44CE6F19E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C16889EFD5EBBDD41A003A90 /* Frameworks */ = {
+		0FE733FE6D46F914984FFB6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96DA2C0E3D2944BECF45A0B5 /* Foundation.framework in Frameworks */,
+				5651C8A338EA10468EC20586 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5507B3BB1DFCEF27D21950E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A40706C75FC16B5FFAC7F31 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60C012C16258325A3C85D92C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C50B953442B9389A1BBD7954 /* Frameworks */ = {
+		64972D1E584584C63858A977 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D078F599C473B7EE3032EC5F /* Foundation.framework in Frameworks */,
-				8958B7D97D60E65238988437 /* UIKit.framework in Frameworks */,
+				A5C5361E66497CFFEECC2FF4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F6B45AEF32EC675E7F33ED2F /* Frameworks */ = {
+		A12DEB0B591CECF3D6EE587F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A7E88E871C3F51BB6460162 /* Foundation.framework in Frameworks */,
+				C04BBDBBAEC6C69A0EADD37E /* Foundation.framework in Frameworks */,
+				DE13C272F83CA3D4F409CCE2 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		052565344AD8BB6846E67ED9 /* Products */ = {
+		1A3DA246735BDE7093B2AA63 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0EFD23AB14DF29E604B78F98 /* TCUTools.bundle */,
-				F35929A1A5E6D00E25D20DC4 /* TCUTools.bundle */,
-				3467011B9C671A867CD82744 /* libPods-Application.a */,
-				3C0056D45318AF336A687DC1 /* libPods-Application-TCUTools.a */,
-				4B6BB0EFF03DB9BA71F70F26 /* libPods-Tests.a */,
-				ED56B711FC9B3519CBA18ADF /* libPods-Tests-TCUTools.a */,
+				98945F117A5AEFD8458854CD /* iOS */,
 			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		37EA362DDC2F70A465D95239 /* Classes */ = {
+		39190A8854B59018D25EFF1A /* Pods-TCUTools */ = {
 			isa = PBXGroup;
 			children = (
-				F816F1B6D5A8C03D6EEC0FB3 /* NSString+Email.h */,
-				38A700D5DB3D932A295673FB /* NSString+Email.m */,
-				35C1B7140CFF12097B2C7142 /* TCUDataManager.h */,
-				9FFD5F598DBD7828D40E6B4B /* TCUDataManager.m */,
-				F150D5923B6D53AE59C5E7C1 /* TCUImageView.h */,
-				0FB30732D6550E17058E13BA /* TCUImageView.m */,
-				EAAAB0ABA312118060EE5DAB /* TCUPickerView.h */,
-				BCD581503CD864DF1407F3AE /* TCUPickerView.m */,
-				AD2DBA9104B0C332475EF910 /* TCUPropertyAttributes.h */,
-				FF445BD4B70BC7E8C6DEEA2E /* TCUPropertyAttributes.m */,
-				DE4954A24AAB63AF378D6FEE /* TCUTextField.h */,
-				1F797A8A4F4AB4186A194A3C /* TCUTextField.m */,
-				04D3709F4494ABB04B460F16 /* TCUTools.h */,
-				3806CBBCD36D1BA3621B8F8C /* TCUTypeSafeCollection.h */,
-				C093B9A7FEDAB7F294B003DB /* TCUTypeSafeCollection.m */,
-				9558E917BAC5A9A3A858E9F8 /* TCUVariableType.h */,
-				3029238D067739963F73F96B /* TCUVariableType.m */,
-				78D4EA155E652EF9C8475C1B /* UIImage+CachedImage.h */,
-				DA189C33E70CC49E36B27127 /* UIImage+CachedImage.m */,
-				2AD08CC15E873FD09DE27EBF /* UIImage+MaskImage.h */,
-				A721FC72C3D7F83076C9B5EB /* UIImage+MaskImage.m */,
-				20EB72921D7BFD835499DBD7 /* UIImage+ResizeAndCrop.h */,
-				57DF4822099558E7DE852334 /* UIImage+ResizeAndCrop.m */,
-				F3D3BFE09519D1AE26E4D097 /* UILabel+FrameCalculation.h */,
-				2E5877180F7AEAA99F096F44 /* UILabel+FrameCalculation.m */,
+				38C3435042DBC1B4480D5C0B /* Pods-TCUTools-acknowledgements.markdown */,
+				18B8C4C2E1945D1471AA01FC /* Pods-TCUTools-acknowledgements.plist */,
+				F0F15CD2A6D20E4425FCB047 /* Pods-TCUTools-dummy.m */,
+				91951290CF422B634E3DE241 /* Pods-TCUTools-environment.h */,
+				D8BFBB8F814F10BBED1ECBB9 /* Pods-TCUTools-resources.sh */,
+				56847C77741FD38E60D5C064 /* Pods-TCUTools.debug.xcconfig */,
+				EE72A025115C56E8B8CCF122 /* Pods-TCUTools.release.xcconfig */,
 			);
-			path = Classes;
+			name = "Pods-TCUTools";
+			path = "Target Support Files/Pods-TCUTools";
 			sourceTree = "<group>";
 		};
-		3E6C27107A62265B85117E23 /* Targets Support Files */ = {
+		42A27FA12849047231CDB5B4 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				8D1770D12EA8F7ABF31C73A2 /* Pods-Application */,
-				F6FFDA1CC552C79CC5A0480A /* Pods-Tests */,
+				7139D08B1C3ABBD3D0D23EE9 /* Classes */,
 			);
-			name = "Targets Support Files";
+			path = Pod;
 			sourceTree = "<group>";
 		};
-		47CBF4E4C76646496F85148F /* TCUTools */ = {
+		4FC8B80C6BEE3B621775DB62 /* TCUTools */ = {
 			isa = PBXGroup;
 			children = (
-				F7230EEDE645260078776E91 /* Pod */,
-				731B9DB2E9C27C7C4E6A73AC /* Support Files */,
+				42A27FA12849047231CDB5B4 /* Pod */,
+				E33093B22FD4AE6C42ABD063 /* Support Files */,
 			);
 			name = TCUTools;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		50CABF4C2BFF2CCB9BB67A73 /* Development Pods */ = {
+		7139D08B1C3ABBD3D0D23EE9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				47CBF4E4C76646496F85148F /* TCUTools */,
+				23BFDB1F348D4FB738002245 /* NSString+Email.h */,
+				F4E1F4AA68EADBFAA8D6D650 /* NSString+Email.m */,
+				B333FD4168FA7706F908D4EA /* TCUDataManager.h */,
+				C04E7DAD2FABDC48ECE70762 /* TCUDataManager.m */,
+				F23C9DA26DF1DD60098A1B96 /* TCUImageView.h */,
+				D13AF3DF983F1CD369CF9FE3 /* TCUImageView.m */,
+				48450D77432B5518F02A7191 /* TCUPickerView.h */,
+				09176E59688B9F9F7991C6DF /* TCUPickerView.m */,
+				F3FE021849072F5807E36915 /* TCUPropertyAttributes.h */,
+				855E46558EFA035627524A43 /* TCUPropertyAttributes.m */,
+				8785E69111AD6C5C8E40CE2C /* TCUTextField.h */,
+				0DD5149E03ACB12E04DBF561 /* TCUTextField.m */,
+				36414E0F6DAB4FEB1F72149F /* TCUTools.h */,
+				4FB0854F5A3B304FAFB19D70 /* TCUTypeSafeCollection.h */,
+				047EA7B984C8E482385E371C /* TCUTypeSafeCollection.m */,
+				A0960DA3B55F2B8D7995FF3F /* TCUVariableType.h */,
+				AE67D8FA56AE2851ADB47571 /* TCUVariableType.m */,
+				672704AB87110F3A8320B32D /* UIImage+CachedImage.h */,
+				606166D71B8937B92A8085E9 /* UIImage+CachedImage.m */,
+				B971813C13F24DD4A17E0F89 /* UIImage+MaskImage.h */,
+				E3EDAB12AC43330B06F68E18 /* UIImage+MaskImage.m */,
+				2ED6B62564EC1D71BE6B7554 /* UIImage+ResizeAndCrop.h */,
+				19FE6439A3274ECA5944B6EE /* UIImage+ResizeAndCrop.m */,
+				8BAA587B4C998EE15B1A79E0 /* UILabel+FrameCalculation.h */,
+				8B35C8C88640EFA2E019ED71 /* UILabel+FrameCalculation.m */,
 			);
-			name = "Development Pods";
+			path = Classes;
 			sourceTree = "<group>";
 		};
-		731B9DB2E9C27C7C4E6A73AC /* Support Files */ = {
+		98945F117A5AEFD8458854CD /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				77D21E2CE30C370CA480B504 /* Pods-Application-TCUTools.xcconfig */,
-				A12C60C1711E605333D79B8F /* Pods-Application-TCUTools-Private.xcconfig */,
-				96586A8DF8BD4E655D5149AE /* Pods-Application-TCUTools-dummy.m */,
-				990ED3B3811D7681DDF31E7B /* Pods-Application-TCUTools-prefix.pch */,
-				94566449102A0B088F8E3ACA /* Pods-Tests-TCUTools.xcconfig */,
-				3710AC022B1C81113206FF0E /* Pods-Tests-TCUTools-Private.xcconfig */,
-				AFC780F57B10354562C9B960 /* Pods-Tests-TCUTools-dummy.m */,
-				0FC9E42B537CBE6098E3C8E6 /* Pods-Tests-TCUTools-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/Pods-Application-TCUTools";
-			sourceTree = "<group>";
-		};
-		8D1770D12EA8F7ABF31C73A2 /* Pods-Application */ = {
-			isa = PBXGroup;
-			children = (
-				57E83AF1485495D116760E6D /* Pods-Application-acknowledgements.markdown */,
-				E35EA809315E9CC6D545A706 /* Pods-Application-acknowledgements.plist */,
-				BB56F3B3209EDED5B9A935C5 /* Pods-Application-dummy.m */,
-				F2D3AED2BE6A5362F87C35F8 /* Pods-Application-environment.h */,
-				180357EB412272D15B646A60 /* Pods-Application-resources.sh */,
-				DCB729E34637E44882848844 /* Pods-Application.debug.xcconfig */,
-				850DC43D821228A94B72BACE /* Pods-Application.release.xcconfig */,
-			);
-			name = "Pods-Application";
-			path = "Target Support Files/Pods-Application";
-			sourceTree = "<group>";
-		};
-		8D1F4EA88F6601F96817BF95 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				6C8201760566AA8C67D1861B /* Foundation.framework */,
-				A322FD9983921EABC24F596E /* UIKit.framework */,
+				B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */,
+				1E23F7A2CEF35E99C4175EAB /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		953D70A3464584155C91D9BE /* Frameworks */ = {
+		9B5F0AB8A0355DB5FC4A3DF7 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8D1F4EA88F6601F96817BF95 /* iOS */,
+				39190A8854B59018D25EFF1A /* Pods-TCUTools */,
+				D58C64BC330381D961F9D5B2 /* Pods-TCUToolsTests */,
 			);
-			name = Frameworks;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		CED9191BCC24F8EA0A028C34 = {
+		AC893B1BC52DA5CF09C162DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5F191DF0FD25F222F4FB6514 /* Podfile */,
-				50CABF4C2BFF2CCB9BB67A73 /* Development Pods */,
-				953D70A3464584155C91D9BE /* Frameworks */,
-				052565344AD8BB6846E67ED9 /* Products */,
-				3E6C27107A62265B85117E23 /* Targets Support Files */,
+				D5BD9FB45C80B17521CED9DF /* TCUTools.bundle */,
+				AD3F6054F9A6CE0F9BBB4B7D /* TCUTools.bundle */,
+				2706CD331B42F64578BE2D5D /* libPods-TCUTools.a */,
+				C2553D9DD1AF6A2586FE5CE5 /* libPods-TCUTools-TCUTools.a */,
+				AF2810CB4923784E94443CA5 /* libPods-TCUToolsTests.a */,
+				EADDC87913C2F743579EF91D /* libPods-TCUToolsTests-TCUTools.a */,
 			);
+			name = Products;
 			sourceTree = "<group>";
 		};
-		F6FFDA1CC552C79CC5A0480A /* Pods-Tests */ = {
+		D3769EB594CE2535ECDF5735 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AF390B74D85849117B9F4A28 /* Pods-Tests-acknowledgements.markdown */,
-				755026E5273CBD1B831CEFCF /* Pods-Tests-acknowledgements.plist */,
-				572EB9E5DD05DE657601E7F9 /* Pods-Tests-dummy.m */,
-				F5A4C36E054FB58E4418530F /* Pods-Tests-environment.h */,
-				80781FB614ED682759A9422B /* Pods-Tests-resources.sh */,
-				17CE7AD8A93D599B70E6D2C1 /* Pods-Tests.debug.xcconfig */,
-				0CC2A4572D95096CEB8CCC3D /* Pods-Tests.release.xcconfig */,
+				4FC8B80C6BEE3B621775DB62 /* TCUTools */,
 			);
-			name = "Pods-Tests";
-			path = "Target Support Files/Pods-Tests";
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		F7230EEDE645260078776E91 /* Pod */ = {
+		D58C64BC330381D961F9D5B2 /* Pods-TCUToolsTests */ = {
 			isa = PBXGroup;
 			children = (
-				37EA362DDC2F70A465D95239 /* Classes */,
+				16A39880971C570A48AFD98E /* Pods-TCUToolsTests-acknowledgements.markdown */,
+				6974A4BBF1E9D8838DAD0074 /* Pods-TCUToolsTests-acknowledgements.plist */,
+				BECFBEC405213970CABCA850 /* Pods-TCUToolsTests-dummy.m */,
+				50220DD4F7AEF2DE79C79F7F /* Pods-TCUToolsTests-environment.h */,
+				E04B2FA1F0F53242A7792FEE /* Pods-TCUToolsTests-resources.sh */,
+				9411936A7B0EB6081759DC35 /* Pods-TCUToolsTests.debug.xcconfig */,
+				BCA415B86A83948155F2D560 /* Pods-TCUToolsTests.release.xcconfig */,
 			);
-			path = Pod;
+			name = "Pods-TCUToolsTests";
+			path = "Target Support Files/Pods-TCUToolsTests";
+			sourceTree = "<group>";
+		};
+		E33093B22FD4AE6C42ABD063 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B34916100198A6297CF379DB /* Pods-TCUTools-TCUTools.xcconfig */,
+				24CB24DCB9A78664BD87E29A /* Pods-TCUTools-TCUTools-Private.xcconfig */,
+				AF3B1DB98C642E51D98BCDF7 /* Pods-TCUTools-TCUTools-dummy.m */,
+				DBA81699ABF96B2BD9E8F541 /* Pods-TCUTools-TCUTools-prefix.pch */,
+				D64384C5F588F9AA87375451 /* Pods-TCUToolsTests-TCUTools.xcconfig */,
+				A6FA4123638E2F89782AFC19 /* Pods-TCUToolsTests-TCUTools-Private.xcconfig */,
+				F8D9AF8BF052C991EAE36D9C /* Pods-TCUToolsTests-TCUTools-dummy.m */,
+				0458F3DEBE3788AF3C9AE314 /* Pods-TCUToolsTests-TCUTools-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Pods-TCUTools-TCUTools";
+			sourceTree = "<group>";
+		};
+		F6CD4D45B86786629E1A4E92 = {
+			isa = PBXGroup;
+			children = (
+				487CBB55C1799F27A5F3F34B /* Podfile */,
+				D3769EB594CE2535ECDF5735 /* Development Pods */,
+				1A3DA246735BDE7093B2AA63 /* Frameworks */,
+				AC893B1BC52DA5CF09C162DE /* Products */,
+				9B5F0AB8A0355DB5FC4A3DF7 /* Targets Support Files */,
+			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		784361583C7BE733C0A58E6A /* Headers */ = {
+		5F97C790FA72EC958BE35B64 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412BB60969463AE429672B1B /* NSString+Email.h in Headers */,
-				A4169D95A3B53AF5B3260337 /* TCUDataManager.h in Headers */,
-				70DD7A405CA24CC184CFCEE4 /* TCUImageView.h in Headers */,
-				B346BF33B8C13628ED695C7E /* TCUPickerView.h in Headers */,
-				CB63A495F77D24D9F1E08A78 /* TCUPropertyAttributes.h in Headers */,
-				40B14A4ED1211E89BF26F298 /* TCUTextField.h in Headers */,
-				299084FC2241E4D296DC3891 /* TCUTools.h in Headers */,
-				6F0FC376AF16FBCEB8249E5F /* TCUTypeSafeCollection.h in Headers */,
-				1FA6EA988014CFAEE13AE086 /* TCUVariableType.h in Headers */,
-				D4D7934D4A0BFAE8C842D9C8 /* UIImage+CachedImage.h in Headers */,
-				62553D23E7671C4FF50894CE /* UIImage+MaskImage.h in Headers */,
-				C8332F8A645A07553AC13D14 /* UIImage+ResizeAndCrop.h in Headers */,
-				170D875A1A5ED8B5015DAF82 /* UILabel+FrameCalculation.h in Headers */,
+				5C6BF541558F23604C73FE34 /* NSString+Email.h in Headers */,
+				8B7ADC4445E381B0DDD9F230 /* TCUDataManager.h in Headers */,
+				3748BC3479234DA50949FEB2 /* TCUImageView.h in Headers */,
+				9ED65408BB12BBB126382CA0 /* TCUPickerView.h in Headers */,
+				E2B8A0DE66AEA728E6FF5475 /* TCUPropertyAttributes.h in Headers */,
+				39778C66390679E515D0CCF1 /* TCUTextField.h in Headers */,
+				5F2AE561D6C790FD917ED329 /* TCUTools.h in Headers */,
+				1323B0B5E6C85D1A30A2668E /* TCUTypeSafeCollection.h in Headers */,
+				7AD3A4DEB2F4A6A70815EC06 /* TCUVariableType.h in Headers */,
+				6B56E49355627E57C7E49E6D /* UIImage+CachedImage.h in Headers */,
+				0FA51C50F46487270B103E76 /* UIImage+MaskImage.h in Headers */,
+				6CD6E0382C8C736399A48D22 /* UIImage+ResizeAndCrop.h in Headers */,
+				B35E6691E6AAE1DF44D855D9 /* UILabel+FrameCalculation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5DC20FACADD9D6F1BD05E8C /* Headers */ = {
+		7EEAF995652D1A3B3851084C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDE15776604AEDC17C9A8556 /* NSString+Email.h in Headers */,
-				BB1DF50BE4EE8E1474F8E6F6 /* TCUDataManager.h in Headers */,
-				9A4EC17517B81B828A4DF543 /* TCUImageView.h in Headers */,
-				B19B7C7A8B7446AF98BD7B85 /* TCUPickerView.h in Headers */,
-				CE0D371C53342D6C31FF919C /* TCUPropertyAttributes.h in Headers */,
-				C1EB40235855EB17B5950BF1 /* TCUTextField.h in Headers */,
-				A815C7051D82CB716D4E7C5C /* TCUTools.h in Headers */,
-				1F86BA79104923383FC3380E /* TCUTypeSafeCollection.h in Headers */,
-				6AFFE128D1E264D28AB27437 /* TCUVariableType.h in Headers */,
-				C7B70FF1033B7A72A98C1B7B /* UIImage+CachedImage.h in Headers */,
-				94F6CE87219423E83A00EE2C /* UIImage+MaskImage.h in Headers */,
-				5484C9B077B6B796E56208A3 /* UIImage+ResizeAndCrop.h in Headers */,
-				7FC9AD61FECDD12AA91AD2DE /* UILabel+FrameCalculation.h in Headers */,
+				D7776BAE555E5A40EB9DB4FB /* NSString+Email.h in Headers */,
+				990D43C6FF356DBA608847B7 /* TCUDataManager.h in Headers */,
+				29C5380C4F340448BA991551 /* TCUImageView.h in Headers */,
+				9AA9157DCFADED9DC0675F56 /* TCUPickerView.h in Headers */,
+				F18BF823214B5C9A242E7EB2 /* TCUPropertyAttributes.h in Headers */,
+				7F91C34E332259EEE4586946 /* TCUTextField.h in Headers */,
+				852356CD73F2581420C0A2B2 /* TCUTools.h in Headers */,
+				7DB8C430F34F29EA52838D9D /* TCUTypeSafeCollection.h in Headers */,
+				DB3F56196FAE07BA64A68D22 /* TCUVariableType.h in Headers */,
+				61559D135A114E86D076BE6A /* UIImage+CachedImage.h in Headers */,
+				3918420F76638AD73CD0471C /* UIImage+MaskImage.h in Headers */,
+				6848BD671D4D6C112A6A047A /* UIImage+ResizeAndCrop.h in Headers */,
+				B028307A21298CFFB509179A /* UILabel+FrameCalculation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2D4A367660FEEADB14CC002F /* Pods-Application-TCUTools */ = {
+		6179B10E0203F34B658AD0A8 /* Pods-TCUTools */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BC1C87AF6BB0C42F7988170A /* Build configuration list for PBXNativeTarget "Pods-Application-TCUTools" */;
+			buildConfigurationList = 1200CD4926EBE83528A8A0AA /* Build configuration list for PBXNativeTarget "Pods-TCUTools" */;
 			buildPhases = (
-				A51C3B2E081107D535417464 /* Sources */,
-				C50B953442B9389A1BBD7954 /* Frameworks */,
-				C5DC20FACADD9D6F1BD05E8C /* Headers */,
+				2C21919DD570AD56015B67D9 /* Sources */,
+				64972D1E584584C63858A977 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1BD10A753E70A94D188ECCF9 /* PBXTargetDependency */,
+				4FCE85FE0103C99BCF086000 /* PBXTargetDependency */,
 			);
-			name = "Pods-Application-TCUTools";
-			productName = "Pods-Application-TCUTools";
-			productReference = 3C0056D45318AF336A687DC1 /* libPods-Application-TCUTools.a */;
+			name = "Pods-TCUTools";
+			productName = "Pods-TCUTools";
+			productReference = 2706CD331B42F64578BE2D5D /* libPods-TCUTools.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		335F3956BCDD01CF445A98A3 /* Pods-Application-TCUTools-TCUTools */ = {
+		86BE61AF77E89BF9CB7AE8D8 /* Pods-TCUTools-TCUTools */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08FE05B30EBC77AF36A50B46 /* Build configuration list for PBXNativeTarget "Pods-Application-TCUTools-TCUTools" */;
+			buildConfigurationList = A83115B752DD1151CB07A9BC /* Build configuration list for PBXNativeTarget "Pods-TCUTools-TCUTools" */;
 			buildPhases = (
-				F8A6EC76704838CD0E95A125 /* Sources */,
-				C16889EFD5EBBDD41A003A90 /* Frameworks */,
-				511FC26F5E77DC72575AB69A /* Resources */,
+				13D728C5C9350FD6414E2544 /* Sources */,
+				A12DEB0B591CECF3D6EE587F /* Frameworks */,
+				5F97C790FA72EC958BE35B64 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				912E7CCF94A20AD836B4C869 /* PBXTargetDependency */,
+			);
+			name = "Pods-TCUTools-TCUTools";
+			productName = "Pods-TCUTools-TCUTools";
+			productReference = C2553D9DD1AF6A2586FE5CE5 /* libPods-TCUTools-TCUTools.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AAF6C97ECAF52C053BDDBB09 /* Pods-TCUToolsTests-TCUTools-TCUTools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F79CE4F9018932656956F06 /* Build configuration list for PBXNativeTarget "Pods-TCUToolsTests-TCUTools-TCUTools" */;
+			buildPhases = (
+				4D42E581B7EC16B58B23D006 /* Sources */,
+				057F27D27057CD44CE6F19E4 /* Frameworks */,
+				AFB16E4A17F0CE7DB9BDCD59 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-Application-TCUTools-TCUTools";
-			productName = "Pods-Application-TCUTools-TCUTools";
-			productReference = F35929A1A5E6D00E25D20DC4 /* TCUTools.bundle */;
+			name = "Pods-TCUToolsTests-TCUTools-TCUTools";
+			productName = "Pods-TCUToolsTests-TCUTools-TCUTools";
+			productReference = D5BD9FB45C80B17521CED9DF /* TCUTools.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		4862A064D026040F0859BA63 /* Pods-Tests-TCUTools */ = {
+		C275BC03C7E88A5BA18CE370 /* Pods-TCUTools-TCUTools-TCUTools */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C2F2FBFE6977310D7C8CB20 /* Build configuration list for PBXNativeTarget "Pods-Tests-TCUTools" */;
+			buildConfigurationList = 4A48A03ECB7EC4028F08A8D1 /* Build configuration list for PBXNativeTarget "Pods-TCUTools-TCUTools-TCUTools" */;
 			buildPhases = (
-				84FC708BB818DC946A38B0B7 /* Sources */,
-				06927AE5B72D7D1FD1252EF1 /* Frameworks */,
-				784361583C7BE733C0A58E6A /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D6489BCECA7DF2FC2B4E7988 /* PBXTargetDependency */,
-			);
-			name = "Pods-Tests-TCUTools";
-			productName = "Pods-Tests-TCUTools";
-			productReference = ED56B711FC9B3519CBA18ADF /* libPods-Tests-TCUTools.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		6E1C54EA851F1692F3FDB643 /* Pods-Tests-TCUTools-TCUTools */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9E9A4FA41655483B7AB1E202 /* Build configuration list for PBXNativeTarget "Pods-Tests-TCUTools-TCUTools" */;
-			buildPhases = (
-				7C2E855582B1BD3D2B320F52 /* Sources */,
-				6240E0C1F0DDFFE12F2531AF /* Frameworks */,
-				BED661FF7C9D0E51B171161F /* Resources */,
+				62E76E79E1AEE6D2707A17F8 /* Sources */,
+				60C012C16258325A3C85D92C /* Frameworks */,
+				6DB2BDAB654081D83BE60461 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-Tests-TCUTools-TCUTools";
-			productName = "Pods-Tests-TCUTools-TCUTools";
-			productReference = 0EFD23AB14DF29E604B78F98 /* TCUTools.bundle */;
+			name = "Pods-TCUTools-TCUTools-TCUTools";
+			productName = "Pods-TCUTools-TCUTools-TCUTools";
+			productReference = AD3F6054F9A6CE0F9BBB4B7D /* TCUTools.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		85DE8BD90B15180040981704 /* Pods-Tests */ = {
+		E35A6C21EA1CDFC12EA09A15 /* Pods-TCUToolsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F49D7B4372BB096A9FD65248 /* Build configuration list for PBXNativeTarget "Pods-Tests" */;
+			buildConfigurationList = 8AC65FD2A50BADE06B8C9299 /* Build configuration list for PBXNativeTarget "Pods-TCUToolsTests" */;
 			buildPhases = (
-				F918668A4D0163E3BC1F6E87 /* Sources */,
-				3003D4ACF397A1C10E4D5E57 /* Frameworks */,
+				7860881BEEC247DCB5191B9E /* Sources */,
+				5507B3BB1DFCEF27D21950E1 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E07210B1D483C2AB6845181E /* PBXTargetDependency */,
+				F94E789E7A26D9C409FA5305 /* PBXTargetDependency */,
 			);
-			name = "Pods-Tests";
-			productName = "Pods-Tests";
-			productReference = 4B6BB0EFF03DB9BA71F70F26 /* libPods-Tests.a */;
+			name = "Pods-TCUToolsTests";
+			productName = "Pods-TCUToolsTests";
+			productReference = AF2810CB4923784E94443CA5 /* libPods-TCUToolsTests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		CECCC4187C1EFBE6667A9B80 /* Pods-Application */ = {
+		FB73DB2EF033540920E4642E /* Pods-TCUToolsTests-TCUTools */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18DAAA7FE54AC80BA95879FB /* Build configuration list for PBXNativeTarget "Pods-Application" */;
+			buildConfigurationList = 03A8A856A9AB65726DE6F63C /* Build configuration list for PBXNativeTarget "Pods-TCUToolsTests-TCUTools" */;
 			buildPhases = (
-				8549723366472A98FEDB7C90 /* Sources */,
-				F6B45AEF32EC675E7F33ED2F /* Frameworks */,
+				9CEEECE92E0586D191BF075C /* Sources */,
+				0FE733FE6D46F914984FFB6A /* Frameworks */,
+				7EEAF995652D1A3B3851084C /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				29F4232A02D6BD6050BADD68 /* PBXTargetDependency */,
+				DB6D4FD458C27581CE77FA34 /* PBXTargetDependency */,
 			);
-			name = "Pods-Application";
-			productName = "Pods-Application";
-			productReference = 3467011B9C671A867CD82744 /* libPods-Application.a */;
+			name = "Pods-TCUToolsTests-TCUTools";
+			productName = "Pods-TCUToolsTests-TCUTools";
+			productReference = EADDC87913C2F743579EF91D /* libPods-TCUToolsTests-TCUTools.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		51AD4DA3DFBFCE45AC79CC55 /* Project object */ = {
+		ED03FAED0F8A9C0C5B3CBE7C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = FC632EDD29DC9A783F779B4C /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 9B1D379907C53CC971B235E2 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = CED9191BCC24F8EA0A028C34;
-			productRefGroup = 052565344AD8BB6846E67ED9 /* Products */;
+			mainGroup = F6CD4D45B86786629E1A4E92;
+			productRefGroup = AC893B1BC52DA5CF09C162DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CECCC4187C1EFBE6667A9B80 /* Pods-Application */,
-				2D4A367660FEEADB14CC002F /* Pods-Application-TCUTools */,
-				335F3956BCDD01CF445A98A3 /* Pods-Application-TCUTools-TCUTools */,
-				85DE8BD90B15180040981704 /* Pods-Tests */,
-				4862A064D026040F0859BA63 /* Pods-Tests-TCUTools */,
-				6E1C54EA851F1692F3FDB643 /* Pods-Tests-TCUTools-TCUTools */,
+				6179B10E0203F34B658AD0A8 /* Pods-TCUTools */,
+				86BE61AF77E89BF9CB7AE8D8 /* Pods-TCUTools-TCUTools */,
+				C275BC03C7E88A5BA18CE370 /* Pods-TCUTools-TCUTools-TCUTools */,
+				E35A6C21EA1CDFC12EA09A15 /* Pods-TCUToolsTests */,
+				FB73DB2EF033540920E4642E /* Pods-TCUToolsTests-TCUTools */,
+				AAF6C97ECAF52C053BDDBB09 /* Pods-TCUToolsTests-TCUTools-TCUTools */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		511FC26F5E77DC72575AB69A /* Resources */ = {
+		6DB2BDAB654081D83BE60461 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BED661FF7C9D0E51B171161F /* Resources */ = {
+		AFB16E4A17F0CE7DB9BDCD59 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -563,182 +563,112 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7C2E855582B1BD3D2B320F52 /* Sources */ = {
+		13D728C5C9350FD6414E2544 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEFF6AA6C6D283E7F4C1C849 /* NSString+Email.m in Sources */,
+				A234D7C6C531936D267747F1 /* Pods-TCUTools-TCUTools-dummy.m in Sources */,
+				2158D56F26E10347596ECF71 /* TCUDataManager.m in Sources */,
+				EACFCDCA6A4E624BB35DD50F /* TCUImageView.m in Sources */,
+				29DC38BAF9FE72A4C004C6CA /* TCUPickerView.m in Sources */,
+				7668E3B25EAAAA5FDCDAFF72 /* TCUPropertyAttributes.m in Sources */,
+				DB198EEDFCA30A15267EB02E /* TCUTextField.m in Sources */,
+				C3550FD9EE6E57C8280094D1 /* TCUTypeSafeCollection.m in Sources */,
+				6FEB8794890B07EA662F1E3A /* TCUVariableType.m in Sources */,
+				9D1FEF9A81E23A0C0464FB9C /* UIImage+CachedImage.m in Sources */,
+				2D642BB26345F5225ECC7390 /* UIImage+MaskImage.m in Sources */,
+				98FC908CB1645046C0BEF385 /* UIImage+ResizeAndCrop.m in Sources */,
+				B2C3FF8AC68B288065F108B2 /* UILabel+FrameCalculation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C21919DD570AD56015B67D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				711092CF3301A64D552DE77A /* Pods-TCUTools-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D42E581B7EC16B58B23D006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		84FC708BB818DC946A38B0B7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A70F3D1A9FE42E2A47C2E198 /* NSString+Email.m in Sources */,
-				F70827D5641ADD91276D7A4D /* Pods-Tests-TCUTools-dummy.m in Sources */,
-				CC83062263F3FF8C7F8FCF83 /* TCUDataManager.m in Sources */,
-				80C47E82C5239CBB2EF60ED9 /* TCUImageView.m in Sources */,
-				7FE6166E0997962829430CA8 /* TCUPickerView.m in Sources */,
-				9CCCCC88D1B574683DEC6129 /* TCUPropertyAttributes.m in Sources */,
-				34D4BFB8FA812E0516414073 /* TCUTextField.m in Sources */,
-				D89FFAFEE022E53F23732EB0 /* TCUTypeSafeCollection.m in Sources */,
-				86EA7A592CD12E597247A637 /* TCUVariableType.m in Sources */,
-				AA7EDC66D6250AEDBCB12292 /* UIImage+CachedImage.m in Sources */,
-				3EE3B5A582D106082E4038E3 /* UIImage+MaskImage.m in Sources */,
-				B7A53872B09012F70583610D /* UIImage+ResizeAndCrop.m in Sources */,
-				E2002B15A4A4A4EF2CDB73AF /* UILabel+FrameCalculation.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8549723366472A98FEDB7C90 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A9B8C82C6867895A7BC2A89F /* Pods-Application-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A51C3B2E081107D535417464 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A373D25EFBAD86EA43540A21 /* NSString+Email.m in Sources */,
-				46A9BAC6ADB887A730232905 /* Pods-Application-TCUTools-dummy.m in Sources */,
-				B614E287C7C5CB86483C2B3D /* TCUDataManager.m in Sources */,
-				60F0EAFE96E9498DA05B1B6F /* TCUImageView.m in Sources */,
-				23FAA0D4CD5B67612C5F4C9C /* TCUPickerView.m in Sources */,
-				C7CA54E235A82069035482A3 /* TCUPropertyAttributes.m in Sources */,
-				548699BFD84A1C2CB5D87945 /* TCUTextField.m in Sources */,
-				DD6AF2280D4156DB6ABA0877 /* TCUTypeSafeCollection.m in Sources */,
-				03F5E7C1A5413AD4518BD9C1 /* TCUVariableType.m in Sources */,
-				FF106AB4FA3D0840E6BD0619 /* UIImage+CachedImage.m in Sources */,
-				DB47410D2DC6EC67DC73D334 /* UIImage+MaskImage.m in Sources */,
-				FE173DB27D97A6624AF0B143 /* UIImage+ResizeAndCrop.m in Sources */,
-				FBFD50CF5331813D8FE63606 /* UILabel+FrameCalculation.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8A6EC76704838CD0E95A125 /* Sources */ = {
+		62E76E79E1AEE6D2707A17F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F918668A4D0163E3BC1F6E87 /* Sources */ = {
+		7860881BEEC247DCB5191B9E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F611744505EA5EF53520B482 /* Pods-Tests-dummy.m in Sources */,
+				A5AFB99FEF2220EC9A8AA67D /* Pods-TCUToolsTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CEEECE92E0586D191BF075C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CC12747CC42C37EE4EEB3EF /* NSString+Email.m in Sources */,
+				8D43259EBA05BF1F31F3284C /* Pods-TCUToolsTests-TCUTools-dummy.m in Sources */,
+				28D9DC0CE0A72391C17C79C2 /* TCUDataManager.m in Sources */,
+				73E190B4B7E4FE13D5DF9936 /* TCUImageView.m in Sources */,
+				C627E6FC5631DABDD5893F28 /* TCUPickerView.m in Sources */,
+				4EA053A3C4732F72E6BBABE7 /* TCUPropertyAttributes.m in Sources */,
+				C13F342A4B4FD2415359C180 /* TCUTextField.m in Sources */,
+				A61391E554D3BECBF9969855 /* TCUTypeSafeCollection.m in Sources */,
+				0AD5A838475A60F134C6EC05 /* TCUVariableType.m in Sources */,
+				34D2CB9DB7863EB793889116 /* UIImage+CachedImage.m in Sources */,
+				2E906D0B5B1AA581B9318F32 /* UIImage+MaskImage.m in Sources */,
+				819D2D87709285817547880A /* UIImage+ResizeAndCrop.m in Sources */,
+				74D6CB1D6247E506F9DB2263 /* UILabel+FrameCalculation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1BD10A753E70A94D188ECCF9 /* PBXTargetDependency */ = {
+		4FCE85FE0103C99BCF086000 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-Application-TCUTools-TCUTools";
-			target = 335F3956BCDD01CF445A98A3 /* Pods-Application-TCUTools-TCUTools */;
-			targetProxy = 6C1295172B3A4355FDC63472 /* PBXContainerItemProxy */;
+			name = "Pods-TCUTools-TCUTools";
+			target = 86BE61AF77E89BF9CB7AE8D8 /* Pods-TCUTools-TCUTools */;
+			targetProxy = DF7A1D21E8B16CA5D06479C2 /* PBXContainerItemProxy */;
 		};
-		29F4232A02D6BD6050BADD68 /* PBXTargetDependency */ = {
+		912E7CCF94A20AD836B4C869 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-Application-TCUTools";
-			target = 2D4A367660FEEADB14CC002F /* Pods-Application-TCUTools */;
-			targetProxy = 7CB179627837839E75F4286A /* PBXContainerItemProxy */;
+			name = "Pods-TCUTools-TCUTools-TCUTools";
+			target = C275BC03C7E88A5BA18CE370 /* Pods-TCUTools-TCUTools-TCUTools */;
+			targetProxy = ADFC16E21C921F8A6A709D1B /* PBXContainerItemProxy */;
 		};
-		D6489BCECA7DF2FC2B4E7988 /* PBXTargetDependency */ = {
+		DB6D4FD458C27581CE77FA34 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-Tests-TCUTools-TCUTools";
-			target = 6E1C54EA851F1692F3FDB643 /* Pods-Tests-TCUTools-TCUTools */;
-			targetProxy = 45F0E207DA8479C4B8D6DECC /* PBXContainerItemProxy */;
+			name = "Pods-TCUToolsTests-TCUTools-TCUTools";
+			target = AAF6C97ECAF52C053BDDBB09 /* Pods-TCUToolsTests-TCUTools-TCUTools */;
+			targetProxy = 760B584C7A121254C4A6D14D /* PBXContainerItemProxy */;
 		};
-		E07210B1D483C2AB6845181E /* PBXTargetDependency */ = {
+		F94E789E7A26D9C409FA5305 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-Tests-TCUTools";
-			target = 4862A064D026040F0859BA63 /* Pods-Tests-TCUTools */;
-			targetProxy = 29F424680B449F5B674D8CAF /* PBXContainerItemProxy */;
+			name = "Pods-TCUToolsTests-TCUTools";
+			target = FB73DB2EF033540920E4642E /* Pods-TCUToolsTests-TCUTools */;
+			targetProxy = 50A9F937EACD34F05350EB84 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		00DBEABF15E2295FFED56045 /* Release */ = {
+		0AB2BAAE1DC638A575F6C6B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A12C60C1711E605333D79B8F /* Pods-Application-TCUTools-Private.xcconfig */;
+			baseConfigurationReference = A6FA4123638E2F89782AFC19 /* Pods-TCUToolsTests-TCUTools-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Application-TCUTools/Pods-Application-TCUTools-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		12461E506C6B9D38F17BDEFF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3710AC022B1C81113206FF0E /* Pods-Tests-TCUTools-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Tests-TCUTools/Pods-Tests-TCUTools-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		1C16046DFD18FAE8DBAD379F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = TCUTools;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		49FE01B2FFEDAA06A00AB91A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCB729E34637E44882848844 /* Pods-Application.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		541C7B19EDC6D4E5FADA6190 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = TCUTools;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		6CF813792DD2C534AE3197DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3710AC022B1C81113206FF0E /* Pods-Tests-TCUTools-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Tests-TCUTools/Pods-Tests-TCUTools-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -749,7 +679,18 @@
 			};
 			name = Debug;
 		};
-		80B3942572DB95771BF519F0 /* Debug */ = {
+		1B25E0D68A7D3EB43CE19639 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = TCUTools;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		2E925FDA4D6033B43F679153 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -788,7 +729,93 @@
 			};
 			name = Debug;
 		};
-		88787AE0F40BB14144E8FDFC /* Release */ = {
+		36F89C6F44C6C5CEC923C75C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE72A025115C56E8B8CCF122 /* Pods-TCUTools.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		46DFFDAEA4AEB025ED998DC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CB24DCB9A78664BD87E29A /* Pods-TCUTools-TCUTools-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TCUTools-TCUTools/Pods-TCUTools-TCUTools-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4E75E5A0C4625F247E6FA09E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = TCUTools;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		6A150E7B2039AFB332BF11C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56847C77741FD38E60D5C064 /* Pods-TCUTools.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		791C00A4E06909556390A436 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = TCUTools;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		93618AF4C3D45F5B7F62BF6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CB24DCB9A78664BD87E29A /* Pods-TCUTools-TCUTools-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TCUTools-TCUTools/Pods-TCUTools-TCUTools-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AB941FBB5C26DFA2EBC165D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -822,20 +849,9 @@
 			};
 			name = Release;
 		};
-		9994CF8951F2A77DBCA14D17 /* Release */ = {
+		B1BF56F2D9ACC3EF1CD227B1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = TCUTools;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		B885453FA676F2DEC0CEF1C9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CC2A4572D95096CEB8CCC3D /* Pods-Tests.release.xcconfig */;
+			baseConfigurationReference = BCA415B86A83948155F2D560 /* Pods-TCUToolsTests.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -849,9 +865,9 @@
 			};
 			name = Release;
 		};
-		BF26BBD4C7F95F59816D8B81 /* Debug */ = {
+		BC58839956130BF881CA8F9B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17CE7AD8A93D599B70E6D2C1 /* Pods-Tests.debug.xcconfig */;
+			baseConfigurationReference = 9411936A7B0EB6081759DC35 /* Pods-TCUToolsTests.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -865,7 +881,7 @@
 			};
 			name = Debug;
 		};
-		E97B5229AB350796F7E33166 /* Release */ = {
+		C513966EBB83FAA3D6ADF98D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -876,105 +892,89 @@
 			};
 			name = Release;
 		};
-		EAD2FB2C2B533CCD61726341 /* Release */ = {
+		D3F79A17CBE8647CC15CB968 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 850DC43D821228A94B72BACE /* Pods-Application.release.xcconfig */;
+			baseConfigurationReference = A6FA4123638E2F89782AFC19 /* Pods-TCUToolsTests-TCUTools-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
-		};
-		EF8D0C95D480BDA4F24AD9F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A12C60C1711E605333D79B8F /* Pods-Application-TCUTools-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-Application-TCUTools/Pods-Application-TCUTools-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		08FE05B30EBC77AF36A50B46 /* Build configuration list for PBXNativeTarget "Pods-Application-TCUTools-TCUTools" */ = {
+		03A8A856A9AB65726DE6F63C /* Build configuration list for PBXNativeTarget "Pods-TCUToolsTests-TCUTools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1C16046DFD18FAE8DBAD379F /* Debug */,
-				9994CF8951F2A77DBCA14D17 /* Release */,
+				0AB2BAAE1DC638A575F6C6B2 /* Debug */,
+				D3F79A17CBE8647CC15CB968 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18DAAA7FE54AC80BA95879FB /* Build configuration list for PBXNativeTarget "Pods-Application" */ = {
+		1200CD4926EBE83528A8A0AA /* Build configuration list for PBXNativeTarget "Pods-TCUTools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				49FE01B2FFEDAA06A00AB91A /* Debug */,
-				EAD2FB2C2B533CCD61726341 /* Release */,
+				6A150E7B2039AFB332BF11C7 /* Debug */,
+				36F89C6F44C6C5CEC923C75C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C2F2FBFE6977310D7C8CB20 /* Build configuration list for PBXNativeTarget "Pods-Tests-TCUTools" */ = {
+		3F79CE4F9018932656956F06 /* Build configuration list for PBXNativeTarget "Pods-TCUToolsTests-TCUTools-TCUTools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6CF813792DD2C534AE3197DC /* Debug */,
-				12461E506C6B9D38F17BDEFF /* Release */,
+				1B25E0D68A7D3EB43CE19639 /* Debug */,
+				C513966EBB83FAA3D6ADF98D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9E9A4FA41655483B7AB1E202 /* Build configuration list for PBXNativeTarget "Pods-Tests-TCUTools-TCUTools" */ = {
+		4A48A03ECB7EC4028F08A8D1 /* Build configuration list for PBXNativeTarget "Pods-TCUTools-TCUTools-TCUTools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				541C7B19EDC6D4E5FADA6190 /* Debug */,
-				E97B5229AB350796F7E33166 /* Release */,
+				4E75E5A0C4625F247E6FA09E /* Debug */,
+				791C00A4E06909556390A436 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BC1C87AF6BB0C42F7988170A /* Build configuration list for PBXNativeTarget "Pods-Application-TCUTools" */ = {
+		8AC65FD2A50BADE06B8C9299 /* Build configuration list for PBXNativeTarget "Pods-TCUToolsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EF8D0C95D480BDA4F24AD9F0 /* Debug */,
-				00DBEABF15E2295FFED56045 /* Release */,
+				BC58839956130BF881CA8F9B /* Debug */,
+				B1BF56F2D9ACC3EF1CD227B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F49D7B4372BB096A9FD65248 /* Build configuration list for PBXNativeTarget "Pods-Tests" */ = {
+		9B1D379907C53CC971B235E2 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BF26BBD4C7F95F59816D8B81 /* Debug */,
-				B885453FA676F2DEC0CEF1C9 /* Release */,
+				2E925FDA4D6033B43F679153 /* Debug */,
+				AB941FBB5C26DFA2EBC165D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC632EDD29DC9A783F779B4C /* Build configuration list for PBXProject "Pods" */ = {
+		A83115B752DD1151CB07A9BC /* Build configuration list for PBXNativeTarget "Pods-TCUTools-TCUTools" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				80B3942572DB95771BF519F0 /* Debug */,
-				88787AE0F40BB14144E8FDFC /* Release */,
+				46DFFDAEA4AEB025ED998DC5 /* Debug */,
+				93618AF4C3D45F5B7F62BF6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 51AD4DA3DFBFCE45AC79CC55 /* Project object */;
+	rootObject = ED03FAED0F8A9C0C5B3CBE7C /* Project object */;
 }
