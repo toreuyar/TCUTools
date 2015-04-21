@@ -227,9 +227,9 @@
 			productReference = 6003F58A195388D20070C39A /* TCUTools.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6003F5AD195388D20070C39A /* Tests */ = {
+		6003F5AD195388D20070C39A /* TCUToolsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "TCUToolsTests" */;
 			buildPhases = (
 				3ECB81AEFA384A0793D0C245 /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
@@ -242,7 +242,7 @@
 			dependencies = (
 				6003F5B4195388D20070C39A /* PBXTargetDependency */,
 			);
-			name = Tests;
+			name = TCUToolsTests;
 			productName = TCUToolsTests;
 			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -276,7 +276,7 @@
 			projectRoot = "";
 			targets = (
 				6003F589195388D20070C39A /* TCUTools */,
-				6003F5AD195388D20070C39A /* Tests */,
+				6003F5AD195388D20070C39A /* TCUToolsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -596,7 +596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */ = {
+		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "TCUToolsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,
