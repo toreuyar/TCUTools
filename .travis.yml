@@ -1,3 +1,4 @@
 language: objective-c
+podfile: ./Example/Podfile
 xcode_project: ./Example/TCUTools.xcodeproj
 xcode_scheme: TCUToolsTests
