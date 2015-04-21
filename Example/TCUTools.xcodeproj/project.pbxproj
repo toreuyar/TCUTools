@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23E5F6E816885E8C46599CEF /* libPods-TCUTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24538AD0409CD362E433CBEA /* libPods-TCUTools.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -22,12 +21,11 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		790A7CF6873C49B5B5E7F81C /* libPods-TCUToolsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 056294D0B7B2CBBE3BE82752 /* libPods-TCUToolsTests.a */; };
+		6B1630E86C58DAB8CB56E16F /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 487019242FF8D360A932C7B0 /* libPods-Tests.a */; };
+		7AC7F9A823895554E8F07E96 /* libPods-Application.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD079D6982A341B34CE8F21 /* libPods-Application.a */; };
 		94B380861ADEA34500133260 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380851ADEA34500133260 /* User.m */; };
 		94B380891ADEA35200133260 /* Requests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380881ADEA35200133260 /* Requests.m */; };
 		94EE60181AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60171AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m */; };
-		BCF869BF038CCB49A59E45DD /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 487019242FF8D360A932C7B0 /* libPods-Tests.a */; };
-		E87B5CDD93B813479C9F369B /* libPods-Application.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD079D6982A341B34CE8F21 /* libPods-Application.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,8 +89,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				23E5F6E816885E8C46599CEF /* libPods-TCUTools.a in Frameworks */,
-				E87B5CDD93B813479C9F369B /* libPods-Application.a in Frameworks */,
+				7AC7F9A823895554E8F07E96 /* libPods-Application.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,8 +100,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				BCF869BF038CCB49A59E45DD /* libPods-Tests.a in Frameworks */,
-				790A7CF6873C49B5B5E7F81C /* libPods-TCUToolsTests.a in Frameworks */,
+				6B1630E86C58DAB8CB56E16F /* libPods-Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
