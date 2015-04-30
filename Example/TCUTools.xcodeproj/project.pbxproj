@@ -25,6 +25,8 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		94B380861ADEA34500133260 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380851ADEA34500133260 /* User.m */; };
 		94B380891ADEA35200133260 /* Requests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B380881ADEA35200133260 /* Requests.m */; };
+		94E8C9FE1AEF667300CFA1B0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94E8C9FC1AEF667300CFA1B0 /* Model.xcdatamodeld */; };
+		94E8CA011AEF672400CFA1B0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E8CA001AEF672400CFA1B0 /* Entity.m */; };
 		94EE60181AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60171AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,9 @@
 		94B380851ADEA34500133260 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		94B380871ADEA35200133260 /* Requests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Requests.h; sourceTree = "<group>"; };
 		94B380881ADEA35200133260 /* Requests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Requests.m; sourceTree = "<group>"; };
+		94E8C9FD1AEF667300CFA1B0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		94E8C9FF1AEF672400CFA1B0 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		94E8CA001AEF672400CFA1B0 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		94EE60171AE6131900EE8ACD /* TCUTypeSafeCollectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCUTypeSafeCollectionTests.m; sourceTree = "<group>"; };
 		C9752A4E54F93EC74E23C4ED /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E80DF1D6D2F7272C9370DBC9 /* Pods-TCUToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUToolsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCUToolsTests/Pods-TCUToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +155,9 @@
 				94B380851ADEA34500133260 /* User.m */,
 				94B380871ADEA35200133260 /* Requests.h */,
 				94B380881ADEA35200133260 /* Requests.m */,
+				94E8C9FC1AEF667300CFA1B0 /* Model.xcdatamodeld */,
+				94E8C9FF1AEF672400CFA1B0 /* Entity.h */,
+				94E8CA001AEF672400CFA1B0 /* Entity.m */,
 			);
 			path = TCUTools;
 			sourceTree = "<group>";
@@ -372,11 +380,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94E8CA011AEF672400CFA1B0 /* Entity.m in Sources */,
 				94B380861ADEA34500133260 /* User.m in Sources */,
 				6003F59E195388D20070C39A /* TCUAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* TCUViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				94B380891ADEA35200133260 /* Requests.m in Sources */,
+				94E8C9FE1AEF667300CFA1B0 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +617,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		94E8C9FC1AEF667300CFA1B0 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				94E8C9FD1AEF667300CFA1B0 /* Model.xcdatamodel */,
+			);
+			currentVersion = 94E8C9FD1AEF667300CFA1B0 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6003F582195388D10070C39A /* Project object */;
 }
