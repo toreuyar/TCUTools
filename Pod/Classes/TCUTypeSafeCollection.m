@@ -29,6 +29,11 @@
 //  Copyright (c) 2015 Töre Çağrı Uyar. All rights reserved.
 //
 
+#define SuppressDeprecatedWarning(DeprecatedCode) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"") \
+DeprecatedCode \
+_Pragma("clang diagnostic pop") \
 
 #import "TCUTypeSafeCollection.h"
 #import "TCUPropertyAttributes.h"
@@ -53,9 +58,9 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
 - (id)getter:(TCUPropertyAttributes *)propertyAttributes;
 - (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
-- (id)castObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast;
-- (id)castAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast;
-- (id)castObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeCasted propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform;
+- (id)transformAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform;
+- (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 
 @end
 
@@ -218,9 +223,11 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
 
 - (void)setDataWithDictionary:(NSDictionary *)dict {
     [tcuTypeSafeCollectionData removeAllObjects];
-    [tcuTypeSafeCollectionData setValuesForKeysWithDictionary:dict];
-    for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
-        [self setter:dict[[self keyForPropertyAttributes:propertyAttributes]] propertyAttributes:propertyAttributes];
+    if ([dict isKindOfClass:[NSDictionary class]]) {
+        [tcuTypeSafeCollectionData setValuesForKeysWithDictionary:dict];
+        for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
+            [self setter:dict[[self keyForPropertyAttributes:propertyAttributes]] propertyAttributes:propertyAttributes];
+        }
     }
 }
 
@@ -377,8 +384,8 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
         return returnObject;
     } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
                [returnObject isKindOfClass:[NSDictionary class]]) {
-        BOOL shouldAutoCast = [self shouldAutoCastObject:returnObject forProperty:propertyAttributes.propertyName];
-        return (shouldAutoCast ? [self castAndSetObject:returnObject propertyAttributes:propertyAttributes autoCast:shouldAutoCast] : nil);
+        BOOL shouldAutoTransform = [self shouldAutoTransformObject:returnObject forProperty:propertyAttributes.propertyName];
+        return (shouldAutoTransform ? [self transformAndSetObject:returnObject propertyAttributes:propertyAttributes autoTransform:shouldAutoTransform] : nil);
     } else {
         return nil;
     }
@@ -389,27 +396,27 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
         Class expectedClass = NSClassFromString(propertyAttributes.name);
         if ([objectToBeSet isKindOfClass:expectedClass]) {
             if ([expectedClass isSubclassOfClass:[NSArray class]]) {
-                Class classToBeCasted = [tcuTypeSafeCollectionArrayToClassMappingTable objectForKey:propertyAttributes.propertyName];
-                if (classToBeCasted) {
+                Class classToBeTransformed = [tcuTypeSafeCollectionArrayToClassMappingTable objectForKey:propertyAttributes.propertyName];
+                if (classToBeTransformed) {
                     NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:((NSArray *)objectToBeSet).count];
                     [((NSArray *)objectToBeSet) enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-                        id castedObject = nil;
-                        if ([obj isKindOfClass:classToBeCasted]) {
-                            castedObject = obj;
+                        id transformedObject = nil;
+                        if ([obj isKindOfClass:classToBeTransformed]) {
+                            transformedObject = obj;
                         } else {
-                            castedObject = [self castObject:obj atIndex:idx toClass:classToBeCasted propertyAttributes:propertyAttributes];
+                            transformedObject = [self transformObject:obj atIndex:idx toClass:classToBeTransformed propertyAttributes:propertyAttributes];
                         }
-                        if (castedObject) {
-                            [tempArray addObject:castedObject];
+                        if (transformedObject) {
+                            [tempArray addObject:transformedObject];
                         }
                     }];
-                    NSArray *castedObject = nil;
+                    NSArray *transformedObject = nil;
                     if ([expectedClass isSubclassOfClass:[NSMutableArray class]]) {
-                        castedObject = tempArray;
+                        transformedObject = tempArray;
                     } else {
-                        castedObject = [NSArray arrayWithArray:tempArray];
+                        transformedObject = [NSArray arrayWithArray:tempArray];
                     }
-                    [self setObject:castedObject onPropertyAttributes:propertyAttributes];
+                    [self setObject:transformedObject onPropertyAttributes:propertyAttributes];
                 } else {
                     [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
                 }
@@ -418,41 +425,41 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
             }
         } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
                    [objectToBeSet isKindOfClass:[NSDictionary class]]) {
-            [self castAndSetObject:objectToBeSet propertyAttributes:propertyAttributes autoCast:[self shouldAutoCastObject:objectToBeSet forProperty:propertyAttributes.propertyName]];
+            [self transformAndSetObject:objectToBeSet propertyAttributes:propertyAttributes autoTransform:[self shouldAutoTransformObject:objectToBeSet forProperty:propertyAttributes.propertyName]];
         } else {
             [self setObject:nil onPropertyAttributes:propertyAttributes];
         }
     }
 }
 
-- (id)castObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeCasted propertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
-    id castedObject = nil;
-    if ([self shouldCastObject:object atIndex:index forProperty:propertyAttributes.propertyName]) {
-        [self willCastObject:object atIndex:index forProperty:propertyAttributes.propertyName];
-        castedObject = ([object isKindOfClass:[NSDictionary class]] ? [[classToBeCasted alloc] initWithDictionary:object] : [[classToBeCasted alloc] init]);
-        [self didCastObject:object atIndex:index forProperty:propertyAttributes.propertyName toObject:castedObject];
+- (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+    id transformedObject = nil;
+    if ([self shouldTransformObject:object atIndex:index forProperty:propertyAttributes.propertyName]) {
+        object = [self willTransformObject:object atIndex:index forProperty:propertyAttributes.propertyName];
+        transformedObject = ([object isKindOfClass:[NSDictionary class]] ? [[classToBeTransformed alloc] initWithDictionary:object] : [[classToBeTransformed alloc] init]);
+        transformedObject = [self didTransformObject:object atIndex:index forProperty:propertyAttributes.propertyName toObject:transformedObject];
     }
-    return castedObject;
+    return transformedObject;
 }
 
-- (id)castObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast {
-    [self willAutoCastObject:object forProperty:propertyAttributes.propertyName];
-    id castedObject = nil;
-    if (autoCast) {
-        castedObject = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:object];
+- (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform {
+    object = [self willAutoTransformObject:object forProperty:propertyAttributes.propertyName];
+    id transformedObject = nil;
+    if (autoTransform) {
+        transformedObject = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:object];
     } else {
         Class expectedClass = NSClassFromString(propertyAttributes.name);
-        castedObject = [self castObject:object toClass:expectedClass forProperty:propertyAttributes.propertyName];
-        if (![castedObject isKindOfClass:expectedClass]) {
-            castedObject = nil;
+        transformedObject = [self transformObject:object toClass:expectedClass forProperty:propertyAttributes.propertyName];
+        if (![transformedObject isKindOfClass:expectedClass]) {
+            transformedObject = nil;
         }
     }
-    [self didAutoCastObject:object forProperty:propertyAttributes.propertyName toObject:castedObject];
-    return castedObject;
+    transformedObject = [self didAutoTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
+    return transformedObject;
 }
 
 - (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
-    [self willSetObject:object forProperty:propertyAttributes.propertyName];
+    object = [self willSetObject:object forProperty:propertyAttributes.propertyName];
     [self willChangeValueForKey:propertyAttributes.propertyName];
     if (object) {
         tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = object;
@@ -463,49 +470,85 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
     [self didSetObject:object forProperty:propertyAttributes.propertyName];
 }
 
-- (id)castAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoCast:(BOOL)autoCast {
-    id castedObject = [self castObject:objectToBeSet onPropertyAttributes:propertyAttributes autoCast:autoCast];
-    [self setObject:castedObject onPropertyAttributes:propertyAttributes];
-    return castedObject;
+- (id)transformAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform {
+    id transformedObject = [self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes autoTransform:autoTransform];
+    [self setObject:transformedObject onPropertyAttributes:propertyAttributes];
+    return transformedObject;
 }
+
+#pragma mark - Overridable Subclass Delegation Methods
 
 - (BOOL)shouldSetObject:(id)object forProperty:(NSString *)propertyName {
     return YES;
 }
 
-- (void)willSetObject:(id)object forProperty:(NSString *)propertyName {
-    return;
+- (id)willSetObject:(id)object forProperty:(NSString *)propertyName {
+    return object;
 }
 
 - (void)didSetObject:(id)object forProperty:(NSString *)propertyName {
     return;
 }
 
-- (BOOL)shouldAutoCastObject:(id)object forProperty:(NSString *)propertyName {
+- (BOOL)shouldAutoTransformObject:(id)object forProperty:(NSString *)propertyName {
+    return SuppressDeprecatedWarning([self shouldAutoCastObject:object forProperty:propertyName]);
+}
+
+- (id)willAutoTransformObject:(id)object forProperty:(NSString *)propertyName {
+    SuppressDeprecatedWarning([self willAutoCastObject:object forProperty:propertyName]);
+    return object;
+}
+
+- (id)didAutoTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject {
+    SuppressDeprecatedWarning([self didAutoCastObject:inboundObject forProperty:propertyName toObject:transformedObject]);
+    return transformedObject;
+}
+
+- (id)transformObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName {
+    return SuppressDeprecatedWarning([self castObject:inboundObject toClass:classType forProperty:propertyName]);
+}
+
+- (BOOL)shouldTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName {
+    return SuppressDeprecatedWarning([self shouldCastObject:object atIndex:index forProperty:propertyName]);
+}
+
+- (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName {
+    SuppressDeprecatedWarning([self willCastObject:object atIndex:index forProperty:propertyName]);
+    return object;
+}
+
+- (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject {
+    SuppressDeprecatedWarning([self didCastObject:object atIndex:index forProperty:propertyName toObject:transformedObject]);
+    return transformedObject;
+}
+
+#pragma mark - Deprecated Methods
+
+- (BOOL)shouldAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)) {
     return YES;
 }
 
-- (void)willAutoCastObject:(id)object forProperty:(NSString *)propertyName {
+- (void)willAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)) {
     return;
 }
 
-- (void)didAutoCastObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)castedObject {
+- (void)didAutoCastObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)) {
     return;
 }
 
-- (id)castObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName {
+- (id)castObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName __attribute__((deprecated)) {
     return nil;
 }
 
-- (BOOL)shouldCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName {
+- (BOOL)shouldCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)) {
     return YES;
 }
 
-- (void)willCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName {
+- (void)willCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)) {
     return;
 }
 
-- (void)didCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)castedObject {
+- (void)didCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)) {
     return;
 }
 

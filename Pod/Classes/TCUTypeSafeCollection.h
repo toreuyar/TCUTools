@@ -43,15 +43,25 @@
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
 - (BOOL)shouldSetObject:(id)object forProperty:(NSString *)propertyName;
-- (void)willSetObject:(id)object forProperty:(NSString *)propertyName;
+- (id)willSetObject:(id)object forProperty:(NSString *)propertyName;
 - (void)didSetObject:(id)object forProperty:(NSString *)propertyName;
 
-- (BOOL)shouldAutoCastObject:(id)object forProperty:(NSString *)propertyName;
-- (void)willAutoCastObject:(id)object forProperty:(NSString *)propertyName;
-- (void)didAutoCastObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)castedObject;
-- (id)castObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName;
-- (BOOL)shouldCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
-- (void)willCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
-- (void)didCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)castedObject;
+- (BOOL)shouldAutoTransformObject:(id)object forProperty:(NSString *)propertyName;
+- (id)willAutoTransformObject:(id)object forProperty:(NSString *)propertyName;
+- (id)didAutoTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject;
+- (id)transformObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName;
+- (BOOL)shouldTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
+- (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
+- (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject;
+
+#pragma mark - Deprecated Methods
+
+- (BOOL)shouldAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
+- (void)willAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
+- (void)didAutoCastObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)); // TODO: Should be removed at next major version.
+- (id)castObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
+- (BOOL)shouldCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
+- (void)willCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
+- (void)didCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)); // TODO: Should be removed at next major version.
 
 @end
