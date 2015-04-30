@@ -31,7 +31,7 @@
 
 @import Foundation;
 
-@interface TCUTypeSafeCollection : NSObject
+@interface TCUTypeSafeCollection : NSObject <NSCopying>
 
 + (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable;
 + (void)setArrayToClassMappingTable:(NSDictionary *)mappingTable;
