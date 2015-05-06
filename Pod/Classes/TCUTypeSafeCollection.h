@@ -31,6 +31,46 @@
 
 @import Foundation;
 
+/**
+ @brief @b TCUTypeSafeCollection is a collection ensuring dynamic properties of subclasses will contain either right typed value or nil. Custom initialization method @b -[TCUTypeSafeCollection initWithDictionary] will auto map values on passed @b NSDictionary to dynamic properties of subclass.
+ 
+ A simple subclass example:
+ 
+ @code
+ 
+ @interface SubClass : TCUTypeSafeCollection
+ 
+ @property (nonatomic) NSString *name;
+ @property (nonatomic) NSArray *arrayOfSubclassedObjecs;
+ 
+ @end
+ 
+ @implementation SubClass
+ 
+ @dynamic name, arrayOfSubclassedObjecs; // TCUTypeSafeCollection only works with dynamic properties.
+ 
+ + (void)initialize {
+     [super initialize];
+     [self setPropertyToKeyMappingTable:@{NSStringFromSelector(@selector(name)) : @"Name", // Mapping value of key 'Name' on dictionary to 'name' property. SubClass.name = NSDictionary[@"Name"];
+                                          NSStringFromSelector(@selector(arrayOfSubclassedObjecs)) : @"SubObjects"}]; // Mapping value of key 'SubObjects' on dictionary to 'arrayOfSubclassedObjecs' property.
+     [self setArrayToClassMappingTable:@{NSStringFromSelector(@selector(arrayOfSubclassedObjecs)) : [SubClass class]}]; // Stating 'arrayOfSubclassedObjecs' property is an NSArray and objects contained in array should be transformed to type [SubClass class]. Transformation will be done automatically as long as tpye is also a subclass of TCUTypeSafeCollection.
+ }
+ 
+ @end
+ 
+ + (void)initializeAndTestSubClass { // This class method intended for demonstration purposes only. This method is not required on subclasses.
+     SubClass *testObject = [[SubClass alloc] initWithDictionary:@{@"Name" : @"Example",
+                                                                   @"SubObjects" : @[@{@"Name" : @"SubObject 1"},
+                                                                                     @{@"Name" : @"SubObject 2"},
+                                                                                     @{@"Name" : @"SubObject 3"}]}];
+     NSLog(@"Name of test object: %@", testObject.name);
+     forin (NSString *name in testObject.arrayOfSubclassedObjecs) {
+         NSLog(@"Name of test object: %@", name);
+     }
+ }
+ 
+ @endcode
+ */
 @interface TCUTypeSafeCollection : NSObject <NSCopying>
 
 + (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable;
