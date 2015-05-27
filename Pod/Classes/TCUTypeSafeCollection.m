@@ -62,6 +62,9 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
 - (id)transformAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform;
 - (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 
+- (id)serializeObject:(id)object withNullForNil:(BOOL)nullForNil;
+- (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils propertyNamesAsKeys:(BOOL)propertyNamesAsKeys;
+
 @end
 
 @implementation TCUTypeSafeCollection
@@ -229,6 +232,53 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
             [self setter:dict[[self keyForPropertyAttributes:propertyAttributes]] propertyAttributes:propertyAttributes];
         }
     }
+}
+
+- (id)serializeObject:(id)object withNullForNil:(BOOL)nullForNil {
+    id serializedData = nil;
+    if ([object isKindOfClass:[NSArray class]]) {
+        NSMutableArray *newMutableArray = [NSMutableArray arrayWithCapacity:((NSArray *)object).count];
+        for (id innerObject in ((NSArray *)object)) {
+            [newMutableArray addObject:[self serializeObject:innerObject withNullForNil:nullForNil]];
+        }
+        serializedData = [NSArray arrayWithArray:newMutableArray];
+    } else if ([object isKindOfClass:[TCUTypeSafeCollection class]]) {
+        serializedData = [((TCUTypeSafeCollection *)object) dictionary];
+    } else {
+        serializedData = object;
+    }
+    if ((!serializedData) && nullForNil) {
+        serializedData = [NSNull null];;
+    }
+    return serializedData;
+}
+
+- (NSDictionary *)dictionary {
+    return [self dictionaryWithNullForNils:NO];
+}
+
+- (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils {
+    return [self dictionaryWithNullForNils:nullForNils propertyNamesAsKeys:NO];
+}
+
+- (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils propertyNamesAsKeys:(BOOL)propertyNamesAsKeys {
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
+        id serializedData = [self serializeObject:[self getter:propertyAttributes] withNullForNil:nullForNils];
+        if (serializedData || nullForNils) {
+            NSString *key = nil;
+            if (propertyNamesAsKeys) {
+                key = propertyAttributes.instanceVariableName;
+                if (!key) {
+                    key = propertyAttributes.propertyName;
+                }
+            } else {
+                key = [self keyForPropertyAttributes:propertyAttributes];
+            }
+            dictionary[key] = serializedData;
+        }
+    }
+    return dictionary;
 }
 
 - (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable preserveClassLevelMappings:(BOOL)preserve {

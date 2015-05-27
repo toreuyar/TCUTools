@@ -82,6 +82,9 @@
 - (void)setDataWith:(NSDictionary *)dict __attribute__((deprecated)); // TODO: Should be removed at next major version.
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
+- (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils;
+- (NSDictionary *)dictionary;
+
 - (BOOL)shouldSetObject:(id)object forProperty:(NSString *)propertyName;
 - (id)willSetObject:(id)object forProperty:(NSString *)propertyName;
 - (void)didSetObject:(id)object forProperty:(NSString *)propertyName;
