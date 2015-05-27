@@ -281,6 +281,15 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
     return dictionary;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@\n%@",
+     [super description], [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self dictionaryWithNullForNils:YES
+                                                                                                             propertyNamesAsKeys:YES]
+                                                                                         options:NSJSONWritingPrettyPrinted
+                                                                                           error:nil]
+                                                encoding:NSUTF8StringEncoding]];
+}
+
 - (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable preserveClassLevelMappings:(BOOL)preserve {
     tcuTypeSafeCollectionPropertyToKeyMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
     NSMapTable *superMappingTable = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
