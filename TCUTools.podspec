@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "TCUTools"
-  s.version          = "1.1.6"
+  s.version          = "1.1.7"
   s.summary          = "Helper classes for various needs coded on Objective-C, iOS."
   s.homepage         = "https://github.com/toreuyar/TCUTools"
   s.license          = { :type => 'MIT' }
@@ -9,9 +9,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.requires_arc = true
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'TCUTools' => ['Pod/Assets/*.png']
-  }
   s.frameworks = 'UIKit', 'Foundation'
   s.xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
 end
