@@ -71,36 +71,34 @@
     }
     if (subjectClass == [NSObject class]) {
         return [NSDictionary dictionaryWithDictionary:propertyMap];
-    } else {
-        unsigned int outCount, i;
-        objc_property_t *properties = class_copyPropertyList(subjectClass, &outCount);
-        for (i = 0; i < outCount; i++) {
-            objc_property_t property = properties[i];
-            const char *propName = property_getName(property);
-            NSString *propertyName = nil;
-            if (propName) {
-                propertyName = [NSString stringWithUTF8String:propName];
-            }
-            const char *attr = property_getAttributes(property);
-            NSString *attributes = nil;
-            if (attr) {
-                attributes = [NSString stringWithCString:attr encoding:NSUTF8StringEncoding];
-            }
-            if (attributes && propertyName) {
-                TCUPropertyAttributes *propertyAttributes = [[TCUPropertyAttributes alloc] init];
-                if ([propertyAttributes parseFromAttributesString:attributes]) {
-                    propertyAttributes.propertyName = propertyName;
-                    [propertyMap setObject:propertyAttributes forKey:propertyName];
-                }
-            }
+    }
+    if (allHierarchy) {
+        [self propertyDictionaryOfClass:[subjectClass superclass] includeSuperClasses:YES onDictionary:propertyMap];
+    }
+    unsigned int outCount, i;
+    objc_property_t *properties = class_copyPropertyList(subjectClass, &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        const char *propName = property_getName(property);
+        NSString *propertyName = nil;
+        if (propName) {
+            propertyName = [NSString stringWithUTF8String:propName];
         }
-        free(properties);
-        if (allHierarchy) {
-            return [self propertyDictionaryOfClass:[subjectClass superclass] includeSuperClasses:YES onDictionary:propertyMap];
-        } else {
-            return [NSDictionary dictionaryWithDictionary:propertyMap];
+        const char *attr = property_getAttributes(property);
+        NSString *attributes = nil;
+        if (attr) {
+            attributes = [NSString stringWithCString:attr encoding:NSUTF8StringEncoding];
+        }
+        if (attributes && propertyName) {
+            TCUPropertyAttributes *propertyAttributes = [[TCUPropertyAttributes alloc] init];
+            if ([propertyAttributes parseFromAttributesString:attributes]) {
+                propertyAttributes.propertyName = propertyName;
+                [propertyMap setObject:propertyAttributes forKey:propertyName];
+            }
         }
     }
+    free(properties);
+    return [NSDictionary dictionaryWithDictionary:propertyMap];
 }
 
 - (BOOL)parseFromAttributesString:(NSString *)attributes {
