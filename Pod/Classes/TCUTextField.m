@@ -378,7 +378,9 @@
 }
 
 - (void)setPlaceholderColor:(UIColor *)textColor {
-    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: textColor}];
+    if ([self.placeholder isKindOfClass:[NSString class]]) {
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: textColor}];
+    }
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
