@@ -18,6 +18,7 @@
 
 + (TCUObjectTransformer *)transformerFrom:(Class)originalObjectClass
                                        to:(Class)transformedObjectClass
+                                   onInit:(void (^)())initBlock
                               transformer:(id (^)(id object))transformer
                        reverseTransformer:(id (^)(id object))remrofsnart;
 

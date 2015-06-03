@@ -14,6 +14,8 @@
 @property (nonatomic, readwrite) Class originalObjectClass;
 @property (nonatomic, readwrite) Class transformedObjectClass;
 
+- (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass onInit:(void (^)())initBlock;
+
 @end
 
 @implementation TCUObjectTransformer
@@ -22,17 +24,25 @@
 
 + (TCUObjectTransformer *)transformerFrom:(Class)originalObjectClass
                                        to:(Class)transformedObjectClass
+                                   onInit:(void (^)())initBlock
                               transformer:(id (^)(id object))transformer
                        reverseTransformer:(id (^)(id object))remrofsnart {
-    TCUObjectTransformer *objectTransformer = [[TCUObjectTransformer alloc] initWithOriginalObjectClass:originalObjectClass transformedObjectClass:transformedObjectClass];
+    TCUObjectTransformer *objectTransformer = [[TCUObjectTransformer alloc] initWithOriginalObjectClass:originalObjectClass transformedObjectClass:transformedObjectClass onInit:initBlock];
     objectTransformer.transformer = transformer;
     objectTransformer.remrofsnart = remrofsnart;
     return objectTransformer;
 }
 
 - (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass {
+    return [self initWithOriginalObjectClass:originalObjectClass transformedObjectClass:transformedObjectClass onInit:nil];
+}
+
+- (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass onInit:(void (^)())initBlock {
     self = [super init];
     if (self) {
+        if (initBlock) {
+            initBlock();
+        }
         self.originalObjectClass = originalObjectClass;
         self.transformedObjectClass = transformedObjectClass;
     }
