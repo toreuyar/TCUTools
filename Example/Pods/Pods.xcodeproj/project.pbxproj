@@ -42,6 +42,7 @@
 		852356CD73F2581420C0A2B2 /* TCUTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 36414E0F6DAB4FEB1F72149F /* TCUTools.h */; };
 		8B7ADC4445E381B0DDD9F230 /* TCUDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B333FD4168FA7706F908D4EA /* TCUDataManager.h */; };
 		8D43259EBA05BF1F31F3284C /* Pods-TCUToolsTests-TCUTools-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D9AF8BF052C991EAE36D9C /* Pods-TCUToolsTests-TCUTools-dummy.m */; };
+		94D8CA221B1EC600002420C0 /* TCUObjectTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D8CA211B1EC600002420C0 /* TCUObjectTransformer.m */; };
 		96DA2C0E3D2944BECF45A0B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99F56D6C4BAC45EFB67CA61 /* Foundation.framework */; };
 		98FC908CB1645046C0BEF385 /* UIImage+ResizeAndCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FE6439A3274ECA5944B6EE /* UIImage+ResizeAndCrop.m */; };
 		990D43C6FF356DBA608847B7 /* TCUDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B333FD4168FA7706F908D4EA /* TCUDataManager.h */; };
@@ -129,6 +130,8 @@
 		8BAA587B4C998EE15B1A79E0 /* UILabel+FrameCalculation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UILabel+FrameCalculation.h"; sourceTree = "<group>"; };
 		91951290CF422B634E3DE241 /* Pods-TCUTools-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TCUTools-environment.h"; sourceTree = "<group>"; };
 		9411936A7B0EB6081759DC35 /* Pods-TCUToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCUToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		94D8CA201B1EC600002420C0 /* TCUObjectTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCUObjectTransformer.h; sourceTree = "<group>"; };
+		94D8CA211B1EC600002420C0 /* TCUObjectTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCUObjectTransformer.m; sourceTree = "<group>"; };
 		A0960DA3B55F2B8D7995FF3F /* TCUVariableType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TCUVariableType.h; sourceTree = "<group>"; };
 		A6FA4123638E2F89782AFC19 /* Pods-TCUToolsTests-TCUTools-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCUToolsTests-TCUTools-Private.xcconfig"; path = "../Pods-TCUToolsTests-TCUTools/Pods-TCUToolsTests-TCUTools-Private.xcconfig"; sourceTree = "<group>"; };
 		AD3F6054F9A6CE0F9BBB4B7D /* TCUTools.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCUTools.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +271,8 @@
 				8785E69111AD6C5C8E40CE2C /* TCUTextField.h */,
 				0DD5149E03ACB12E04DBF561 /* TCUTextField.m */,
 				36414E0F6DAB4FEB1F72149F /* TCUTools.h */,
+				94D8CA201B1EC600002420C0 /* TCUObjectTransformer.h */,
+				94D8CA211B1EC600002420C0 /* TCUObjectTransformer.m */,
 				4FB0854F5A3B304FAFB19D70 /* TCUTypeSafeCollection.h */,
 				047EA7B984C8E482385E371C /* TCUTypeSafeCollection.m */,
 				A0960DA3B55F2B8D7995FF3F /* TCUVariableType.h */,
@@ -588,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				711092CF3301A64D552DE77A /* Pods-TCUTools-dummy.m in Sources */,
+				94D8CA221B1EC600002420C0 /* TCUObjectTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
