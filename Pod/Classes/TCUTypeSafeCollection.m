@@ -44,11 +44,13 @@ static const void *kTCUTypeSafeCollectionGettersKey = (void *)&kTCUTypeSafeColle
 static const void *kTCUTypeSafeCollectionSettersKey = (void *)&kTCUTypeSafeCollectionSettersKey;
 static const void *kTCUTypeSafeCollectionPropertyToKeyMappingTableKey = (void *)&kTCUTypeSafeCollectionPropertyToKeyMappingTableKey;
 static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&kTCUTypeSafeCollectionArrayToClassMappingTableKey;
+static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTypeSafeCollectionObjectTransformersKey;
 
 @interface TCUTypeSafeCollection () {
     __weak NSDictionary *tcuTypeSafeCollectionProperties;
     __weak NSMapTable *tcuTypeSafeCollectionGetters;
     __weak NSMapTable *tcuTypeSafeCollectionSetters;
+    __weak NSMutableDictionary *tcuTypeSafeCollectionObjectTransformers;
     NSMapTable *tcuTypeSafeCollectionPropertyToKeyMappingTable;
     NSMapTable *tcuTypeSafeCollectionArrayToClassMappingTable;
     NSMutableDictionary *tcuTypeSafeCollectionData;
@@ -78,6 +80,9 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
     }
     if (tcuTypeSafeCollectionArrayToClassMappingTable != objc_getAssociatedObject([self class], kTCUTypeSafeCollectionArrayToClassMappingTableKey)) {
         typeSafeCollection->tcuTypeSafeCollectionArrayToClassMappingTable = tcuTypeSafeCollectionArrayToClassMappingTable;
+    }
+    if (tcuTypeSafeCollectionObjectTransformers != objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey)) {
+        typeSafeCollection->tcuTypeSafeCollectionObjectTransformers = tcuTypeSafeCollectionObjectTransformers;
     }
     for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
         id object = [self getter:propertyAttributes];
@@ -150,8 +155,8 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
             }
         }];
         tcuTypeSafeCollectionProperties = [NSDictionary dictionaryWithDictionary:propertyDictionary];
-        NSMapTable *tcuTypeSafeCollectionPropertyToKeyMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
-        NSMapTable *tcuTypeSafeCollectionArrayToClassMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionPropertiesKey, tcuTypeSafeCollectionProperties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
         NSMapTable *tcuTypeSafeCollectionGetters = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory];
         [tcuTypeSafeCollectionProperties enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, TCUPropertyAttributes *propertyAttributes, BOOL *stop) {
             NSString *getter = propertyAttributes.getter;
@@ -160,6 +165,8 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
             }
             [tcuTypeSafeCollectionGetters setObject:propertyAttributes forKey:getter];
         }];
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionGettersKey, tcuTypeSafeCollectionGetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
         NSMapTable *tcuTypeSafeCollectionSetters = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory];
         [tcuTypeSafeCollectionProperties enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, TCUPropertyAttributes *propertyAttributes, BOOL *stop) {
             if (!(propertyAttributes.propertyAttribute & TCUPropertyAttributeReadonly)) {
@@ -170,11 +177,16 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
                 [tcuTypeSafeCollectionSetters setObject:propertyAttributes forKey:setter];
             }
         }];
-        objc_setAssociatedObject(self, kTCUTypeSafeCollectionPropertiesKey, tcuTypeSafeCollectionProperties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, kTCUTypeSafeCollectionGettersKey, tcuTypeSafeCollectionGetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(self, kTCUTypeSafeCollectionSettersKey, tcuTypeSafeCollectionSetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+        NSMapTable *tcuTypeSafeCollectionPropertyToKeyMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
         objc_setAssociatedObject(self, kTCUTypeSafeCollectionPropertyToKeyMappingTableKey, tcuTypeSafeCollectionPropertyToKeyMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+        NSMapTable *tcuTypeSafeCollectionArrayToClassMappingTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsCopyIn];
         objc_setAssociatedObject(self, kTCUTypeSafeCollectionArrayToClassMappingTableKey, tcuTypeSafeCollectionArrayToClassMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+        objc_setAssociatedObject(self, kTCUTypeSafeCollectionObjectTransformersKey, [NSMutableDictionary dictionary], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
         [self setPropertyToKeyMappingTable:[self propertyToJSONKeyMappingTable]];
         [self setArrayToClassMappingTable:[self arrayToClassMappingTable]];
     }
@@ -216,6 +228,50 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
             if ([propertyName isKindOfClass:[NSString class]] && class_isMetaClass(object_getClass(classType))) {
                 if ([classType isSubclassOfClass:[TCUTypeSafeCollection class]]) {
                     [selfMappingTable setObject:classType forKey:propertyName];
+                }
+            }
+        }];
+    }
+}
+
++ (NSMutableArray *)objectTransformers {
+    return [NSMutableArray array];
+}
+
++ (NSMutableDictionary *)objectTransformersPerProperty {
+    return [NSMutableDictionary dictionary];
+}
+
++ (void)setObjectTransformers:(NSArray *)objectTransformers {
+    if ([objectTransformers isKindOfClass:[NSArray class]]) {
+        [self setObjectTransformersPerProperty:@{@"" : objectTransformers}];
+    }
+}
+
++ (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty {
+    NSMutableDictionary *selfTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
+    [selfTransformers removeAllObjects];
+    NSMutableDictionary *superTransformers = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionObjectTransformersKey);
+    [selfTransformers setValuesForKeysWithDictionary:superTransformers];
+    if ([objectTransformersPerProperty isKindOfClass:[NSDictionary class]]) {
+        [objectTransformersPerProperty enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSArray *transformers, BOOL *stop) {
+            if ([transformers isKindOfClass:[NSArray class]]) {
+                NSMutableDictionary *objectTransformersOfProperty = selfTransformers[propertyName];
+                if (!objectTransformersOfProperty) {
+                    objectTransformersOfProperty = [NSMutableDictionary dictionary];
+                    selfTransformers[propertyName] = objectTransformersOfProperty;
+                }
+                for (TCUObjectTransformer *transformer in transformers) {
+                    if ([transformer isKindOfClass:[TCUObjectTransformer class]]) {
+                        if (transformer.originalObjectClass && transformer.transformedObjectClass) {
+                            NSMutableDictionary *originalObjectKeyDict = selfTransformers[NSStringFromClass(transformer.originalObjectClass)];
+                            if (!originalObjectKeyDict) {
+                                originalObjectKeyDict = [NSMutableDictionary dictionary];
+                                selfTransformers[NSStringFromClass(transformer.originalObjectClass)] = originalObjectKeyDict;
+                            }
+                            originalObjectKeyDict[NSStringFromClass(transformer.transformedObjectClass)] = transformer;
+                        }
+                    }
                 }
             }
         }];
@@ -343,6 +399,44 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
     }
 }
 
+- (void)setObjectTransformers:(NSArray *)objectTransformers preserveClassLevelTransformers:(BOOL)preserve {
+    if ([objectTransformers isKindOfClass:[NSArray class]]) {
+        [self setObjectTransformersPerProperty:@{@"" : objectTransformers} preserveClassLevelTransformers:preserve];
+    }
+}
+
+- (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty preserveClassLevelTransformers:(BOOL)preserve {
+    tcuTypeSafeCollectionObjectTransformers = [NSMutableDictionary dictionary];
+    NSMutableDictionary *superTransformers = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionObjectTransformersKey);
+    [tcuTypeSafeCollectionObjectTransformers setValuesForKeysWithDictionary:superTransformers];
+    if (preserve) {
+        [tcuTypeSafeCollectionObjectTransformers setValuesForKeysWithDictionary:objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey)];
+    }
+    if ([objectTransformersPerProperty isKindOfClass:[NSDictionary class]]) {
+        [objectTransformersPerProperty enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSArray *transformers, BOOL *stop) {
+            if ([transformers isKindOfClass:[NSArray class]]) {
+                NSMutableDictionary *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[propertyName];
+                if (!objectTransformersOfProperty) {
+                    objectTransformersOfProperty = [NSMutableDictionary dictionary];
+                    tcuTypeSafeCollectionObjectTransformers[propertyName] = objectTransformersOfProperty;
+                }
+                for (TCUObjectTransformer *transformer in transformers) {
+                    if ([transformer isKindOfClass:[TCUObjectTransformer class]]) {
+                        if (transformer.originalObjectClass && transformer.transformedObjectClass) {
+                            NSMutableDictionary *originalObjectKeyDict = tcuTypeSafeCollectionObjectTransformers[NSStringFromClass(transformer.originalObjectClass)];
+                            if (!originalObjectKeyDict) {
+                                originalObjectKeyDict = [NSMutableDictionary dictionary];
+                                tcuTypeSafeCollectionObjectTransformers[NSStringFromClass(transformer.originalObjectClass)] = originalObjectKeyDict;
+                            }
+                            originalObjectKeyDict[NSStringFromClass(transformer.transformedObjectClass)] = transformer;
+                        }
+                    }
+                }
+            }
+        }];
+    }
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -355,6 +449,7 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
             tcuTypeSafeCollectionSetters = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionSettersKey);
             tcuTypeSafeCollectionPropertyToKeyMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
             tcuTypeSafeCollectionArrayToClassMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionArrayToClassMappingTableKey);
+            tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
         }
     }
     return self;

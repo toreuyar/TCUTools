@@ -31,6 +31,8 @@
 
 @import Foundation;
 
+#import "TCUObjectTransformer.h"
+
 /**
  @brief @b TCUTypeSafeCollection is a collection ensuring dynamic properties of subclasses will contain either right typed value or nil. Custom initialization method @b -[TCUTypeSafeCollection initWithDictionary] will auto map values on passed @b NSDictionary to dynamic properties of subclass.
  
@@ -79,6 +81,13 @@
 + (void)setArrayToClassMappingTable:(NSDictionary *)mappingTable;
 - (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable preserveClassLevelMappings:(BOOL)preserve;
 - (void)setArrayToClassMappingTable:(NSDictionary *)mappingTable preserveClassLevelMappings:(BOOL)preserve;
+
++ (NSMutableArray *)objectTransformers;
++ (NSMutableDictionary *)objectTransformersPerProperty;
++ (void)setObjectTransformers:(NSArray *)objectTransformers;
++ (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty;
+- (void)setObjectTransformers:(NSArray *)objectTransformers preserveClassLevelTransformers:(BOOL)preserve;
+- (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty preserveClassLevelTransformers:(BOOL)preserve;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)setDataWith:(NSDictionary *)dict __attribute__((deprecated)); // TODO: Should be removed at next major version.
