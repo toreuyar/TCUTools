@@ -1,5 +1,5 @@
 PODS:
-  - TCUTools (1.1.5)
+  - TCUTools (1.1.8)
 
 DEPENDENCIES:
   - TCUTools (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  TCUTools: d76f7a8718cdab3041efcf7a4d2dbecb739e1474
+  TCUTools: 8ca7883d7a7995a6d33a189363b56e458cc2d08a
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.37.2

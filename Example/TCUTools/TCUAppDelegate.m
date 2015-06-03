@@ -13,17 +13,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    if ([@"http://toreuyar.net" isKindOfClass:[NSString class]]) {
+        NSLog(@"Yeap");
+    } else {
+        NSLog(@"Nope");
+    }
+    
     
     User *user = [[User alloc] initWithDictionary:@{@"id" : @"123",
                                                     @"username" : @"SomeBody",
-                                                    @"requests" : @[@{@"id" : @1 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @2 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @3 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @4 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @5 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @6 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @7 , @"requestText" : @"Some text."},
-                                                                    @{@"id" : @8 , @"requestText" : @"Some text."},
+                                                    @"requests" : @[@{@"id" : @1 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @2 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @3 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @4 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @5 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @6 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @7 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
+                                                                    @{@"id" : @8 , @"requestText" : @"Some text.", @"imageURL" : @"http://toreuyar.net"},
                                                             ]
                                                     }];
     [user.requests enumerateObjectsUsingBlock:^(Requests *request, NSUInteger idx, BOOL *stop) {

@@ -10,11 +10,28 @@
 
 @implementation Requests
 
-@dynamic requestID, requestText;
+@dynamic requestID, requestText, imageURL;
 
-+ (void)initialize {
-    [super initialize];
-    [self setPropertyToKeyMappingTable:@{@"requestID":@"id"}];
++ (NSMutableDictionary *)propertyToJSONKeyMappingTable {
+    NSMutableDictionary *dict = [super propertyToJSONKeyMappingTable];
+    [dict setValuesForKeysWithDictionary:@{@"requestID":@"id"}];
+    return dict;
+}
+
++ (NSMutableArray *)objectTransformers {
+    NSMutableArray *transformers = [super objectTransformers];
+    [transformers addObject:[TCUObjectTransformer transformerFrom:[NSString class] to:[NSURL class] onInit:^{
+        NSLog(@"Transformer init");
+    } transformer:^id(id object) {
+        return [NSURL URLWithString:object];
+    } reverseTransformer:^id(NSURL *object) {
+        return object.absoluteString;
+    }]];
+    return transformers;
+}
+
++ (NSMutableDictionary *)objectTransformersPerProperty {
+    return [super objectTransformersPerProperty];
 }
 
 @end

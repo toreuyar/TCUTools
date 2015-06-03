@@ -12,5 +12,6 @@
 
 @property (nonatomic) NSNumber *requestID;
 @property (nonatomic) NSString *requestText;
+@property (nonatomic) NSURL *imageURL;
 
 @end
