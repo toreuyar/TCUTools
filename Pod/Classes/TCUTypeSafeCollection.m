@@ -37,6 +37,14 @@ _Pragma("clang diagnostic pop") \
 
 #import "TCUTypeSafeCollection.h"
 #import "TCUPropertyAttributes.h"
+
+@interface TCUObjectTransformer (TCUTypeSafeCollection)
+
++ (TCUObjectTransformer *)dictionaryToTypeSafeCollectionTransformer;
+- (id)transformedObject:(id)object toClass:(Class)transformedClass;
+
+@end
+
 @import ObjectiveC;
 
 static const void *kTCUTypeSafeCollectionPropertiesKey = (void *)&kTCUTypeSafeCollectionPropertiesKey;
@@ -45,6 +53,8 @@ static const void *kTCUTypeSafeCollectionSettersKey = (void *)&kTCUTypeSafeColle
 static const void *kTCUTypeSafeCollectionPropertyToKeyMappingTableKey = (void *)&kTCUTypeSafeCollectionPropertyToKeyMappingTableKey;
 static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&kTCUTypeSafeCollectionArrayToClassMappingTableKey;
 static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTypeSafeCollectionObjectTransformersKey;
+
+#define kClassTranformersKey @"*"
 
 @interface TCUTypeSafeCollection () {
     __weak NSDictionary *tcuTypeSafeCollectionProperties;
@@ -59,13 +69,40 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 - (NSString *)keyForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)getter:(TCUPropertyAttributes *)propertyAttributes;
 - (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
-- (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
-- (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform;
-- (id)transformAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform;
+- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 
 - (id)serializeObject:(id)object withNullForNil:(BOOL)nullForNil;
 - (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils propertyNamesAsKeys:(BOOL)propertyNamesAsKeys;
+
+@end
+
+@implementation TCUObjectTransformer (TCUTypeSafeCollection)
+
++ (TCUObjectTransformer *)dictionaryToTypeSafeCollectionTransformer {
+    __strong static TCUObjectTransformer *_dictionaryToTypeSafeCollectionTransformer = nil;
+    static dispatch_once_t dictionaryToTypeSafeCollectionTransformer;
+    dispatch_once(&dictionaryToTypeSafeCollectionTransformer, ^{
+        _dictionaryToTypeSafeCollectionTransformer = [[self alloc] initWithOriginalObjectClass:[NSDictionary class] transformedObjectClass:[TCUTypeSafeCollection class]];
+        _dictionaryToTypeSafeCollectionTransformer.transformer = (id)^(id object) {
+            return nil;
+        };
+        _dictionaryToTypeSafeCollectionTransformer.remrofsnart = (id)^(id object) {
+            return [((TCUTypeSafeCollection *)object) dictionary];
+        };
+    });
+    return _dictionaryToTypeSafeCollectionTransformer;
+}
+
+- (id)transformedObject:(id)object toClass:(Class)transformedClass {
+    if ([object isKindOfClass:[NSDictionary class]] &&
+        [[transformedClass class] isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+        return [[transformedClass alloc] initWithDictionary:object];
+    } else {
+        return [self transformedObject:object];
+    }
+}
 
 @end
 
@@ -125,12 +162,12 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 - (BOOL)validateValue:(inout id *)ioValue forKey:(NSString *)key error:(out NSError **)outError {
     TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionGetters objectForKey:key];
+    Class expectedClass = NSClassFromString(propertyAttributes.name);
     if (propertyAttributes) {
-        if ([(*ioValue) isKindOfClass:NSClassFromString(propertyAttributes.name)]) {
+        if ([(*ioValue) isKindOfClass:expectedClass]) {
             return YES;
-        } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
-                   [(*ioValue) isKindOfClass:[NSDictionary class]]) {
-            (*ioValue) = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:(*ioValue)];
+        } else if ([self canTransfromClass:[(*ioValue) class] toClass:expectedClass forPropertyName:propertyAttributes.name]) {
+            (*ioValue) = [self transformObject:(*ioValue) toClass:expectedClass forProperty:propertyAttributes.name];
             return NO;
         } else {
             return NO;
@@ -244,7 +281,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 + (void)setObjectTransformers:(NSArray *)objectTransformers {
     if ([objectTransformers isKindOfClass:[NSArray class]]) {
-        [self setObjectTransformersPerProperty:@{@"" : objectTransformers}];
+        [self setObjectTransformersPerProperty:@{kClassTranformersKey : objectTransformers}];
     }
 }
 
@@ -276,10 +313,6 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
             }
         }];
     }
-}
-
-- (void)setDataWith:(NSDictionary *)dict __attribute__((deprecated)) { // TODO: Should be removed at next major version.
-    [self setDataWithDictionary:dict];
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
@@ -401,7 +434,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 - (void)setObjectTransformers:(NSArray *)objectTransformers preserveClassLevelTransformers:(BOOL)preserve {
     if ([objectTransformers isKindOfClass:[NSArray class]]) {
-        [self setObjectTransformersPerProperty:@{@"" : objectTransformers} preserveClassLevelTransformers:preserve];
+        [self setObjectTransformersPerProperty:@{kClassTranformersKey : objectTransformers} preserveClassLevelTransformers:preserve];
     }
 }
 
@@ -543,12 +576,11 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 - (id)getter:(TCUPropertyAttributes *)propertyAttributes {
     id returnObject = tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]];
-    if ([returnObject isKindOfClass:NSClassFromString(propertyAttributes.name)]) {
+    Class expectedClass = NSClassFromString(propertyAttributes.name);
+    if ([returnObject isKindOfClass:expectedClass]) {
         return returnObject;
-    } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
-               [returnObject isKindOfClass:[NSDictionary class]]) {
-        BOOL shouldAutoTransform = [self shouldAutoTransformObject:returnObject forProperty:propertyAttributes.propertyName];
-        return (shouldAutoTransform ? [self transformAndSetObject:returnObject propertyAttributes:propertyAttributes autoTransform:shouldAutoTransform] : nil);
+    } else if ([self canTransfromClass:[returnObject class] toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
+        return [self setObject:[self transformObject:returnObject onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes];
     } else {
         return nil;
     }
@@ -586,38 +618,91 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
             } else {
                 [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
             }
-        } else if ([NSClassFromString(propertyAttributes.name) isSubclassOfClass:[TCUTypeSafeCollection class]] &&
-                   [objectToBeSet isKindOfClass:[NSDictionary class]]) {
-            [self transformAndSetObject:objectToBeSet propertyAttributes:propertyAttributes autoTransform:[self shouldAutoTransformObject:objectToBeSet forProperty:propertyAttributes.propertyName]];
+        } else if ([self canTransfromClass:[objectToBeSet class] toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
+            [self setObject:[self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes];
         } else {
             [self setObject:nil onPropertyAttributes:propertyAttributes];
         }
     }
 }
 
++ (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    if (originalClass && transformedClass) {
+        NSDictionary *tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
+        if ((tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
+            (tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
+            ([originalClass isKindOfClass:[NSDictionary class]] &&
+             [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]])) {
+                return YES;
+            }
+    }
+    return NO;
+}
+
+- (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    if (originalClass && transformedClass) {
+        if ((tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
+            (tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
+            ([originalClass isKindOfClass:[NSDictionary class]] &&
+             [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]])) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    TCUObjectTransformer *transformer = nil;
+    if (originalClass && transformedClass) {
+        NSDictionary *tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
+        if ([originalClass isKindOfClass:[NSDictionary class]] &&
+            [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+            transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
+        } else {
+            transformer = tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
+            if (!transformer) {
+                transformer = tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
+            }
+        }
+    }
+    return transformer;
+}
+
+- (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    TCUObjectTransformer *transformer = nil;
+    if (originalClass && transformedClass) {
+        if ([originalClass isKindOfClass:[NSDictionary class]] &&
+            [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+            transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
+        } else {
+            transformer = tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
+            if (!transformer) {
+                transformer = tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
+            }
+        }
+    }
+    return transformer;
+}
+
 - (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
     id transformedObject = nil;
     if ([self shouldTransformObject:object atIndex:index forProperty:propertyAttributes.propertyName]) {
         object = [self willTransformObject:object atIndex:index forProperty:propertyAttributes.propertyName];
-        transformedObject = ([object isKindOfClass:[NSDictionary class]] ? [[classToBeTransformed alloc] initWithDictionary:object] : [[classToBeTransformed alloc] init]);
+        transformedObject = [self transformObject:object toClass:classToBeTransformed forProperty:propertyAttributes.propertyName];
         transformedObject = [self didTransformObject:object atIndex:index forProperty:propertyAttributes.propertyName toObject:transformedObject];
     }
     return transformedObject;
 }
 
-- (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform {
-    object = [self willAutoTransformObject:object forProperty:propertyAttributes.propertyName];
-    id transformedObject = nil;
-    if (autoTransform) {
-        transformedObject = [[NSClassFromString(propertyAttributes.name) alloc] initWithDictionary:object];
-    } else {
-        Class expectedClass = NSClassFromString(propertyAttributes.name);
-        transformedObject = [self transformObject:object toClass:expectedClass forProperty:propertyAttributes.propertyName];
-    }
-    return [self didAutoTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
+- (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+    object = [self willTransformObject:object forProperty:propertyAttributes.propertyName];
+    id transformedObject = [self transformObject:object
+                                         toClass:NSClassFromString(propertyAttributes.name)
+                                     forProperty:propertyAttributes.propertyName];
+    return [self didTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
 }
 
-- (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
     object = [self willSetObject:object forProperty:propertyAttributes.propertyName];
     [self willChangeValueForKey:propertyAttributes.propertyName];
     if (object) {
@@ -627,12 +712,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     }
     [self didChangeValueForKey:propertyAttributes.propertyName];
     [self didSetObject:object forProperty:propertyAttributes.propertyName];
-}
-
-- (id)transformAndSetObject:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes autoTransform:(BOOL)autoTransform {
-    id transformedObject = [self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes autoTransform:autoTransform];
-    [self setObject:transformedObject onPropertyAttributes:propertyAttributes];
-    return transformedObject;
+    return object;
 }
 
 #pragma mark - Overridable Subclass Delegation Methods
@@ -649,66 +729,34 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     return;
 }
 
-- (BOOL)shouldAutoTransformObject:(id)object forProperty:(NSString *)propertyName {
-    return SuppressDeprecatedWarning([self shouldAutoCastObject:object forProperty:propertyName]);
-}
-
-- (id)willAutoTransformObject:(id)object forProperty:(NSString *)propertyName {
-    SuppressDeprecatedWarning([self willAutoCastObject:object forProperty:propertyName]);
+- (id)willTransformObject:(id)object forProperty:(NSString *)propertyName {
     return object;
 }
 
-- (id)didAutoTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject {
-    SuppressDeprecatedWarning([self didAutoCastObject:inboundObject forProperty:propertyName toObject:transformedObject]);
+- (id)didTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject {
     return transformedObject;
 }
 
 - (id)transformObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName {
-    return SuppressDeprecatedWarning([self castObject:inboundObject toClass:classType forProperty:propertyName]);
+    if ([inboundObject isKindOfClass:[NSObject class]] && classType) {
+        return [[self transfromerFromClass:[inboundObject class]
+                                   toClass:classType
+                           forPropertyName:propertyName] transformedObject:inboundObject toClass:classType];
+    } else {
+        return nil;
+    }
 }
 
 - (BOOL)shouldTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName {
-    return SuppressDeprecatedWarning([self shouldCastObject:object atIndex:index forProperty:propertyName]);
+    return YES;
 }
 
 - (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName {
-    SuppressDeprecatedWarning([self willCastObject:object atIndex:index forProperty:propertyName]);
     return object;
 }
 
 - (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject {
-    SuppressDeprecatedWarning([self didCastObject:object atIndex:index forProperty:propertyName toObject:transformedObject]);
     return transformedObject;
-}
-
-#pragma mark - Deprecated Methods
-
-- (BOOL)shouldAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)) {
-    return YES;
-}
-
-- (void)willAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)) {
-    return;
-}
-
-- (void)didAutoCastObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)) {
-    return;
-}
-
-- (id)castObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName __attribute__((deprecated)) {
-    return nil;
-}
-
-- (BOOL)shouldCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)) {
-    return YES;
-}
-
-- (void)willCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)) {
-    return;
-}
-
-- (void)didCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)) {
-    return;
 }
 
 @end

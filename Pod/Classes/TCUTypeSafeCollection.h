@@ -88,9 +88,12 @@
 + (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty;
 - (void)setObjectTransformers:(NSArray *)objectTransformers preserveClassLevelTransformers:(BOOL)preserve;
 - (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty preserveClassLevelTransformers:(BOOL)preserve;
++ (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
+- (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
++ (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
+- (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
-- (void)setDataWith:(NSDictionary *)dict __attribute__((deprecated)); // TODO: Should be removed at next major version.
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
 - (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils;
@@ -100,22 +103,11 @@
 - (id)willSetObject:(id)object forProperty:(NSString *)propertyName;
 - (void)didSetObject:(id)object forProperty:(NSString *)propertyName;
 
-- (BOOL)shouldAutoTransformObject:(id)object forProperty:(NSString *)propertyName;
-- (id)willAutoTransformObject:(id)object forProperty:(NSString *)propertyName;
-- (id)didAutoTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject;
+- (id)willTransformObject:(id)object forProperty:(NSString *)propertyName;
+- (id)didTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject;
 - (id)transformObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName;
 - (BOOL)shouldTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
 - (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
 - (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject;
-
-#pragma mark - Deprecated Methods
-
-- (BOOL)shouldAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
-- (void)willAutoCastObject:(id)object forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
-- (void)didAutoCastObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)); // TODO: Should be removed at next major version.
-- (id)castObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
-- (BOOL)shouldCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
-- (void)willCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName __attribute__((deprecated)); // TODO: Should be removed at next major version.
-- (void)didCastObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)castedObject __attribute__((deprecated)); // TODO: Should be removed at next major version.
 
 @end
