@@ -97,7 +97,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 - (id)transformedObject:(id)object toClass:(Class)transformedClass {
     if ([object isKindOfClass:[NSDictionary class]] &&
-        [[transformedClass class] isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+        [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
         return [[transformedClass alloc] initWithDictionary:object];
     } else {
         return [self transformedObject:object];
@@ -166,7 +166,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     if (propertyAttributes) {
         if ([(*ioValue) isKindOfClass:expectedClass]) {
             return YES;
-        } else if ([self canTransfromClass:[(*ioValue) class] toClass:expectedClass forPropertyName:propertyAttributes.name]) {
+        } else if ([self canTransfromObject:(*ioValue) toClass:expectedClass forPropertyName:propertyAttributes.name]) {
             (*ioValue) = [self transformObject:(*ioValue) toClass:expectedClass forProperty:propertyAttributes.name];
             return NO;
         } else {
@@ -226,6 +226,9 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
         
         [self setPropertyToKeyMappingTable:[self propertyToJSONKeyMappingTable]];
         [self setArrayToClassMappingTable:[self arrayToClassMappingTable]];
+        
+        [self setObjectTransformers:[self objectTransformers] append:YES];
+        [self setObjectTransformersPerProperty:[self objectTransformersPerProperty] append:YES];
     }
 }
 
@@ -279,34 +282,36 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     return [NSMutableDictionary dictionary];
 }
 
-+ (void)setObjectTransformers:(NSArray *)objectTransformers {
++ (void)setObjectTransformers:(NSArray *)objectTransformers append:(BOOL)append {
     if ([objectTransformers isKindOfClass:[NSArray class]]) {
-        [self setObjectTransformersPerProperty:@{kClassTranformersKey : objectTransformers}];
+        [self setObjectTransformersPerProperty:@{kClassTranformersKey : objectTransformers} append:append];
     }
 }
 
-+ (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty {
++ (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty append:(BOOL)append {
     NSMutableDictionary *selfTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
-    [selfTransformers removeAllObjects];
+    if (!append) {
+        [selfTransformers removeAllObjects];
+    }
     NSMutableDictionary *superTransformers = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionObjectTransformersKey);
     [selfTransformers setValuesForKeysWithDictionary:superTransformers];
     if ([objectTransformersPerProperty isKindOfClass:[NSDictionary class]]) {
         [objectTransformersPerProperty enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSArray *transformers, BOOL *stop) {
             if ([transformers isKindOfClass:[NSArray class]]) {
-                NSMutableDictionary *objectTransformersOfProperty = selfTransformers[propertyName];
+                NSMapTable *objectTransformersOfProperty = selfTransformers[propertyName];
                 if (!objectTransformersOfProperty) {
-                    objectTransformersOfProperty = [NSMutableDictionary dictionary];
+                    objectTransformersOfProperty = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory];
                     selfTransformers[propertyName] = objectTransformersOfProperty;
                 }
                 for (TCUObjectTransformer *transformer in transformers) {
                     if ([transformer isKindOfClass:[TCUObjectTransformer class]]) {
                         if (transformer.originalObjectClass && transformer.transformedObjectClass) {
-                            NSMutableDictionary *originalObjectKeyDict = selfTransformers[NSStringFromClass(transformer.originalObjectClass)];
-                            if (!originalObjectKeyDict) {
-                                originalObjectKeyDict = [NSMutableDictionary dictionary];
-                                selfTransformers[NSStringFromClass(transformer.originalObjectClass)] = originalObjectKeyDict;
+                            NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:transformer.originalObjectClass];
+                            if (!originalObjectKeyMapTable) {
+                                originalObjectKeyMapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory];
+                                [objectTransformersOfProperty setObject:originalObjectKeyMapTable forKey:transformer.originalObjectClass];
                             }
-                            originalObjectKeyDict[NSStringFromClass(transformer.transformedObjectClass)] = transformer;
+                            [originalObjectKeyMapTable setObject:transformer forKey:transformer.transformedObjectClass];
                         }
                     }
                 }
@@ -448,20 +453,20 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     if ([objectTransformersPerProperty isKindOfClass:[NSDictionary class]]) {
         [objectTransformersPerProperty enumerateKeysAndObjectsUsingBlock:^(NSString *propertyName, NSArray *transformers, BOOL *stop) {
             if ([transformers isKindOfClass:[NSArray class]]) {
-                NSMutableDictionary *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[propertyName];
+                NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[propertyName];
                 if (!objectTransformersOfProperty) {
-                    objectTransformersOfProperty = [NSMutableDictionary dictionary];
+                    objectTransformersOfProperty = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory];
                     tcuTypeSafeCollectionObjectTransformers[propertyName] = objectTransformersOfProperty;
                 }
                 for (TCUObjectTransformer *transformer in transformers) {
                     if ([transformer isKindOfClass:[TCUObjectTransformer class]]) {
                         if (transformer.originalObjectClass && transformer.transformedObjectClass) {
-                            NSMutableDictionary *originalObjectKeyDict = tcuTypeSafeCollectionObjectTransformers[NSStringFromClass(transformer.originalObjectClass)];
-                            if (!originalObjectKeyDict) {
-                                originalObjectKeyDict = [NSMutableDictionary dictionary];
-                                tcuTypeSafeCollectionObjectTransformers[NSStringFromClass(transformer.originalObjectClass)] = originalObjectKeyDict;
+                            NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:transformer.originalObjectClass];
+                            if (!originalObjectKeyMapTable) {
+                                originalObjectKeyMapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory];
+                                [objectTransformersOfProperty setObject:originalObjectKeyMapTable forKey:transformer.originalObjectClass];
                             }
-                            originalObjectKeyDict[NSStringFromClass(transformer.transformedObjectClass)] = transformer;
+                            [originalObjectKeyMapTable setObject:transformer forKey:transformer.transformedObjectClass];
                         }
                     }
                 }
@@ -579,7 +584,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     Class expectedClass = NSClassFromString(propertyAttributes.name);
     if ([returnObject isKindOfClass:expectedClass]) {
         return returnObject;
-    } else if ([self canTransfromClass:[returnObject class] toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
+    } else if ([self canTransfromObject:returnObject toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
         return [self setObject:[self transformObject:returnObject onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes];
     } else {
         return nil;
@@ -618,7 +623,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
             } else {
                 [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
             }
-        } else if ([self canTransfromClass:[objectToBeSet class] toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
+        } else if ([self canTransfromObject:objectToBeSet toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
             [self setObject:[self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes];
         } else {
             [self setObject:nil onPropertyAttributes:propertyAttributes];
@@ -626,58 +631,106 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     }
 }
 
-+ (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
-    if (originalClass && transformedClass) {
++ (BOOL)canTransfromObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    if ([object isKindOfClass:[NSObject class]] && transformedClass) {
+        BOOL transformerFound = NO;
         NSDictionary *tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
-        if ((tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
-            (tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
-            ([originalClass isKindOfClass:[NSDictionary class]] &&
-             [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]])) {
-                return YES;
+        for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
+            NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+            for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                if ([object isKindOfClass:inboundClass]) {
+                    NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                    if ([originalObjectKeyMapTable objectForKey:transformedClass]) {
+                        transformerFound = YES;
+                        break;
+                    }
+                }
             }
-    }
-    return NO;
-}
-
-- (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
-    if (originalClass && transformedClass) {
-        if ((tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
-            (tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)]) ||
-            ([originalClass isKindOfClass:[NSDictionary class]] &&
-             [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]])) {
+            if (transformerFound) {
+                break;
+            }
+        }
+        if (transformerFound || ([object isKindOfClass:[NSDictionary class]] && [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]])) {
             return YES;
         }
     }
     return NO;
 }
 
-+ (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
-    TCUObjectTransformer *transformer = nil;
-    if (originalClass && transformedClass) {
+- (BOOL)canTransfromObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    if ([object isKindOfClass:[NSObject class]] && transformedClass) {
+        BOOL transformerFound = NO;
+        for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
+            NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+            for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                if ([object isKindOfClass:inboundClass]) {
+                    NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                    if ([originalObjectKeyMapTable objectForKey:transformedClass]) {
+                        transformerFound = YES;
+                        break;
+                    }
+                }
+            }
+            if (transformerFound) {
+                break;
+            }
+        }
+        if (transformerFound || ([object isKindOfClass:[NSDictionary class]] && [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]])) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    __block TCUObjectTransformer *transformer = nil;
+    if ([object isKindOfClass:[NSObject class]] && transformedClass) {
         NSDictionary *tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
-        if ([originalClass isKindOfClass:[NSDictionary class]] &&
+        if ([object isKindOfClass:[NSDictionary class]] &&
             [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
             transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
         } else {
-            transformer = tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
-            if (!transformer) {
-                transformer = tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
+            for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
+                NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+                for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                    if ([object isKindOfClass:inboundClass]) {
+                        NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                        transformer = [originalObjectKeyMapTable objectForKey:transformedClass];
+                        if (transformer) {
+                            break;
+                        }
+                    }
+                }
+                if (transformer) {
+                    break;
+                }
             }
         }
     }
     return transformer;
 }
 
-- (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
-    TCUObjectTransformer *transformer = nil;
-    if (originalClass && transformedClass) {
-        if ([originalClass isKindOfClass:[NSDictionary class]] &&
+- (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+    __block TCUObjectTransformer *transformer = nil;
+    if ([object isKindOfClass:[NSObject class]] && transformedClass) {
+        if ([object isKindOfClass:[NSDictionary class]] &&
             [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
             transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
         } else {
-            transformer = tcuTypeSafeCollectionObjectTransformers[propertyName][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
-            if (!transformer) {
-                transformer = tcuTypeSafeCollectionObjectTransformers[kClassTranformersKey][NSStringFromClass(originalClass)][NSStringFromClass(transformedClass)];
+            for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
+                NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+                for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                    if ([object isKindOfClass:inboundClass]) {
+                        NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                        transformer = [originalObjectKeyMapTable objectForKey:transformedClass];
+                        if (transformer) {
+                            break;
+                        }
+                    }
+                }
+                if (transformer) {
+                    break;
+                }
             }
         }
     }
@@ -739,7 +792,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 - (id)transformObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName {
     if ([inboundObject isKindOfClass:[NSObject class]] && classType) {
-        return [[self transfromerFromClass:[inboundObject class]
+        return [[self transfromerForObject:inboundObject
                                    toClass:classType
                            forPropertyName:propertyName] transformedObject:inboundObject toClass:classType];
     } else {

@@ -84,14 +84,14 @@
 
 + (NSMutableArray *)objectTransformers;
 + (NSMutableDictionary *)objectTransformersPerProperty;
-+ (void)setObjectTransformers:(NSArray *)objectTransformers;
-+ (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty;
++ (void)setObjectTransformers:(NSArray *)objectTransformers append:(BOOL)append;
++ (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty append:(BOOL)append;
 - (void)setObjectTransformers:(NSArray *)objectTransformers preserveClassLevelTransformers:(BOOL)preserve;
 - (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty preserveClassLevelTransformers:(BOOL)preserve;
-+ (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
-- (BOOL)canTransfromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
-+ (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
-- (TCUObjectTransformer *)transfromerFromClass:(Class)originalClass toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
++ (BOOL)canTransfromObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
+- (BOOL)canTransfromObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
++ (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
+- (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)setDataWithDictionary:(NSDictionary *)dict;
