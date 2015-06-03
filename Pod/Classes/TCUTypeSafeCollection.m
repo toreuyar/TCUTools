@@ -175,7 +175,17 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
         objc_setAssociatedObject(self, kTCUTypeSafeCollectionSettersKey, tcuTypeSafeCollectionSetters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(self, kTCUTypeSafeCollectionPropertyToKeyMappingTableKey, tcuTypeSafeCollectionPropertyToKeyMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(self, kTCUTypeSafeCollectionArrayToClassMappingTableKey, tcuTypeSafeCollectionArrayToClassMappingTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [self setPropertyToKeyMappingTable:[self propertyToJSONKeyMappingTable]];
+        [self setArrayToClassMappingTable:[self arrayToClassMappingTable]];
     }
+}
+
++ (NSMutableDictionary *)propertyToJSONKeyMappingTable {
+    return [NSMutableDictionary dictionary];
+}
+
++ (NSMutableDictionary *)arrayToClassMappingTable {
+    return [NSMutableDictionary dictionary];
 }
 
 + (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable {
@@ -509,12 +519,8 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
     } else {
         Class expectedClass = NSClassFromString(propertyAttributes.name);
         transformedObject = [self transformObject:object toClass:expectedClass forProperty:propertyAttributes.propertyName];
-        if (![transformedObject isKindOfClass:expectedClass]) {
-            transformedObject = nil;
-        }
     }
-    transformedObject = [self didAutoTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
-    return transformedObject;
+    return [self didAutoTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
 }
 
 - (void)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
