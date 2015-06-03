@@ -237,7 +237,6 @@ static const void *kTCUTypeSafeCollectionArrayToClassMappingTableKey = (void *)&
 - (void)setDataWithDictionary:(NSDictionary *)dict {
     [tcuTypeSafeCollectionData removeAllObjects];
     if ([dict isKindOfClass:[NSDictionary class]]) {
-        [tcuTypeSafeCollectionData setValuesForKeysWithDictionary:dict];
         for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
             [self setter:dict[[self keyForPropertyAttributes:propertyAttributes]] propertyAttributes:propertyAttributes];
         }
