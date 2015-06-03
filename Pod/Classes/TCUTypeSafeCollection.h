@@ -93,6 +93,9 @@
 + (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
 - (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
 
+- (id)getProperty:(NSString *)propertyName;
+- (void)setProperty:(NSString *)propertyName object:(id)object;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 

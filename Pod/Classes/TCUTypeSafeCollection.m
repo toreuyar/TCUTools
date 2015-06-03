@@ -68,13 +68,16 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 - (NSString *)keyForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)getter:(TCUPropertyAttributes *)propertyAttributes;
-- (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
-- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes muteKVONotification:(id)muteKVONotification;
+- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes KVONotification:(BOOL)KVONotification;
 - (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 
 - (id)serializeObject:(id)object withNullForNil:(BOOL)nullForNil;
 - (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils propertyNamesAsKeys:(BOOL)propertyNamesAsKeys;
+
+- (id)getterInvocationForProperty:(NSString *)propertyName;
+- (void)setterInvocationForProperty:(NSString *)propertyName parameter:(id)object;
 
 @end
 
@@ -108,6 +111,54 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 
 @implementation TCUTypeSafeCollection
 
+- (id)getProperty:(NSString *)propertyName {
+    if (propertyName) {
+        TCUPropertyAttributes *attributes = tcuTypeSafeCollectionProperties[propertyName];
+        if (attributes) {
+            return [self getter:attributes];
+        }
+    }
+    return nil;
+}
+
+- (void)setProperty:(NSString *)propertyName object:(id)object {
+    if (propertyName) {
+        TCUPropertyAttributes *propertyAttributes = tcuTypeSafeCollectionProperties[propertyName];
+        if (propertyAttributes) {
+            NSString *setter = propertyAttributes.setter;
+            if (!setter) {
+                setter = [NSString stringWithFormat:@"set%@%@:", [[propertyName substringToIndex:1] uppercaseString], [propertyName substringFromIndex:1]];
+            }
+            TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionSetters objectForKey:setter];
+            if (propertyAttributes) {
+                [self setter:object propertyAttributes:propertyAttributes muteKVONotification:[NSObject new]];
+            }
+        }
+    }
+}
+
+- (id)getterInvocationForProperty:(NSString *)propertyName {
+    SEL selector = NSSelectorFromString(propertyName);
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+    [invocation setTarget:self];
+    [invocation invoke];
+    id object;
+    [invocation getReturnValue:&object];
+    return object;
+}
+
+- (void)setterInvocationForProperty:(NSString *)propertyName parameter:(id)object {
+    SEL selector = NSSelectorFromString([NSString stringWithFormat:@"set%@%@:", [[propertyName substringToIndex:1] uppercaseString], [propertyName substringFromIndex:1]]);
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+    [invocation setTarget:self];
+    if (object) {
+        [invocation setArgument:&object atIndex:2];
+    }
+    [invocation invoke];
+}
+
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -126,7 +177,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
         if ([object conformsToProtocol:@protocol(NSCopying)]) {
             object = [object copyWithZone:zone];
         }
-        [typeSafeCollection setter:object propertyAttributes:propertyAttributes];
+        [typeSafeCollection setterInvocationForProperty:propertyAttributes.propertyName parameter:object];
     }
     return typeSafeCollection;
 }
@@ -136,7 +187,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 - (id)valueForKey:(NSString *)key {
     TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionGetters objectForKey:key];
     if (propertyAttributes) {
-        return [self getter:propertyAttributes];
+        return [self getterInvocationForProperty:propertyAttributes.propertyName];
     } else {
         return [super valueForKey:key];
     }
@@ -145,7 +196,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 - (void)setValue:(id)value forKey:(NSString *)key {
     TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionSetters objectForKey:key];
     if (propertyAttributes) {
-        return [self setter:value propertyAttributes:propertyAttributes];
+        return [self setterInvocationForProperty:propertyAttributes.propertyName parameter:value];
     } else {
         return [super setValue:value forKey:key];
     }
@@ -154,7 +205,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 - (void)setNilValueForKey:(NSString *)key {
     TCUPropertyAttributes *propertyAttributes = [tcuTypeSafeCollectionSetters objectForKey:key];
     if (propertyAttributes) {
-        return [self setter:nil propertyAttributes:propertyAttributes];
+        return [self setterInvocationForProperty:propertyAttributes.propertyName parameter:nil];
     } else {
         return [super setNilValueForKey:key];
     }
@@ -332,7 +383,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     [tcuTypeSafeCollectionData removeAllObjects];
     if ([dict isKindOfClass:[NSDictionary class]]) {
         for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
-            [self setter:dict[[self keyForPropertyAttributes:propertyAttributes]] propertyAttributes:propertyAttributes];
+            [self setterInvocationForProperty:propertyAttributes.propertyName parameter:dict[[self keyForPropertyAttributes:propertyAttributes]]];
         }
     }
 }
@@ -367,7 +418,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
 - (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils propertyNamesAsKeys:(BOOL)propertyNamesAsKeys {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
-        id serializedData = [self serializeObject:[self getter:propertyAttributes] withNullForNil:nullForNils];
+        id serializedData = [self serializeObject:[self getterInvocationForProperty:propertyAttributes.propertyName] withNullForNil:nullForNils];
         if (serializedData || nullForNils) {
             NSString *key = nil;
             if (propertyNamesAsKeys) {
@@ -531,7 +582,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     } else {
         TCUPropertyAttributes *setter = [tcuTypeSafeCollectionSetters objectForKey:selectorName];
         if (setter) {
-            return [NSMethodSignature signatureWithObjCTypes:"v@:@@"];
+            return [NSMethodSignature signatureWithObjCTypes:"v@:@@@"];
         } else {
             return nil;
         }
@@ -559,7 +610,7 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     } else {
         TCUPropertyAttributes *setter = [tcuTypeSafeCollectionSetters objectForKey:selectorName];
         if (setter) {
-            anInvocation.selector = @selector(setter:propertyAttributes:);
+            anInvocation.selector = @selector(setter:propertyAttributes:muteKVONotification:);
             [anInvocation setArgument:&setter atIndex:3];
             [anInvocation invokeWithTarget:self];
         } else {
@@ -585,13 +636,13 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     if ([returnObject isKindOfClass:expectedClass]) {
         return returnObject;
     } else if ([self canTransfromObject:returnObject toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
-        return [self setObject:[self transformObject:returnObject onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes];
+        return [self setObject:[self transformObject:returnObject onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes KVONotification:NO];
     } else {
         return nil;
     }
 }
 
-- (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+- (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes muteKVONotification:(id)muteKVONotification {
     if ([self shouldSetObject:objectToBeSet forProperty:propertyAttributes.propertyName]) {
         Class expectedClass = NSClassFromString(propertyAttributes.name);
         if ([objectToBeSet isKindOfClass:expectedClass]) {
@@ -616,17 +667,17 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
                     } else {
                         transformedObject = [NSArray arrayWithArray:tempArray];
                     }
-                    [self setObject:transformedObject onPropertyAttributes:propertyAttributes];
+                    [self setObject:transformedObject onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification ? NO : YES)];
                 } else {
-                    [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+                    [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification ? NO : YES)];
                 }
             } else {
-                [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+                [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification ? NO : YES)];
             }
         } else if ([self canTransfromObject:objectToBeSet toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
-            [self setObject:[self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes];
+            [self setObject:[self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification ? NO : YES)];
         } else {
-            [self setObject:nil onPropertyAttributes:propertyAttributes];
+            [self setObject:nil onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification ? NO : YES)];
         }
     }
 }
@@ -755,15 +806,19 @@ static const void *kTCUTypeSafeCollectionObjectTransformersKey = (void *)&kTCUTy
     return [self didTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
 }
 
-- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes KVONotification:(BOOL)KVONotification {
     object = [self willSetObject:object forProperty:propertyAttributes.propertyName];
-    [self willChangeValueForKey:propertyAttributes.propertyName];
+    if (KVONotification) {
+        [self willChangeValueForKey:propertyAttributes.propertyName];
+    }
     if (object) {
         tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = object;
     } else {
         [tcuTypeSafeCollectionData removeObjectForKey:[self keyForPropertyAttributes:propertyAttributes]];
     }
-    [self didChangeValueForKey:propertyAttributes.propertyName];
+    if (KVONotification) {
+        [self didChangeValueForKey:propertyAttributes.propertyName];
+    }
     [self didSetObject:object forProperty:propertyAttributes.propertyName];
     return object;
 }

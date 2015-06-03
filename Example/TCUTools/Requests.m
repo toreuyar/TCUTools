@@ -12,6 +12,18 @@
 
 @dynamic requestID, requestText, imageURL;
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self addObserver:self forKeyPath:NSStringFromSelector(@selector(requestText)) options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(requestText))];
+}
+
 + (NSMutableDictionary *)propertyToJSONKeyMappingTable {
     NSMutableDictionary *dict = [super propertyToJSONKeyMappingTable];
     [dict setValuesForKeysWithDictionary:@{@"requestID":@"id"}];
@@ -32,6 +44,21 @@
 
 + (NSMutableDictionary *)objectTransformersPerProperty {
     return [super objectTransformersPerProperty];
+}
+
+- (void)setRequestText:(NSString *)requestText {
+    [super setProperty:NSStringFromSelector(@selector(requestText)) object:requestText];
+    NSLog(@"Custom setter");
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == self) {
+        if ([keyPath isEqualToString:NSStringFromSelector(@selector(requestText))]) {
+            NSLog(@"Value changed!");
+            return;
+        }
+    }
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 @end
