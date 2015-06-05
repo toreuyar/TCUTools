@@ -32,6 +32,7 @@
 @import Foundation;
 
 #import "TCUObjectTransformer.h"
+#import "TCUPropertyAttributes.h"
 
 /**
  @brief @b TCUTypeSafeCollection is a collection ensuring dynamic properties of subclasses will contain either right typed value or nil. Custom initialization method @b -[TCUTypeSafeCollection initWithDictionary] will auto map values on passed @b NSDictionary to dynamic properties of subclass.
@@ -99,6 +100,8 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
+- (instancetype)eagerTransform;
+
 - (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils;
 - (NSDictionary *)dictionary;
 
@@ -112,5 +115,9 @@
 - (BOOL)shouldTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
 - (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
 - (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject;
+
+- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (id)retrieveObjectForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (void)cleanStore;
 
 @end
