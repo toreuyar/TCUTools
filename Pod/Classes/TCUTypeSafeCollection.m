@@ -707,11 +707,13 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                 Class classToBeTransformed = [tcuTypeSafeCollectionArrayToClassMappingTable objectForKey:propertyAttributes.propertyName];
                 objc_setAssociatedObject(objectToBeSet, kTCUTypeSafeCollectionArrayDataKey, (classToBeTransformed ? nil : @YES), OBJC_ASSOCIATION_RETAIN);
             }
-        } else if ((!([expectedClass isSubclassOfClass:[TCUTypeSafeCollection class]] || [expectedClass isSubclassOfClass:[NSArray class]])) &&
-                   [self canTransfromObject:objectToBeSet toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
-            objectToBeSet = [self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes];
-        } else {
-            objectToBeSet = nil;
+        } else if (!([expectedClass isSubclassOfClass:[TCUTypeSafeCollection class]] ||
+                     [expectedClass isSubclassOfClass:[NSArray class]])) {
+            if ([self canTransfromObject:objectToBeSet toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
+                objectToBeSet = [self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+            } else {
+                objectToBeSet = nil;
+            }
         }
         [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification.boolValue ? NO : YES)];
     }
