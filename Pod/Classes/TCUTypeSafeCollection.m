@@ -444,7 +444,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
         id serializedData = [self serializeObject:[self getterInvocationForProperty:propertyAttributes.propertyName] withNullForNil:nullForNils];
-        if (serializedData || nullForNils) {
+        if (serializedData) {
             NSString *key = nil;
             if (propertyNamesAsKeys) {
                 key = propertyAttributes.instanceVariableName;
