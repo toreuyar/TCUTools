@@ -57,4 +57,6 @@
     #define NSLogPrettyPrintedJSON(JSONObject) ((void)0)
 #endif
 
+#define dispatchSyncMainNoDeadlock(block) if([NSThread currentThread].isMainThread){block();}else{dispatch_sync(dispatch_get_main_queue(),block);}
+
 #endif
