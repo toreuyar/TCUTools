@@ -81,13 +81,21 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 
 @end
 
+@interface TCUDefaultObjectTransformer : TCUObjectTransformer
+
+@end
+
+@implementation TCUDefaultObjectTransformer
+
+@end
+
 @implementation TCUObjectTransformer (TCUTypeSafeCollection)
 
 + (TCUObjectTransformer *)dictionaryToTypeSafeCollectionTransformer {
     __strong static TCUObjectTransformer *_dictionaryToTypeSafeCollectionTransformer = nil;
     static dispatch_once_t dictionaryToTypeSafeCollectionTransformer;
     dispatch_once(&dictionaryToTypeSafeCollectionTransformer, ^{
-        _dictionaryToTypeSafeCollectionTransformer = [[self alloc] initWithOriginalObjectClass:[NSDictionary class] transformedObjectClass:[TCUTypeSafeCollection class]];
+        _dictionaryToTypeSafeCollectionTransformer = [[TCUDefaultObjectTransformer alloc] initWithOriginalObjectClass:[NSDictionary class] transformedObjectClass:[TCUTypeSafeCollection class]];
         _dictionaryToTypeSafeCollectionTransformer.transformer = (id)^(id object) {
             return nil;
         };
@@ -99,8 +107,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 }
 
 - (id)transformedObject:(id)object toClass:(Class)transformedClass {
-    if ([object isKindOfClass:[NSDictionary class]] &&
-        [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+    if ([self isKindOfClass:[TCUDefaultObjectTransformer class]]) {
         return [[transformedClass alloc] initWithDictionary:object];
     } else {
         return [self transformedObject:object];
@@ -329,6 +336,8 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 }
 
 + (NSMutableArray *)objectTransformers {
+    NSMutableArray *transformers = [NSMutableArray array];
+    [transformers addObject:[TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer]];
     return [NSMutableArray array];
 }
 
@@ -774,12 +783,18 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     __block TCUObjectTransformer *transformer = nil;
     if ([object isKindOfClass:[NSObject class]] && transformedClass) {
         NSDictionary *tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
-        if ([object isKindOfClass:[NSDictionary class]] &&
-            [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
-            transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
-        } else {
-            for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
-                NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+        for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
+            NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+            for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                if ([object isMemberOfClass:inboundClass]) {
+                    NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                    transformer = [originalObjectKeyMapTable objectForKey:transformedClass];
+                    if (transformer) {
+                        break;
+                    }
+                }
+            }
+            if (!transformer) {
                 for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
                     if ([object isKindOfClass:inboundClass]) {
                         NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
@@ -789,10 +804,15 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                         }
                     }
                 }
-                if (transformer) {
-                    break;
-                }
             }
+            if (transformer) {
+                break;
+            }
+        }
+        if ((!transformer) &&
+            [object isKindOfClass:[NSDictionary class]] &&
+            [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+            transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
         }
     }
     return transformer;
@@ -801,12 +821,18 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 - (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
     __block TCUObjectTransformer *transformer = nil;
     if ([object isKindOfClass:[NSObject class]] && transformedClass) {
-        if ([object isKindOfClass:[NSDictionary class]] &&
-            [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
-            transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
-        } else {
-            for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
-                NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+        for (NSString *transformerPropertyName in @[propertyName, kClassTranformersKey]) {
+            NSMapTable *objectTransformersOfProperty = tcuTypeSafeCollectionObjectTransformers[transformerPropertyName];
+            for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                if ([object isMemberOfClass:inboundClass]) {
+                    NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                    transformer = [originalObjectKeyMapTable objectForKey:transformedClass];
+                    if (transformer) {
+                        break;
+                    }
+                }
+            }
+            if (!transformer) {
                 for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
                     if ([object isKindOfClass:inboundClass]) {
                         NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
@@ -816,10 +842,15 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                         }
                     }
                 }
-                if (transformer) {
-                    break;
-                }
             }
+            if (transformer) {
+                break;
+            }
+        }
+        if ((!transformer) &&
+            [object isKindOfClass:[NSDictionary class]] &&
+            [transformedClass isSubclassOfClass:[TCUTypeSafeCollection class]]) {
+            transformer = [TCUObjectTransformer dictionaryToTypeSafeCollectionTransformer];
         }
     }
     return transformer;
