@@ -66,6 +66,8 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     NSMutableDictionary *tcuTypeSafeCollectionData;
 }
 
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
+
 - (NSString *)keyForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)getter:(TCUPropertyAttributes *)propertyAttributes;
 - (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes muteKVONotification:(NSNumber *)muteKVONotification;
@@ -108,7 +110,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 
 - (id)transformedObject:(id)object toClass:(Class)transformedClass {
     if ([self isKindOfClass:[TCUDefaultObjectTransformer class]]) {
-        return [[transformedClass alloc] initWithDictionary:object];
+        return [transformedClass objectWithDictionary:object];
     } else {
         return [self transformedObject:object];
     }

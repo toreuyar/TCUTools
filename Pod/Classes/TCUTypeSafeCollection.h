@@ -62,10 +62,10 @@
  @end
  
  + (void)initializeAndTestSubClass { // This class method intended for demonstration purposes only. This method is not required on subclasses.
-     SubClass *testObject = [[SubClass alloc] initWithDictionary:@{@"Name" : @"Example",
-                                                                   @"SubObjects" : @[@{@"Name" : @"SubObject 1"},
-                                                                                     @{@"Name" : @"SubObject 2"},
-                                                                                     @{@"Name" : @"SubObject 3"}]}];
+     SubClass *testObject = [SubClass objectWithDictionary:@{@"Name" : @"Example",
+                                                             @"SubObjects" : @[@{@"Name" : @"SubObject 1"},
+                                                                             @{@"Name" : @"SubObject 2"},
+                                                                             @{@"Name" : @"SubObject 3"}]}];
      NSLog(@"Name of test object: %@", testObject.name);
      forin (NSString *name in testObject.arrayOfSubclassedObjecs) {
          NSLog(@"Name of test object: %@", name);
@@ -99,7 +99,6 @@
 - (id)getProperty:(NSString *)propertyName;
 - (void)setProperty:(NSString *)propertyName object:(id)object;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
 - (instancetype)eagerTransform;
