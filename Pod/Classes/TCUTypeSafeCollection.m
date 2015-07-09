@@ -91,6 +91,10 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 
 @implementation TCUObjectTransformer (TCUTypeSafeCollection)
 
++ (instancetype)objectWithDictionary:(NSDictionary *)dict {
+    return [[self alloc] initWithDictionary:dict];
+}
+
 + (TCUObjectTransformer *)dictionaryToTypeSafeCollectionTransformer {
     __strong static TCUObjectTransformer *_dictionaryToTypeSafeCollectionTransformer = nil;
     static dispatch_once_t dictionaryToTypeSafeCollectionTransformer;

@@ -76,6 +76,8 @@
  */
 @interface TCUTypeSafeCollection : NSObject <NSCopying>
 
++ (instancetype)objectWithDictionary:(NSDictionary *)dict;
+
 + (NSMutableDictionary *)propertyToJSONKeyMappingTable;
 + (NSMutableDictionary *)arrayToClassMappingTable;
 + (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable;
