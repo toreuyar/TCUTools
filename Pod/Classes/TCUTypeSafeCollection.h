@@ -107,8 +107,8 @@
 - (NSDictionary *)dictionary;
 
 - (BOOL)shouldSetObject:(id)object forProperty:(NSString *)propertyName;
-- (id)willSetObject:(id)object forProperty:(NSString *)propertyName tranformed:(BOOL)tranformed;
-- (void)didSetObject:(id)object forProperty:(NSString *)propertyName tranformed:(BOOL)tranformed;
+- (id)willSetObject:(id)object forProperty:(NSString *)propertyName transformed:(BOOL)transformed;
+- (void)didSetObject:(id)object forProperty:(NSString *)propertyName transformed:(BOOL)transformed;
 
 - (id)willTransformObject:(id)object forProperty:(NSString *)propertyName;
 - (id)didTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject;
@@ -117,7 +117,7 @@
 - (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
 - (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject;
 
-- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes tranformed:(BOOL)tranformed;
+- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes transformed:(BOOL)transformed;
 - (id)retrieveObjectForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (void)cleanStore;
 
