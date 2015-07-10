@@ -1,6 +1,6 @@
 {
   "name": "TCUTools",
-  "version": "2.0.0",
+  "version": "2.1.6",
   "summary": "Helper classes for various needs coded on Objective-C, iOS.",
   "homepage": "https://github.com/toreuyar/TCUTools",
   "license": {
@@ -11,7 +11,7 @@
   },
   "source": {
     "git": "https://github.com/toreuyar/TCUTools.git",
-    "tag": "2.0.0",
+    "tag": "2.1.6",
     "submodules": true
   },
   "platforms": {

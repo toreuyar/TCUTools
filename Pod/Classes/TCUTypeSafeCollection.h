@@ -62,10 +62,10 @@
  @end
  
  + (void)initializeAndTestSubClass { // This class method intended for demonstration purposes only. This method is not required on subclasses.
-     SubClass *testObject = [[SubClass alloc] initWithDictionary:@{@"Name" : @"Example",
-                                                                   @"SubObjects" : @[@{@"Name" : @"SubObject 1"},
-                                                                                     @{@"Name" : @"SubObject 2"},
-                                                                                     @{@"Name" : @"SubObject 3"}]}];
+     SubClass *testObject = [SubClass objectWithDictionary:@{@"Name" : @"Example",
+                                                             @"SubObjects" : @[@{@"Name" : @"SubObject 1"},
+                                                                             @{@"Name" : @"SubObject 2"},
+                                                                             @{@"Name" : @"SubObject 3"}]}];
      NSLog(@"Name of test object: %@", testObject.name);
      forin (NSString *name in testObject.arrayOfSubclassedObjecs) {
          NSLog(@"Name of test object: %@", name);
@@ -75,6 +75,8 @@
  @endcode
  */
 @interface TCUTypeSafeCollection : NSObject <NSCopying>
+
++ (instancetype)objectWithDictionary:(NSDictionary *)dict;
 
 + (NSMutableDictionary *)propertyToJSONKeyMappingTable;
 + (NSMutableDictionary *)arrayToClassMappingTable;
@@ -97,7 +99,6 @@
 - (id)getProperty:(NSString *)propertyName;
 - (void)setProperty:(NSString *)propertyName object:(id)object;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)setDataWithDictionary:(NSDictionary *)dict;
 
 - (instancetype)eagerTransform;
@@ -106,8 +107,8 @@
 - (NSDictionary *)dictionary;
 
 - (BOOL)shouldSetObject:(id)object forProperty:(NSString *)propertyName;
-- (id)willSetObject:(id)object forProperty:(NSString *)propertyName;
-- (void)didSetObject:(id)object forProperty:(NSString *)propertyName;
+- (id)willSetObject:(id)object forProperty:(NSString *)propertyName tranformed:(BOOL)tranformed;
+- (void)didSetObject:(id)object forProperty:(NSString *)propertyName tranformed:(BOOL)tranformed;
 
 - (id)willTransformObject:(id)object forProperty:(NSString *)propertyName;
 - (id)didTransformObject:(id)inboundObject forProperty:(NSString *)propertyName toObject:(id)transformedObject;
@@ -116,7 +117,7 @@
 - (id)willTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName;
 - (id)didTransformObject:(id)object atIndex:(NSUInteger)index forProperty:(NSString *)propertyName toObject:(id)transformedObject;
 
-- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
+- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes tranformed:(BOOL)tranformed;
 - (id)retrieveObjectForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (void)cleanStore;
 

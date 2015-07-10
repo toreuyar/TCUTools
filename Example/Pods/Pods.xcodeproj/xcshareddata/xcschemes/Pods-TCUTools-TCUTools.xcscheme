@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D30B41788545B7CDAEC8966B"
+               BlueprintIdentifier = "4E46CD8DC1FBB91173897DA9"
                BuildableName = "libPods-TCUTools-TCUTools.a"
                BlueprintName = "Pods-TCUTools-TCUTools"
                ReferencedContainer = "container:Pods.xcodeproj">

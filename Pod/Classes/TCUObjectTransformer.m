@@ -37,7 +37,7 @@
 @property (nonatomic, readwrite) Class originalObjectClass;
 @property (nonatomic, readwrite) Class transformedObjectClass;
 
-- (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass onInit:(void (^)())initBlock;
+- (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass onInit:(void (^)(TCUObjectTransformer *transformer))initBlock;
 
 @end
 
@@ -60,11 +60,11 @@
     return [self initWithOriginalObjectClass:originalObjectClass transformedObjectClass:transformedObjectClass onInit:nil];
 }
 
-- (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass onInit:(void (^)())initBlock {
+- (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass onInit:(void (^)(TCUObjectTransformer *transformer))initBlock {
     self = [super init];
     if (self) {
         if (initBlock) {
-            initBlock();
+            initBlock(self);
         }
         self.originalObjectClass = originalObjectClass;
         self.transformedObjectClass = transformedObjectClass;

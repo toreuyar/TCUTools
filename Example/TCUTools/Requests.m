@@ -32,11 +32,11 @@
 
 + (NSMutableArray *)objectTransformers {
     NSMutableArray *transformers = [super objectTransformers];
-    [transformers addObject:[TCUObjectTransformer transformerFrom:[NSString class] to:[NSURL class] onInit:^{
+    [transformers addObject:[TCUObjectTransformer transformerFrom:[NSString class] to:[NSURL class] onInit:^(TCUObjectTransformer *transformer) {
         NSLog(@"Transformer init");
-    } transformer:^id(id object) {
+    } transformer:^id(TCUObjectTransformer *transformer, NSString *object) {
         return [NSURL URLWithString:object];
-    } reverseTransformer:^id(NSURL *object) {
+    } reverseTransformer:^id(TCUObjectTransformer *transformer, NSURL *object) {
         return object.absoluteString;
     }]];
     return transformers;
