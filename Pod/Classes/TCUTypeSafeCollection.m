@@ -71,7 +71,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 - (NSString *)keyForPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)getter:(TCUPropertyAttributes *)propertyAttributes;
 - (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes muteKVONotification:(NSNumber *)muteKVONotification;
-- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes KVONotification:(BOOL)KVONotification;
+- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes KVONotification:(BOOL)KVONotification tranformed:(BOOL)tranformed;
 - (id)transformObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 - (id)transformObject:(id)object atIndex:(NSUInteger)index toClass:(Class)classToBeTransformed propertyAttributes:(TCUPropertyAttributes *)propertyAttributes;
 
@@ -700,21 +700,22 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                         } else {
                             transformedObjectAray = [NSArray arrayWithArray:tempArray];
                         }
-                        returnObject = [self setObject:transformedObjectAray onPropertyAttributes:propertyAttributes KVONotification:NO];
+                        returnObject = [self setObject:transformedObjectAray onPropertyAttributes:propertyAttributes KVONotification:NO tranformed:YES];
                     }
                     objc_setAssociatedObject(returnObject, kTCUTypeSafeCollectionArrayDataKey, @YES, OBJC_ASSOCIATION_RETAIN);
                 }
             }
         } else if ([self canTransfromObject:returnObject toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
-            returnObject = [self setObject:[self transformObject:returnObject onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes KVONotification:NO];
+            returnObject = [self setObject:[self transformObject:returnObject onPropertyAttributes:propertyAttributes] onPropertyAttributes:propertyAttributes KVONotification:NO tranformed:YES];
         } else {
-            returnObject = [self setObject:nil onPropertyAttributes:propertyAttributes KVONotification:NO];
+            returnObject = [self setObject:nil onPropertyAttributes:propertyAttributes KVONotification:NO tranformed:NO];
         }
     }
     return returnObject;
 }
 
 - (void)setter:(id)objectToBeSet propertyAttributes:(TCUPropertyAttributes *)propertyAttributes muteKVONotification:(NSNumber *)muteKVONotification {
+    BOOL transformed = NO;
     if ([self shouldSetObject:objectToBeSet forProperty:propertyAttributes.propertyName]) {
         Class expectedClass = NSClassFromString(propertyAttributes.name);
         if ([objectToBeSet isKindOfClass:expectedClass]) {
@@ -726,11 +727,12 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                      [expectedClass isSubclassOfClass:[NSArray class]])) {
             if ([self canTransfromObject:objectToBeSet toClass:expectedClass forPropertyName:propertyAttributes.propertyName]) {
                 objectToBeSet = [self transformObject:objectToBeSet onPropertyAttributes:propertyAttributes];
+                transformed = YES;
             } else {
                 objectToBeSet = nil;
             }
         }
-        [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification.boolValue ? NO : YES)];
+        [self setObject:objectToBeSet onPropertyAttributes:propertyAttributes KVONotification:(muteKVONotification.boolValue ? NO : YES) tranformed:transformed];
     }
 }
 
@@ -880,16 +882,16 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     return [self didTransformObject:object forProperty:propertyAttributes.propertyName toObject:transformedObject];
 }
 
-- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes KVONotification:(BOOL)KVONotification {
-    object = [self willSetObject:object forProperty:propertyAttributes.propertyName];
+- (id)setObject:(id)object onPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes KVONotification:(BOOL)KVONotification tranformed:(BOOL)tranformed {
+    object = [self willSetObject:object forProperty:propertyAttributes.propertyName tranformed:(BOOL)tranformed];
     if (KVONotification) {
         [self willChangeValueForKey:propertyAttributes.propertyName];
     }
-    object = [self storeObject:object forPropertyAttributes:propertyAttributes];
+    object = [self storeObject:object forPropertyAttributes:propertyAttributes tranformed:(BOOL)tranformed];
     if (KVONotification) {
         [self didChangeValueForKey:propertyAttributes.propertyName];
     }
-    [self didSetObject:object forProperty:propertyAttributes.propertyName];
+    [self didSetObject:object forProperty:propertyAttributes.propertyName tranformed:(BOOL)tranformed];
     return object;
 }
 
@@ -899,11 +901,11 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     return YES;
 }
 
-- (id)willSetObject:(id)object forProperty:(NSString *)propertyName {
+- (id)willSetObject:(id)object forProperty:(NSString *)propertyName tranformed:(BOOL)tranformed {
     return object;
 }
 
-- (void)didSetObject:(id)object forProperty:(NSString *)propertyName {
+- (void)didSetObject:(id)object forProperty:(NSString *)propertyName tranformed:(BOOL)tranformed {
     return;
 }
 
@@ -937,7 +939,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     return transformedObject;
 }
 
-- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes {
+- (id)storeObject:(id)object forPropertyAttributes:(TCUPropertyAttributes *)propertyAttributes tranformed:(BOOL)tranformed {
     if (object) {
         tcuTypeSafeCollectionData[[self keyForPropertyAttributes:propertyAttributes]] = object;
     } else {
