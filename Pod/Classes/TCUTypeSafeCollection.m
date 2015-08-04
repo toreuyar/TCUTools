@@ -700,6 +700,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                         } else {
                             transformedObjectAray = [NSArray arrayWithArray:tempArray];
                         }
+                        objc_setAssociatedObject(transformedObjectAray, kTCUTypeSafeCollectionArrayDataKey, @YES, OBJC_ASSOCIATION_RETAIN);
                         returnObject = [self setObject:transformedObjectAray onPropertyAttributes:propertyAttributes KVONotification:NO transformed:YES];
                     }
                     objc_setAssociatedObject(returnObject, kTCUTypeSafeCollectionArrayDataKey, @YES, OBJC_ASSOCIATION_RETAIN);
