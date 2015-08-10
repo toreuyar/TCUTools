@@ -93,8 +93,8 @@
 - (void)setObjectTransformersPerProperty:(NSDictionary *)objectTransformersPerProperty preserveClassLevelTransformers:(BOOL)preserve;
 + (BOOL)canTransfromObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
 - (BOOL)canTransfromObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
-+ (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
-- (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
++ (TCUObjectTransformer *)transformerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
+- (TCUObjectTransformer *)transformerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName;
 
 - (id)getProperty:(NSString *)propertyName;
 - (void)setProperty:(NSString *)propertyName object:(id)object;

@@ -458,7 +458,18 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 - (NSDictionary *)dictionaryWithNullForNils:(BOOL)nullForNils propertyNamesAsKeys:(BOOL)propertyNamesAsKeys {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     for (TCUPropertyAttributes *propertyAttributes in tcuTypeSafeCollectionGetters.objectEnumerator) {
-        id serializedData = [self serializeObject:[self getterInvocationForProperty:propertyAttributes.propertyName] withNullForNil:nullForNils];
+        id object = [self getterInvocationForProperty:propertyAttributes.propertyName];
+        id serializedData = nil;
+        if ([object isKindOfClass:[NSDate class]]) {
+            TCUObjectTransformer *dateTransformer = [self transformerForObject:[NSString string] toClass:[NSDate class] forPropertyName:propertyAttributes.propertyName];
+            if ([dateTransformer allowsReverseTransformation]) {
+                serializedData = [dateTransformer reverseTransformedObject:object];
+            } else {
+                serializedData = [object description];
+            }
+        } else {
+            serializedData = [self serializeObject:object withNullForNil:nullForNils];
+        }
         if (serializedData) {
             NSString *key = nil;
             if (propertyNamesAsKeys) {
@@ -788,7 +799,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     return NO;
 }
 
-+ (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
++ (TCUObjectTransformer *)transformerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
     __block TCUObjectTransformer *transformer = nil;
     if ([object isKindOfClass:[NSObject class]] && transformedClass) {
         NSDictionary *tcuTypeSafeCollectionObjectTransformers = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionObjectTransformersKey);
@@ -827,7 +838,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     return transformer;
 }
 
-- (TCUObjectTransformer *)transfromerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
+- (TCUObjectTransformer *)transformerForObject:(NSObject *)object toClass:(Class)transformedClass forPropertyName:(NSString *)propertyName {
     __block TCUObjectTransformer *transformer = nil;
     if ([object isKindOfClass:[NSObject class]] && transformedClass) {
         for (NSString *transformerPropertyName in @[propertyName, kClassTransformersKey]) {
@@ -920,7 +931,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 
 - (id)transformObject:(id)inboundObject toClass:(Class)classType forProperty:(NSString *)propertyName {
     if ([inboundObject isKindOfClass:[NSObject class]] && classType) {
-        return [[self transfromerForObject:inboundObject
+        return [[self transformerForObject:inboundObject
                                    toClass:classType
                            forPropertyName:propertyName] transformedObject:inboundObject toClass:classType];
     } else {
