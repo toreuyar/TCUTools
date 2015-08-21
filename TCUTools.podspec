@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "TCUTools"
-  s.version          = "3.0.3"
+  s.version          = "3.0.4"
   s.summary          = "Helper classes for various needs coded on Objective-C, iOS."
   s.homepage         = "https://github.com/toreuyar/TCUTools"
   s.license          = { :type => 'MIT' }

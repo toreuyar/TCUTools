@@ -309,7 +309,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
 
 + (void)setPropertyToKeyMappingTable:(NSDictionary *)mappingTable {
     NSMapTable *selfMappingTable = objc_getAssociatedObject([self class], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
-    [selfMappingTable removeAllObjects];
+//    [selfMappingTable removeAllObjects];
     NSMapTable *superMappingTable = objc_getAssociatedObject([self superclass], kTCUTypeSafeCollectionPropertyToKeyMappingTableKey);
     for (NSString *propertyName in superMappingTable.keyEnumerator) {
         [selfMappingTable setObject:[superMappingTable objectForKey:propertyName] forKey:propertyName];
