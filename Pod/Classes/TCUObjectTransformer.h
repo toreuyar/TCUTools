@@ -38,6 +38,14 @@
 @property (nonatomic, readonly) Class transformedObjectClass;
 @property (nonatomic, copy) id (^transformer)(TCUObjectTransformer *transformer, id object);
 @property (nonatomic, copy) id (^remrofsnart)(TCUObjectTransformer *transformer, id object);
+@property (nonatomic, copy) id (^transformerWithClassForwarding)(TCUObjectTransformer *transformer, Class class, id object);
+@property (nonatomic, copy) id (^remrofsnartWithClassForwarding)(TCUObjectTransformer *transformer, Class class, id object);
+
++ (TCUObjectTransformer *)transformerFrom:(Class)originalObjectClass
+                                       to:(Class)transformedObjectClass
+                                   onInit:(void (^)(TCUObjectTransformer *transformer))initBlock
+           transformerWithClassForwarding:(id (^)(TCUObjectTransformer *transformer, Class class, id object))transformer
+    reverseTransformerWithClassForwarding:(id (^)(TCUObjectTransformer *transformer, Class class, id object))remrofsnart;
 
 + (TCUObjectTransformer *)transformerFrom:(Class)originalObjectClass
                                        to:(Class)transformedObjectClass
@@ -48,7 +56,7 @@
 - (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass;
 
 - (BOOL)allowsReverseTransformation;
-- (id)transformedObject:(id)object;
-- (id)reverseTransformedObject:(id)object;
+- (id)transformedObject:(id)object toClass:(Class)class;
+- (id)reverseTransformedObject:(id)object toClass:(Class)class;
 
 @end

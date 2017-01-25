@@ -56,6 +56,17 @@
     return objectTransformer;
 }
 
++ (TCUObjectTransformer *)transformerFrom:(Class)originalObjectClass
+                                       to:(Class)transformedObjectClass
+                                   onInit:(void (^)(TCUObjectTransformer *transformer))initBlock
+           transformerWithClassForwarding:(id (^)(TCUObjectTransformer *transformer, Class class, id object))transformer
+    reverseTransformerWithClassForwarding:(id (^)(TCUObjectTransformer *transformer, Class class, id object))remrofsnart {
+    TCUObjectTransformer *objectTransformer = [[TCUObjectTransformer alloc] initWithOriginalObjectClass:originalObjectClass transformedObjectClass:transformedObjectClass onInit:initBlock];
+    objectTransformer.transformerWithClassForwarding = transformer;
+    objectTransformer.remrofsnartWithClassForwarding = remrofsnart;
+    return objectTransformer;
+}
+
 - (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass {
     return [self initWithOriginalObjectClass:originalObjectClass transformedObjectClass:transformedObjectClass onInit:nil];
 }
@@ -87,12 +98,24 @@
     return _dataStore;
 }
 
-- (id)transformedObject:(id)object {
-    return ((self.transformer) ? self.transformer(self, object) : nil);
+- (id)transformedObject:(id)object toClass:(Class)class {
+    id transformedObject = nil;
+    if (self.transformerWithClassForwarding) {
+        transformedObject = self.transformerWithClassForwarding(self, class, object);
+    } else if (self.transformer) {
+        transformedObject = self.transformer(self, object);
+    }
+    return transformedObject;
 }
 
-- (id)reverseTransformedObject:(id)object {
-    return ((self.remrofsnart) ? self.remrofsnart(self, object) : nil);
+- (id)reverseTransformedObject:(id)object toClass:(Class)class {
+    id reverseTransformedObject = nil;
+    if (self.remrofsnartWithClassForwarding) {
+        reverseTransformedObject = self.remrofsnartWithClassForwarding(self, class, object);
+    } else if (self.remrofsnart) {
+        reverseTransformedObject = self.remrofsnart(self, object);
+    }
+    return reverseTransformedObject;
 }
 
 @end
