@@ -98,7 +98,7 @@
     return _dataStore;
 }
 
-- (id)transformedObject:(id)object toClass:(Class)class {
+- (id)transformedObject:(id)object to:(Class)class {
     id transformedObject = nil;
     if (self.transformerWithClassForwarding) {
         transformedObject = self.transformerWithClassForwarding(self, class, object);
@@ -108,7 +108,7 @@
     return transformedObject;
 }
 
-- (id)reverseTransformedObject:(id)object toClass:(Class)class {
+- (id)reverseTransformedObject:(id)object to:(Class)class {
     id reverseTransformedObject = nil;
     if (self.remrofsnartWithClassForwarding) {
         reverseTransformedObject = self.remrofsnartWithClassForwarding(self, class, object);

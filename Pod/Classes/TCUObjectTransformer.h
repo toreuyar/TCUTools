@@ -56,7 +56,7 @@
 - (instancetype)initWithOriginalObjectClass:(Class)originalObjectClass transformedObjectClass:(Class)transformedObjectClass;
 
 - (BOOL)allowsReverseTransformation;
-- (id)transformedObject:(id)object toClass:(Class)class;
-- (id)reverseTransformedObject:(id)object toClass:(Class)class;
+- (id)transformedObject:(id)object to:(Class)class;
+- (id)reverseTransformedObject:(id)object to:(Class)class;
 
 @end

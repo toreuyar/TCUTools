@@ -40,7 +40,7 @@ _Pragma("clang diagnostic pop") \
 @interface TCUObjectTransformer (TCUTypeSafeCollection)
 
 + (TCUObjectTransformer *)dictionaryToTypeSafeCollectionTransformer;
-- (id)transformedObject:(id)object to:(Class)transformedClass;
+- (id)transformedObject:(id)object toClass:(Class)transformedClass;
 
 @end
 
@@ -108,11 +108,11 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
     return _dictionaryToTypeSafeCollectionTransformer;
 }
 
-- (id)transformedObject:(id)object to:(Class)transformedClass {
+- (id)transformedObject:(id)object toClass:(Class)transformedClass {
     if ([self isKindOfClass:[TCUDefaultObjectTransformer class]]) {
         return [transformedClass objectWithDictionary:object];
     } else {
-        return [self transformedObject:object toClass:transformedClass];
+        return [self transformedObject:object to:transformedClass];
     }
 }
 
@@ -463,7 +463,7 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
         if ([object isKindOfClass:[NSDate class]]) {
             TCUObjectTransformer *dateTransformer = [self transformerForObject:[NSString string] toClass:[NSDate class] forPropertyName:propertyAttributes.propertyName];
             if ([dateTransformer allowsReverseTransformation]) {
-                serializedData = [dateTransformer reverseTransformedObject:object toClass:[NSDate class]];
+                serializedData = [dateTransformer reverseTransformedObject:object to:[NSDate class]];
             } else {
                 serializedData = [object description];
             }
@@ -761,6 +761,15 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                         transformerFound = YES;
                         break;
                     }
+                    for (Class originalClass in originalObjectKeyMapTable.keyEnumerator) {
+                        if ([transformedClass isSubclassOfClass:originalClass]) {
+                            transformerFound = YES;
+                            break;
+                        }
+                    }
+                    if (transformerFound) {
+                        break;
+                    }
                 }
             }
             if (transformerFound) {
@@ -784,6 +793,15 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                     NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
                     if ([originalObjectKeyMapTable objectForKey:transformedClass]) {
                         transformerFound = YES;
+                        break;
+                    }
+                    for (Class originalClass in originalObjectKeyMapTable.keyEnumerator) {
+                        if ([transformedClass isSubclassOfClass:originalClass]) {
+                            transformerFound = YES;
+                            break;
+                        }
+                    }
+                    if (transformerFound) {
                         break;
                     }
                 }
@@ -825,6 +843,22 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                     }
                 }
             }
+            if (!transformer) {
+                for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                    if ([object isKindOfClass:inboundClass]) {
+                        NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                        for (Class originalClass in originalObjectKeyMapTable.keyEnumerator) {
+                            if ([transformedClass isSubclassOfClass:originalClass]) {
+                                transformer = [originalObjectKeyMapTable objectForKey:originalClass];
+                                break;
+                            }
+                        }
+                        if (transformer) {
+                            break;
+                        }
+                    }
+                }
+            }
             if (transformer) {
                 break;
             }
@@ -857,6 +891,22 @@ static const void *kTCUTypeSafeCollectionArrayDataKey = (void *)&kTCUTypeSafeCol
                     if ([object isKindOfClass:inboundClass]) {
                         NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
                         transformer = [originalObjectKeyMapTable objectForKey:transformedClass];
+                        if (transformer) {
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!transformer) {
+                for (Class inboundClass in objectTransformersOfProperty.keyEnumerator) {
+                    if ([object isKindOfClass:inboundClass]) {
+                        NSMapTable *originalObjectKeyMapTable = [objectTransformersOfProperty objectForKey:inboundClass];
+                        for (Class originalClass in originalObjectKeyMapTable.keyEnumerator) {
+                            if ([transformedClass isSubclassOfClass:originalClass]) {
+                                transformer = [originalObjectKeyMapTable objectForKey:originalClass];
+                                break;
+                            }
+                        }
                         if (transformer) {
                             break;
                         }
